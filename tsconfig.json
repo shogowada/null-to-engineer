@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "lib": [
+      "es5",
+      "es6",
+      "es2015",
+      "es2015.promise",
+      "es2016.array.include",
+      "es2017.object",
+      "es2019",
+      "dom"
+    ],
+    "target": "es2015",
+    "jsx": "react",
+    "module": "commonjs",
+    "outDir": "./dist"
+  },
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
+}
