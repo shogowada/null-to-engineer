@@ -4,7 +4,10 @@ interface Props {
   code: string;
 }
 
-const createConsoleLite = (onLog: (...args: any[]) => void) => {
+const createConsoleLite = (
+  onLog: (...args: any[]) => void,
+  onClear: () => void
+): any => {
   return ["info", "log", "warn", "error", "debug"].reduce(
     (consoleLite, methodName) => {
       return {
@@ -12,7 +15,9 @@ const createConsoleLite = (onLog: (...args: any[]) => void) => {
         [methodName]: onLog,
       };
     },
-    {}
+    {
+      clear: onClear,
+    }
   );
 };
 
@@ -26,7 +31,7 @@ const mapLogArgsToLog = (...args: any[]): string | null => {
   }
 };
 
-const mapLogArgToLog = (arg: any) => {
+const mapLogArgToLog = (arg: any): string => {
   if (typeof arg === "object") {
     return JSON.stringify(arg);
   } else {
@@ -34,7 +39,7 @@ const mapLogArgToLog = (arg: any) => {
   }
 };
 
-const createFunctionCode = (code: string) => {
+const createFunctionCode = (code: string): string => {
   return `"use strict";
 return (console) => {
   ${code}
@@ -52,12 +57,15 @@ export const FiddleOutput: React.FunctionComponent<Props> = (props: Props) => {
           onClick={() => {
             setLogs([]);
 
-            const consoleLite = createConsoleLite((...args: any[]) => {
-              const log: string | null = mapLogArgsToLog(...args);
-              if (log) {
-                setLogs((prevState) => [...prevState, log]);
-              }
-            });
+            const consoleLite = createConsoleLite(
+              (...args: any[]) => {
+                const log: string | null = mapLogArgsToLog(...args);
+                if (log) {
+                  setLogs((prevState) => [...prevState, log]);
+                }
+              },
+              () => setLogs([])
+            );
 
             try {
               window.Function(createFunctionCode(props.code))()(consoleLite);

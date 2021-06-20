@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Fiddle } from "./fiddle";
+import { Fiddle } from "./gui/components/fiddle";
 
 const mountDOM = document.createElement("div");
 document.body.appendChild(mountDOM);
