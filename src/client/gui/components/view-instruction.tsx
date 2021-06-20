@@ -13,7 +13,11 @@ export const ViewInstruction = (props: Props) => {
   React.useEffect(() => {
     props
       .fetchHTML(props.id)
-      .then(setHTML, () => setErrorMessage("Failed to fetch instruction"));
+      .then(setHTML, () =>
+        setErrorMessage(
+          "ページの読み込みに失敗しました😝あとでもう一度試してください"
+        )
+      );
   }, [props.id]);
 
   return (

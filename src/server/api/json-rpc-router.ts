@@ -7,8 +7,10 @@ import {
   JSONRPCResponse,
   JSONRPCServer,
 } from "json-rpc-2.0";
+import { addJSONRPCMethods } from "../presentation";
 
 const jsonRPCServer = new JSONRPCServer();
+addJSONRPCMethods(jsonRPCServer);
 
 export const jsonRPCRouter = Router();
 jsonRPCRouter.use(bodyParser.json());
