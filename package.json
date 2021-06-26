@@ -9,7 +9,7 @@
     "build": "webpack-cli",
     "build-base": "docker build --tag null-to-web-engineer:base --file Dockerfile-base .",
     "_start": "ts-node ./src/server/index.ts",
-    "start": "npm run format && npm run build-base && docker-compose up --build",
+    "start": "npm run format && npm run build-base && docker-compose up --build -d",
     "e2e-test": "npm run e2e-test-api && npm run e2e-test-gui",
     "e2e-test-api": "cucumber-js --profile api",
     "e2e-test-gui": "cucumber-js --profile gui",
