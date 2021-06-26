@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ElementID } from "../../../../common";
 
 interface Props {
   code: string;
@@ -53,6 +54,7 @@ export const FiddleOutput: React.FunctionComponent<Props> = (props: Props) => {
     <div>
       <div>
         <button
+          id={ElementID.FiddleExecute}
           type="button"
           onClick={() => {
             setLogs([]);
@@ -77,7 +79,7 @@ export const FiddleOutput: React.FunctionComponent<Props> = (props: Props) => {
           Run
         </button>
       </div>
-      <pre>{logs.join("\n")}</pre>
+      <pre id={ElementID.FiddleOutput}>{logs.join("\n")}</pre>
     </div>
   );
 };

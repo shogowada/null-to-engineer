@@ -1,1 +1,1 @@
-export * from "./json-rpc";
+export * from "./app-api-client";

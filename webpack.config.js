@@ -39,7 +39,7 @@ module.exports = {
   plugins: [
     new HTMLWebpackPlugin({
       template: path.join(__dirname, "index.html"),
-      title: "Null to Web Software Engineer",
+      title: "０から始めるウェブエンジニアリング",
       hash: true,
     }),
   ],

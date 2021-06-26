@@ -1,9 +1,9 @@
 import fetch, { Response } from "node-fetch";
 import { JSONRPCClient } from "json-rpc-2.0";
-import { InstructionID } from "../instruction";
-import { GetInstructionHTMLParams, JSONRPCMethods } from "./json-rpc-methods";
+import { GetInstructionHTMLParams, JSONRPCMethodNames } from "./json-rpc";
+import { InstructionID } from "./instruction";
 
-export class JSONRPCAPIClient {
+export class AppAPIClient {
   private jsonRPCClient: JSONRPCClient;
 
   constructor(url: string) {
@@ -28,8 +28,12 @@ export class JSONRPCAPIClient {
   getInstructionHTML(id: InstructionID): PromiseLike<string> {
     const params: GetInstructionHTMLParams = { id };
     return this.jsonRPCClient.request(
-      JSONRPCMethods.GetInstructionHTML,
+      JSONRPCMethodNames.GetInstructionHTML,
       params
     );
+  }
+
+  getVersion(): PromiseLike<string> {
+    return this.jsonRPCClient.request(JSONRPCMethodNames.GetVersion);
   }
 }

@@ -1,0 +1,7 @@
+FROM null-to-web-engineer:base
+
+COPY ./src/test ./src/test
+COPY ./cucumber.js ./
+COPY ./features ./features
+
+CMD ["npm", "run", "e2e-test"]

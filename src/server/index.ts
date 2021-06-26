@@ -22,6 +22,7 @@ app.get("/*", (req, res) => {
 });
 
 const Port = 80;
+console.log(`Starting server on ${Port}`);
 app.listen(Port, () => {
-  console.log(`Listening on ${Port}`);
+  console.log(`Started server on ${Port}`);
 });

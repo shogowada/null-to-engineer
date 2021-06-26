@@ -1,7 +1,7 @@
 import * as React from "react";
 import createCachedSelector from "re-reselect";
 import { InstructionID } from "../../../common";
-import { jsonRPCClient } from "../../infrastructure";
+import { appAPIClient } from "../../infrastructure";
 import { ViewInstruction } from "../components/view-instruction";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 const instructionSelector = createCachedSelector(
   (id: InstructionID): PromiseLike<string> =>
-    jsonRPCClient.getInstructionHTML(id),
+    appAPIClient.getInstructionHTML(id),
   (promisedHTML: PromiseLike<string>) => promisedHTML
 )((id: InstructionID) => id);
 
