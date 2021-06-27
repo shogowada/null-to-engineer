@@ -1,18 +1,31 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { InstructionID } from "../common";
-import { ConnectedViewInstruction } from "./gui/containers/connected-view-instruction";
-import { Fiddle } from "./gui/components/fiddle";
-import { ViewChapters } from "./gui/components/view-chapters";
+import { applyMiddleware, createStore, Store } from "redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { Provider } from "react-redux";
+import { createBrowserHistory, History } from "history";
+import { ConnectedRouter, routerMiddleware } from "connected-react-router";
+import { AppDispatch, AppState, createReducer } from "./presentation";
+import { Main } from "./gui/components/main";
+
+const history: History = createBrowserHistory();
+
+const store: Store<AppState> & {
+  dispatch: AppDispatch;
+} = createStore(
+  createReducer(history),
+  composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)))
+);
 
 const mountDOM = document.createElement("div");
 document.body.appendChild(mountDOM);
 
 ReactDOM.render(
-  <div>
-    <ViewChapters />
-    <ConnectedViewInstruction id={InstructionID.JavaScriptBasics} />
-    <Fiddle />
-  </div>,
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <Main />
+    </ConnectedRouter>
+  </Provider>,
   mountDOM
 );
