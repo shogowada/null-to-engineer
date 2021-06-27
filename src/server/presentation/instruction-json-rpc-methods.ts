@@ -4,6 +4,6 @@ import { GetInstructionHTMLParams, JSONRPCMethodNames } from "../../common";
 export const addInstructionJSONRPCMethods = (jsonRPCServer: JSONRPCServer) => {
   jsonRPCServer.addMethod(
     JSONRPCMethodNames.GetInstructionHTML,
-    ({ id }: GetInstructionHTMLParams) => "Hello, World!"
+    ({ id }: GetInstructionHTMLParams) => `Hello, World! from ${id}`
   );
 };
