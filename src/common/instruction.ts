@@ -23,3 +23,7 @@ export const Chapters: Chapter[] = [
     ],
   },
 ];
+
+export const InstructionIDs: InstructionID[] = Chapters.flatMap(
+  (chapter) => chapter.instructionIDs
+);

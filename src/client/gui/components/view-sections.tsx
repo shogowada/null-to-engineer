@@ -19,7 +19,7 @@ export const ViewSections: React.FunctionComponent<Props> = (props: Props) => {
           }}
           onClick={() => props.onClick(instructionID)}
         >
-          {instructionID}
+          <a href="javascript:void(0);">{instructionID}</a>
         </li>
       ))}
     </React.Fragment>

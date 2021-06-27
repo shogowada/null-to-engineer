@@ -76,7 +76,7 @@ export const FiddleOutput: React.FunctionComponent<Props> = (props: Props) => {
             }
           }}
         >
-          Run
+          実行
         </button>
       </div>
       <pre id={ElementID.FiddleOutput}>{logs.join("\n")}</pre>

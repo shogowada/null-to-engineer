@@ -1,0 +1,37 @@
+body {
+  font-family: sans-serif;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: max-content 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "chapters instruction fiddle";
+  height: 100vh;
+}
+
+.item-chapters {
+  grid-area: chapters;
+  overflow-y: auto;
+}
+
+.item-instruction {
+  grid-area: instruction;
+  overflow-y: auto;
+}
+
+.item-fiddle {
+  grid-area: fiddle;
+}
+
+code {
+  background: ghostwhite;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  padding: 3px;
+}
+
+code.language-javascript {
+  display: block;
+  padding: 20px;
+}

@@ -8,6 +8,7 @@ import { createBrowserHistory, History } from "history";
 import { ConnectedRouter, routerMiddleware } from "connected-react-router";
 import { AppDispatch, AppState, createReducer } from "./presentation";
 import { Main } from "./gui/components/main";
+import "./gui/styles/main.scss";
 
 const history: History = createBrowserHistory();
 
