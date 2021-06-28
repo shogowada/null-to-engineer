@@ -1,3 +1,5 @@
+@import "~highlight.js/styles/github.css";
+
 body {
   font-family: sans-serif;
   background-color: rgba(0, 0, 0, 0.02);
@@ -44,7 +46,7 @@ body {
 }
 
 code {
-  background: ghostwhite;
+  background: #f6f8fa;
   border: 1px solid lightgray;
   border-radius: 3px;
   padding: 3px 6px;
