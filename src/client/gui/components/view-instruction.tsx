@@ -21,7 +21,7 @@ export const ViewInstruction = (props: Props) => {
   }, [props.id]);
 
   return (
-    <div>
+    <div className="instruction-pane">
       {errorMessage && <div>{errorMessage}</div>}
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </div>

@@ -1,5 +1,8 @@
 body {
   font-family: sans-serif;
+  background-color: rgba(0, 0, 0, 0.02);
+  margin: 0;
+  padding: 0;
 }
 
 .main-container {
@@ -20,18 +23,36 @@ body {
   overflow-y: auto;
 }
 
+.item-instruction .instruction-pane {
+  margin: 30px;
+  border-radius: 10px;
+  padding: 5px 30px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
+
+.item-instruction p {
+  margin: 40px auto;
+}
+
 .item-fiddle {
   grid-area: fiddle;
+}
+
+.monospace {
+  font-family: monospace;
 }
 
 code {
   background: ghostwhite;
   border: 1px solid lightgray;
   border-radius: 3px;
-  padding: 3px;
+  padding: 3px 6px;
+  margin: auto 3px;
 }
 
 code.language-javascript {
   display: block;
   padding: 20px;
+  overflow-x: auto;
 }

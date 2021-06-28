@@ -11,6 +11,7 @@ export const FiddleEditor: React.FunctionComponent<Props> = (props: Props) => {
     <div>
       <textarea
         id={ElementID.FiddleCode}
+        className="monospace"
         value={props.code}
         onChange={(event) => {
           props.onCodeChange(event.target.value);
