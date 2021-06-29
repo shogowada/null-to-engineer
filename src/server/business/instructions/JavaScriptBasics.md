@@ -110,6 +110,35 @@ console.log(!(true && true)); // false
 console.log(!false && !false); // true
 ```
 
+二つの値を比較してブーリアンを作ることもできるんだ。
+
+```javascript
+// === を使うと、値が同じ場合にtrueになるよ
+console.log(1 === 1); // true
+console.log(1 === 2); // false
+console.log("abc" === "abc"); // true
+console.log("abc" === "ABC"); // false
+// !== を使うと、値が違う場合にtrueになるよ
+console.log(1 !== 1); // false
+console.log(1 !== 2); // true
+console.log("abc" !== "abc"); // false
+console.log("abc" !== "ABC"); // true
+// > を使うと、左辺の方が右辺より大きい場合にtrueになるよ
+console.log(1 > 1); // false
+console.log(2 > 1); // true
+// < を使うと、左辺の方が右辺より小さい場合にtrueになるよ
+console.log(1 < 1); // false
+console.log(1 < 2); // true
+// >= を使うと、左辺の方が右辺より大きいか同じな場合にtrueになるよ
+console.log(1 >= 1); // true
+console.log(2 >= 1); // true
+console.log(1 >= 2); // false
+// <= を使うと、左辺の方が右辺より小さいか同じな場合にtrueになるよ
+console.log(1 <= 1); // true
+console.log(2 <= 1); // false
+console.log(1 <= 2); // true
+```
+
 ## 変数
 
 値は「変数」と呼ばれる物に覚えておいてもらうこともできるんだ。

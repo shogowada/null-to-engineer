@@ -39,6 +39,7 @@ body {
 
 .item-fiddle {
   grid-area: fiddle;
+  overflow-y: auto;
 }
 
 .monospace {
