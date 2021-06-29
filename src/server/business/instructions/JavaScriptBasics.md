@@ -195,6 +195,7 @@ console.log(text); // あ、変わっちゃった！
 いくつかの値を一つの「オブジェクト」と呼ばれるものにまとめて覚えてもらうこともできるよ。
 
 ```javascript
+// {}を使ってオブジェクトを作ろう！
 const person = {
   name: "Mercury Veca",
   age: 20,
@@ -279,7 +280,8 @@ console.log(createIntroduction(person)); // Mercury Vecaは20才です！
 const introduce = (person) => {
   console.log(`${person.name}は${person.age}才です！`);
 };
-
+// []を使って配列を作ろう！
+// 各要素は,を使って区切ってね。
 const people = [
   { name: "Mercury Veca", age: 20 },
   { name: "Karpos Boris", age: 15 },
