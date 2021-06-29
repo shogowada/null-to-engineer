@@ -36,8 +36,8 @@ console.log("Hello, World!"); // コードの後ろに書くこともできる�
 二つ以上の文字列をくっつけることもできるよ。`` `${}` ``を使う方法と、`+`を使う方法があるんだ。
 
 ```javascript
-console.log(`Hello, ${"World"}!`);
-console.log("Hello, " + "World!");
+console.log(`Hello, ${"World"}!`); // Hello, World!
+console.log("Hello, " + "World!"); // Hello, World!
 ```
 
 二行とも`Hello, World!`と表示されたはず。
@@ -176,18 +176,18 @@ text = "これ、エラーになる！";
 
 ```javascript
 const text = "変わらないものもある";
-console.log(text);
+console.log(text); // 変わらないものもある
 const text2 = "これだとエラーにならない！";
-console.log(text2);
+console.log(text2); // これだとエラーにならない！
 ```
 
 `const`の代わりに`let`で`text`を宣言すると、値を変えることができる。
 
 ```javascript
 let text = "変わらないものもある";
-console.log(text);
+console.log(text); // 変わらないものもある
 text = "あ、変わっちゃった！";
-console.log(text);
+console.log(text); // あ、変わっちゃった！
 ```
 
 ## オブジェクト
@@ -200,7 +200,7 @@ const person = {
   age: 20,
 };
 // .を使ってオブジェクトが持っている値を取りだそう！
-console.log(`${person.name}は${person.age}才です！`);
+console.log(`${person.name}は${person.age}才です！`); // Mercury Vecaは20才です！
 ```
 
 ## 関数
@@ -237,8 +237,8 @@ const personB = {
   name: "Karpos Boris",
   age: 15,
 };
-introduce(personA);
-introduce(personB);
+introduce(personA); // Mercury Vecaは20才です！
+introduce(personB); // Karpos Borisは15才です！
 ```
 
 パラメータは何個でも受け取れるよ。下の例では`name`と`age`の二つのパラメータを受け取っているね。
@@ -252,7 +252,7 @@ const person = {
   name: "Mercury Veca",
   age: 20,
 };
-introduce(person.name, person.age);
+introduce(person.name, person.age); // Mercury Vecaは20才です！
 ```
 
 `return`を使うと、一つだけ何かを返すこともできるんだ。
@@ -268,7 +268,7 @@ const person = {
   age: 20,
 };
 // 返された文字列をconsole.logを使って表示しよう！
-console.log(createIntroduction(person));
+console.log(createIntroduction(person)); // Mercury Vecaは20才です！
 ```
 
 ## 配列
@@ -286,6 +286,6 @@ const people = [
 ];
 // []を使って要素を取りだそう！
 // 0を使うと最初の要素、1を使うと二つ目の要素を取り出せるよ。
-introduce(people[0]);
-introduce(people[1]);
+introduce(people[0]); // Mercury Vecaは20才です！
+introduce(people[1]); // Karpos Borisは15才です！
 ```
