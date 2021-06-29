@@ -1,1 +1,1 @@
-# JavaScript ループ
+# JavaScript のループ

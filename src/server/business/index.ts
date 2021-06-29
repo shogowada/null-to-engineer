@@ -1,1 +1,1 @@
-export * from "./instruction-html-factory";
+export * from "./instruction-repository";

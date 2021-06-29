@@ -66,3 +66,89 @@ if (x % 2 === 0) {
 ```
 
 ## switch 文
+
+一つの値によって違うコードを実行したい場合、`switch`文が便利だよ。
+
+```javascript
+const language = "Japanese";
+// languageの値によって、違うコードが実行される
+switch (language) {
+  case "Japanese": {
+    // languageが"Japanese"ならこのコード
+    console.log("こんにちは");
+    break;
+  }
+  case "English": {
+    // languageが"English"ならこのコード
+    console.log("Hello");
+    break;
+  }
+  case "Spanish": {
+    // languageが"Spanish"ならこのコード
+    console.log("Hola");
+    break;
+  }
+}
+```
+
+`case`の後の`:`を忘れないようにね！あと`break`を忘れると、次の`case`のコードまで実行されちゃうから注意！
+
+```javascript
+const language = "Japanese";
+switch (language) {
+  case "Japanese": {
+    console.log("こんにちは");
+    // ここでbreak忘れちゃった！
+  }
+  case "English": {
+    // languageが"Japanese"でも、このコードまで実行されちゃう！
+    console.log("Hello");
+    break;
+  }
+}
+```
+
+「何で！？」と思うかもしれないけど、これをうまく利用することもできるよ。
+
+```javascript
+const language = "Japanese";
+switch (language) {
+  case "Japanese":
+  case "日本語": {
+    // languageが"Japanese"でも"日本語"でも、このコードが実行される
+    console.log("こんにちは");
+    break;
+  }
+  case "English": {
+    console.log("Hello");
+    break;
+  }
+  case "Spanish":
+  case "español": {
+    console.log("Hola");
+    break;
+  }
+}
+```
+
+どの`case`にも当てはまらないときに実行したいコードがある場合、`default`を使うといいよ。
+
+```javascript
+const language = "Japanese";
+switch (language) {
+  case "Japanese": {
+    console.log("こんにちは");
+    break;
+  }
+  case "Spanish": {
+    console.log("Hola");
+    break;
+  }
+  default: {
+    // どのcaseにも当てはまらない場合、このコードが実行される
+    // 当然、languageが"English"の場合もこのコードが実行される👍
+    console.log("Hello");
+    break;
+  }
+}
+```

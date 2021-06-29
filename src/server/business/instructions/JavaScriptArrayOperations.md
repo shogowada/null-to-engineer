@@ -1,1 +1,1 @@
-# JavaScript 配列
+# JavaScript の配列

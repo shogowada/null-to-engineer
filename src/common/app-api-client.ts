@@ -1,7 +1,7 @@
 import fetch, { Response } from "node-fetch";
 import { JSONRPCClient } from "json-rpc-2.0";
 import { GetInstructionHTMLParams, JSONRPCMethodNames } from "./json-rpc";
-import { InstructionID } from "./instruction";
+import { Instruction, InstructionID } from "./instruction";
 
 export class AppAPIClient {
   private jsonRPCClient: JSONRPCClient;

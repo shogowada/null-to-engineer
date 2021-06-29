@@ -11,12 +11,24 @@ export enum InstructionID {
 
 export interface Chapter {
   id: ChapterID;
+  name: string;
   instructionIDs: InstructionID[];
+}
+
+export interface Instruction extends InstructionMetadata {
+  html: string;
+}
+
+export interface InstructionMetadata {
+  id: InstructionID;
+  name: string;
+  sections: string[];
 }
 
 export const Chapters: Chapter[] = [
   {
     id: ChapterID.JavaScriptBasics,
+    name: "JavaScript 基本編 🥳",
     instructionIDs: [
       InstructionID.JavaScriptBasics,
       InstructionID.JavaScriptConditionalOperations,

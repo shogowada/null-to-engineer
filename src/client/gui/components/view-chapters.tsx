@@ -12,7 +12,7 @@ export const ViewChapters: React.FunctionComponent<Props> = (props: Props) => {
     <React.Fragment>
       {Chapters.map((chapter) => (
         <div key={chapter.id}>
-          <h3>{chapter.id}</h3>
+          <h3>{chapter.name}</h3>
           <ul>
             <ViewSections
               selectedInstructionID={props.selectedInstructionID}

@@ -11,6 +11,7 @@ export const ViewInstruction = (props: Props) => {
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
   React.useEffect(() => {
+    setHTML("");
     props
       .fetchHTML(props.id)
       .then(setHTML, () =>
