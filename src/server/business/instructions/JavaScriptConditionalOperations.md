@@ -152,3 +152,36 @@ switch (language) {
   }
 }
 ```
+
+## どんな値が true とみなされて、どんな値が false とみなされるの？
+
+JavaScript では以下の値は全て「falsy」と言われて、`if`文の中では`false`と同じ扱いになるよ。逆に言えば、それ以外の値なら`true`と同じ扱いになるんだね 😲
+
+```javascript
+if (false) {
+  console.log("実行されない");
+}
+if (0) {
+  console.log("実行されない");
+}
+if ("") {
+  console.log("実行されない");
+}
+// nullは「値が存在しない」ことを示す特別な値。
+if (null) {
+  console.log("実行されない");
+}
+// undefinedは「値が定義されていない」ことを示す特別な値。
+// 「nullと何が違うの？」と思った？安心して☺️
+// JavaScript何年もやってる人でも「なんで両方あるんだややこしい！」と思ってるから！
+if (undefined) {
+  console.log("実行されない");
+}
+// NaNはNot a Numberの略。「数字じゃない」ことを示す値だね。
+// 例えば文字列を数字で割ろうとすると（例："hello" / 3）、NaNになるよ。
+if (NaN) {
+  console.log("実行されない");
+}
+```
+
+詳しく知りたい人は、[MDN のドキュメント](https://developer.mozilla.org/ja/docs/Glossary/Falsy)を見てみて！

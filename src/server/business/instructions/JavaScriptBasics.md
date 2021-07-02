@@ -291,3 +291,31 @@ const people = [
 introduce(people[0]); // Mercury Vecaは20才です！
 introduce(people[1]); // Karpos Borisは15才です！
 ```
+
+# クラス
+
+クラスを使うと、同じ機能を持ったオブジェクトを何度も作ることができるよ。
+
+```javascript
+class Person {
+  // constructorという特別な関数を使って、クラスを初期化できるよ
+  constructor(name, age) {
+    // thisを使ってクラスが持っている値にアクセスしよう
+    this.name = name;
+    this.age = age;
+  }
+
+  introduce() {
+    // JavaScriptのthisはややこしい仕様になってるんだけど、
+    // 今のところは「thisを使ってこのクラスが持っている値や関数にアクセス」と覚えておけばOK👍
+    console.log(`${this.name}は${this.age}才です！`);
+  }
+}
+
+// classはnewで宣言
+// newで渡した値は、そのclassのconstructorに渡されるよ
+const personA = new Person("Mercury Veca", 20);
+const personB = new Person("Karpos Boris", 15);
+personA.introduce(); // Mercury Vecaは20才です！
+personB.introduce(); // Karpos Borisは15才です！
+```
