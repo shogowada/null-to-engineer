@@ -54,7 +54,6 @@ export const FiddleOutput: React.FunctionComponent<Props> = (props: Props) => {
   return (
     <React.Fragment>
       <button
-        style={{ flex: 1 }}
         id={ElementID.FiddleExecute}
         type="button"
         onClick={() => {
@@ -82,6 +81,7 @@ export const FiddleOutput: React.FunctionComponent<Props> = (props: Props) => {
       <pre
         id={ElementID.FiddleOutput}
         className={createClassName([logs.length ? "" : "empty"])}
+        style={{ flex: 1 }}
       >
         {logs.length
           ? logs.join("\n")

@@ -110,6 +110,7 @@ body {
   margin: 0 $margin-small $margin-small $margin-small;
   padding: $padding-medium;
   width: calc(100% - #{$margin-small * 2});
+  height: 200px;
   box-sizing: border-box;
   resize: vertical;
   font-family: monospace;
@@ -126,6 +127,7 @@ body {
   margin: $margin-small;
   background: white;
   box-shadow: 0 0 $margin-small $shadow-color;
+  overflow-y: auto;
 
   &.empty {
     color: rgba(0, 0, 0, 0.5);

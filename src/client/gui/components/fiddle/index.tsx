@@ -10,6 +10,7 @@ export const Fiddle: React.FunctionComponent = () => {
       style={{
         display: "flex",
         flexDirection: "column",
+        height: "100%",
       }}
     >
       <FiddleEditor code={code} onCodeChange={setCode} />
