@@ -2,7 +2,10 @@
 
 $margin-main-frame: 30px;
 $margin-small: 3px;
+$padding-medium: 5px 15px;
+$padding-large: 5px 30px;
 $shadow-color: rgba(0, 0, 0, 0.2);
+$font-size: 16px;
 
 body {
   font-family: sans-serif;
@@ -36,7 +39,7 @@ body {
   .instruction-pane {
     margin: $margin-main-frame ($margin-main-frame / 2);
     border-radius: 10px;
-    padding: 5px 30px;
+    padding: $padding-large;
     box-shadow: 0 0 ($margin-main-frame / 2) $shadow-color;
     background-color: white;
   }
@@ -60,7 +63,7 @@ body {
 
 .instruction-list-item {
   border-radius: $margin-small;
-  padding: 5px 15px;
+  padding: $padding-medium;
   margin: $margin-small;
   cursor: pointer;
   color: rgba(0, 0, 0, 0.5);
@@ -103,8 +106,30 @@ body {
   }
 }
 
-.monospace {
+#fiddle-code {
+  margin: 0 $margin-small $margin-small $margin-small;
+  padding: $padding-medium;
+  width: calc(100% - #{$margin-small * 2});
+  box-sizing: border-box;
+  resize: vertical;
   font-family: monospace;
+}
+
+#fiddle-execute {
+  width: calc(100% - #{$margin-small * 2});
+  margin: 0 $margin-small;
+}
+
+#fiddle-output {
+  border-radius: $margin-small;
+  padding: $padding-medium;
+  margin: $margin-small;
+  background: white;
+  box-shadow: 0 0 $margin-small $shadow-color;
+
+  &.empty {
+    color: rgba(0, 0, 0, 0.5);
+  }
 }
 
 code {

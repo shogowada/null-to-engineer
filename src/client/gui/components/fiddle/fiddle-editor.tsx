@@ -8,15 +8,12 @@ interface Props {
 
 export const FiddleEditor: React.FunctionComponent<Props> = (props: Props) => {
   return (
-    <div>
-      <textarea
-        id={ElementID.FiddleCode}
-        className="monospace"
-        value={props.code}
-        onChange={(event) => {
-          props.onCodeChange(event.target.value);
-        }}
-      />
-    </div>
+    <textarea
+      id={ElementID.FiddleCode}
+      value={props.code}
+      onChange={(event) => {
+        props.onCodeChange(event.target.value);
+      }}
+    />
   );
 };

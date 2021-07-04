@@ -6,7 +6,12 @@ export const Fiddle: React.FunctionComponent = () => {
   const [code, setCode] = React.useState<string>("");
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <FiddleEditor code={code} onCodeChange={setCode} />
       <FiddleOutput code={code} />
     </div>

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ElementID } from "../../../../common";
+import { createClassName } from "../create-class-name";
 
 interface Props {
   code: string;
@@ -51,35 +52,41 @@ export const FiddleOutput: React.FunctionComponent<Props> = (props: Props) => {
   const [logs, setLogs] = React.useState<string[]>([]);
 
   return (
-    <div>
-      <div>
-        <button
-          id={ElementID.FiddleExecute}
-          type="button"
-          onClick={() => {
-            setLogs([]);
+    <React.Fragment>
+      <button
+        style={{ flex: 1 }}
+        id={ElementID.FiddleExecute}
+        type="button"
+        onClick={() => {
+          setLogs([]);
 
-            const consoleLite = createConsoleLite(
-              (...args: any[]) => {
-                const log: string | null = mapLogArgsToLog(...args);
-                if (log) {
-                  setLogs((prevState) => [...prevState, log]);
-                }
-              },
-              () => setLogs([])
-            );
+          const consoleLite = createConsoleLite(
+            (...args: any[]) => {
+              const log: string | null = mapLogArgsToLog(...args);
+              if (log) {
+                setLogs((prevState) => [...prevState, log]);
+              }
+            },
+            () => setLogs([])
+          );
 
-            try {
-              window.Function(createFunctionCode(props.code))()(consoleLite);
-            } catch (error) {
-              setLogs([String(error)]);
-            }
-          }}
-        >
-          実行
-        </button>
-      </div>
-      <pre id={ElementID.FiddleOutput}>{logs.join("\n")}</pre>
-    </div>
+          try {
+            window.Function(createFunctionCode(props.code))()(consoleLite);
+          } catch (error) {
+            setLogs([String(error)]);
+          }
+        }}
+      >
+        ️実行️ ▶️
+      </button>
+      <pre
+        id={ElementID.FiddleOutput}
+        className={createClassName([logs.length ? "" : "empty"])}
+      >
+        {logs.length
+          ? logs.join("\n")
+          : "コードを実行すると、結果がここに表示されるよ👀"}
+      </pre>
+    </React.Fragment>
   );
 };
