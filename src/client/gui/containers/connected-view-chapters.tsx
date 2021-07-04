@@ -17,8 +17,8 @@ export const ConnectedViewChapters: React.FunctionComponent<Props> = (
   return (
     <ViewChapters
       selectedInstructionID={props.selectedInstructionID}
-      onClick={(instructionID: InstructionID) => {
-        dispatch(push(RoutePath.instruction(instructionID)));
+      onClick={(href: string) => {
+        dispatch(push(href));
       }}
     />
   );

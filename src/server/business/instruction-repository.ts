@@ -7,6 +7,7 @@ import {
   Instruction,
   InstructionID,
   InstructionIDs,
+  InstructionMetadata,
 } from "../../common";
 
 const loadMarkdown = (instructionID: InstructionID): string => {
@@ -34,7 +35,7 @@ const createSections = (markdownLines: string[]): string[] => {
     if (groups) {
       return [...sections, groups[1]];
     } else {
-      return [];
+      return sections;
     }
   }, []);
 };
@@ -58,13 +59,33 @@ const createInstruction = (instructionID: InstructionID): Instruction => {
   };
 };
 
+const instructions: Instruction[] = InstructionIDs.reduce(
+  (instructions, instructionID: InstructionID): Instruction[] => [
+    ...instructions,
+    createInstruction(instructionID),
+  ],
+  []
+);
+
 const instructionIDToInstructionDictionary: Dictionary<Instruction> =
-  InstructionIDs.reduce((dictionary, instructionID: InstructionID) => {
-    return {
+  instructions.reduce(
+    (dictionary, instruction: Instruction): Dictionary<Instruction> => ({
       ...dictionary,
-      [instructionID]: createInstruction(instructionID),
-    };
-  }, {});
+      [instruction.id]: instruction,
+    }),
+    {}
+  );
+
+const instructionMetadataList: InstructionMetadata[] = instructions.map(
+  (instruction): InstructionMetadata => ({
+    id: instruction.id,
+    name: instruction.name,
+    sections: instruction.sections,
+  })
+);
 
 export const getInstruction = (id: InstructionID): Instruction =>
   instructionIDToInstructionDictionary[id];
+
+export const getInstructionMetadataList = (): InstructionMetadata[] =>
+  instructionMetadataList;

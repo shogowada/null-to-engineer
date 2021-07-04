@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Chapters, InstructionID } from "../../../common";
-import { ViewSections } from "./view-sections";
+import { ViewInstructionLinks } from "./view-instruction-links";
 
 interface Props {
   selectedInstructionID: InstructionID;
-  onClick: (instructionID: InstructionID) => void;
+  onClick: (href: string) => void;
 }
 
 export const ViewChapters: React.FunctionComponent<Props> = (props: Props) => {
@@ -13,8 +13,8 @@ export const ViewChapters: React.FunctionComponent<Props> = (props: Props) => {
       {Chapters.map((chapter) => (
         <div key={chapter.id}>
           <h3>{chapter.name}</h3>
-          <ul>
-            <ViewSections
+          <ul className="instruction-list">
+            <ViewInstructionLinks
               selectedInstructionID={props.selectedInstructionID}
               instructionIDs={chapter.instructionIDs}
               onClick={props.onClick}

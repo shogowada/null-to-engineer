@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "format": "pretty-quick || echo \"Ignoring the format failure\"",
+    "format": "npm run generate-code && (pretty-quick || echo \"Ignoring the format failure\")",
     "check-type": "tsc --noEmit",
+    "generate-code": "ts-node ./src/generate-code.ts",
     "build": "webpack-cli",
     "build-base": "docker build --tag null-to-web-engineer:base --file Dockerfile-base .",
     "_start": "ts-node ./src/server/index.ts",
