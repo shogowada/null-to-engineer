@@ -14,6 +14,11 @@ export const Main: React.FunctionComponent = () => {
       }).then(undefined, (error) =>
         console.warn(`Failed to scroll ${hash} into view`, error)
       );
+    } else {
+      setTimeout(
+        () => document.querySelector(".item-instruction")?.scroll(0, 0),
+        0
+      );
     }
   }, [pathname, hash]);
 
