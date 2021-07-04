@@ -9,7 +9,7 @@ interface Props {
 
 export const ViewChapters: React.FunctionComponent<Props> = (props: Props) => {
   return (
-    <React.Fragment>
+    <div className="chapters-pane">
       {Chapters.map((chapter) => (
         <div key={chapter.id}>
           <h3>{chapter.name}</h3>
@@ -22,6 +22,6 @@ export const ViewChapters: React.FunctionComponent<Props> = (props: Props) => {
           </ul>
         </div>
       ))}
-    </React.Fragment>
+    </div>
   );
 };

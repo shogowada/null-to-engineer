@@ -22,7 +22,11 @@ body {
 .item-chapters {
   grid-area: chapters;
   overflow-y: auto;
-  margin: $margin-main-frame 0 $margin-main-frame $margin-main-frame;
+
+  .chapters-pane {
+    margin: $margin-main-frame ($margin-main-frame / 2) $margin-main-frame
+      $margin-main-frame;
+  }
 }
 
 .item-instruction {
@@ -30,10 +34,10 @@ body {
   overflow-y: auto;
 
   .instruction-pane {
-    margin: $margin-main-frame;
+    margin: $margin-main-frame ($margin-main-frame / 2);
     border-radius: 10px;
     padding: 5px 30px;
-    box-shadow: 0 0 20px $shadow-color;
+    box-shadow: 0 0 ($margin-main-frame / 2) $shadow-color;
     background-color: white;
   }
 
@@ -45,6 +49,8 @@ body {
 .item-fiddle {
   grid-area: fiddle;
   overflow-y: auto;
+  margin: $margin-main-frame $margin-main-frame $margin-main-frame
+    ($margin-main-frame / 2);
 }
 
 .instruction-list {
@@ -57,11 +63,23 @@ body {
   padding: 5px 15px;
   margin: $margin-small;
   cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.5);
+    color: black;
+  }
 
   &.selected {
     background: white;
+    color: black;
     box-shadow: 0 0 $margin-small $shadow-color;
     cursor: auto;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 }
 
@@ -73,10 +91,16 @@ body {
 .section-list-item {
   margin: 10px 0;
   cursor: pointer;
-}
+  color: rgba(0, 0, 0, 0.5);
 
-.no-decoration-anchor {
-  text-decoration: none;
+  &:hover {
+    color: black;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 .monospace {

@@ -53,9 +53,7 @@ export const ViewInstructionLinks: React.FunctionComponent<Props> = (
                 />
               </React.Fragment>
             ) : (
-              <Link className="no-decoration-anchor" to={href}>
-                {instructionMetadata.name}
-              </Link>
+              <Link to={href}>{instructionMetadata.name}</Link>
             )}
           </li>
         );
