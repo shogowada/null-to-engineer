@@ -153,15 +153,22 @@ switch (language) {
 }
 ```
 
-## どんな値が true とみなされて、どんな値が false とみなされるの？
+## Truthy と falsy ？
 
-JavaScript では以下の値は全て「falsy」と言われて、`if`文の中では`false`と同じ扱いになるよ。逆に言えば、それ以外の値なら`true`と同じ扱いになるんだね 😲
+JavaScript では以下の値は全て「falsy」と言われて、`if`文の中では`false`と同じ扱いになるよ。
+逆に言えば、それ以外の値は「truthy」と言われて、`if`文の中では`true`と同じ扱いになるんだね 😲
 
 ```javascript
 if (false) {
   console.log("実行されない");
 }
 if (0) {
+  console.log("実行されない");
+}
+if (-0) {
+  console.log("実行されない");
+}
+if (0n) {
   console.log("実行されない");
 }
 if ("") {

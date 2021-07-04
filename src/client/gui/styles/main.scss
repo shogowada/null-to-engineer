@@ -1,6 +1,8 @@
 @import "~highlight.js/styles/github.css";
 
 $margin-main-frame: 30px;
+$margin-small: 3px;
+$shadow-color: rgba(0, 0, 0, 0.2);
 
 body {
   font-family: sans-serif;
@@ -26,18 +28,18 @@ body {
 .item-instruction {
   grid-area: instruction;
   overflow-y: auto;
-}
 
-.item-instruction .instruction-pane {
-  margin: $margin-main-frame;
-  border-radius: 10px;
-  padding: 5px 30px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  background-color: white;
-}
+  .instruction-pane {
+    margin: $margin-main-frame;
+    border-radius: 10px;
+    padding: 5px 30px;
+    box-shadow: 0 0 20px $shadow-color;
+    background-color: white;
+  }
 
-.item-instruction p {
-  margin: 40px auto;
+  p {
+    margin: 40px auto;
+  }
 }
 
 .item-fiddle {
@@ -47,23 +49,30 @@ body {
 
 .instruction-list {
   list-style: none;
-  margin: 0;
   padding: 0;
 }
 
 .instruction-list-item {
-  border-radius: 3px;
+  border-radius: $margin-small;
   padding: 5px 15px;
-  margin: 3px;
+  margin: $margin-small;
   cursor: pointer;
 
   &.selected {
-    background: rgba(0, 0, 256, 0.1);
+    background: white;
+    box-shadow: 0 0 $margin-small $shadow-color;
+    cursor: auto;
   }
 }
 
 .section-list {
   list-style: none;
+  padding: 0 0 0 10px;
+}
+
+.section-list-item {
+  margin: 10px 0;
+  cursor: pointer;
 }
 
 .no-decoration-anchor {

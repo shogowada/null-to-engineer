@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import {
   InstructionID,
   InstructionMetadata,
@@ -6,6 +7,7 @@ import {
   RoutePath,
 } from "../../../common";
 import { createClassName } from "./create-class-name";
+import { ViewSectionLinks } from "./view-section-links";
 
 interface Props {
   selectedInstructionID: InstructionID;
@@ -24,26 +26,37 @@ export const ViewInstructionLinks: React.FunctionComponent<Props> = (
             (metadata) => metadata.id === instructionID
           )!;
         const href: string = RoutePath.instruction(instructionMetadata.id);
+        const selected: boolean =
+          instructionMetadata.id === props.selectedInstructionID;
         return (
           <li
             key={instructionMetadata.id}
             className={createClassName([
               "instruction-list-item",
-              instructionMetadata.id === props.selectedInstructionID
-                ? "selected"
-                : null,
+              selected ? "selected" : null,
             ])}
-            onClick={() => props.onClick(href)}
+            onClick={() => {
+              if (!selected) {
+                props.onClick(href);
+              }
+            }}
           >
-            <a
-              className="no-decoration-anchor"
-              href={href}
-              onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
-                event.preventDefault();
-              }}
-            >
-              {instructionMetadata.name}
-            </a>
+            {selected ? (
+              <React.Fragment>
+                {instructionMetadata.name}
+                <ViewSectionLinks
+                  baseHref={href}
+                  sections={instructionMetadata.sections}
+                  onClick={(href: string) => {
+                    props.onClick(href);
+                  }}
+                />
+              </React.Fragment>
+            ) : (
+              <Link className="no-decoration-anchor" to={href}>
+                {instructionMetadata.name}
+              </Link>
+            )}
           </li>
         );
       })}
