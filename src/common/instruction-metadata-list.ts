@@ -42,6 +42,11 @@ export const InstructionMetadataList: InstructionMetadata[] = [
   {
     id: InstructionID.JavaScriptLoopOperations,
     name: "JavaScript のループ",
-    sections: [],
+    sections: [
+      "forEach ループ",
+      "while ループ",
+      "do while ループ",
+      "for ループ",
+    ],
   },
 ];
