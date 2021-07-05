@@ -49,4 +49,9 @@ export const InstructionMetadataList: InstructionMetadata[] = [
       "for ループ",
     ],
   },
+  {
+    id: InstructionID.AboutNullToEngineer,
+    name: "このサイトについて",
+    sections: ["このサイトを作った理由", "ロードマップ", "管理人"],
+  },
 ];

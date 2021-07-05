@@ -1,5 +1,6 @@
 export enum ChapterID {
   JavaScriptBasics = "JavaScriptBasics",
+  AboutNullToEngineer = "AboutNullToEngineer",
 }
 
 export enum InstructionID {
@@ -7,6 +8,7 @@ export enum InstructionID {
   JavaScriptConditionalOperations = "JavaScriptConditionalOperations",
   JavaScriptArrayOperations = "JavaScriptArrayOperations",
   JavaScriptLoopOperations = "JavaScriptLoopOperations",
+  AboutNullToEngineer = "AboutNullToEngineer",
 }
 
 export interface Chapter {
@@ -35,6 +37,11 @@ export const Chapters: Chapter[] = [
       InstructionID.JavaScriptArrayOperations,
       InstructionID.JavaScriptLoopOperations,
     ],
+  },
+  {
+    id: ChapterID.AboutNullToEngineer,
+    name: "このサイトについて 🦋",
+    instructionIDs: [InstructionID.AboutNullToEngineer],
   },
 ];
 
