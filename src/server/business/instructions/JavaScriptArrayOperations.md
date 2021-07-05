@@ -6,7 +6,7 @@
 
 ## 配列に要素を追加
 
-配列に新しい要素を追加したい場合、`[...items, newItem]`という書き方で新しい配列を作ることができるよ。
+配列に新しい要素を追加したい場合、`[...items, newItem]`という書き方で新しい配列を作ることができるよ 🙂
 
 ```javascript
 const items = [1, 2, 3];
@@ -55,7 +55,7 @@ console.log(items); // [0,1,2,3,4,5,6]
 
 ## filter
 
-`filter`を使うと、元の配列からある条件を満たす要素だけを取り出した、新しい配列を作ることができるんだ。
+`filter`を使うと、元の配列からある条件を満たす要素だけを取り出した、新しい配列を作ることができるんだ 👍
 
 ```javascript
 const animals = [
@@ -76,7 +76,7 @@ console.log(animals); // [{"name":"dog","class":"mammal"},{"name":"cat","class":
 
 ## find
 
-`find`は`filter`に近いけど、条件を満たした要素全てを返すんじゃなくて、条件を満たした要素一つだけを返すよ。見つからなかった場合は`undefined`という特別な値を返す。
+`find`は`filter`に近いけど、条件を満たした要素全てを返すんじゃなくて、条件を満たした要素一つだけを返すよ。見つからなかった場合は`undefined`という特別な値を返す 😮
 
 ```javascript
 const animals = [
@@ -94,7 +94,7 @@ console.log(fish); // undefined
 
 ## map
 
-`map`を使うと、配列の各要素から新しい値を取り出した配列を作ることができる。
+`map`を使うと、配列の各要素から新しい値を取り出した配列を作ることができる 🙂
 
 ```javascript
 const animals = [
@@ -112,7 +112,7 @@ console.log(animals); // [{"name":"dog","class":"mammal"},{"name":"cat","class":
 
 ## flat
 
-`flat`を使うと、配列の要素が配列だったときに、その配列の要素も全て繋げた一つの配列を作ることができるよ。
+`flat`を使うと、配列の要素が配列だったときに、その配列の要素も全て繋げた一つの配列を作ることができるよ 😄
 
 ```javascript
 const items = [1, [2, 3], [4, 5], 6];
@@ -126,7 +126,7 @@ console.log(items); // [1,[2,3],[4,5],6]
 
 ## flatMap
 
-`flatMap`は`map`と`flat`を一度に行うよ！
+`flatMap`は`map`と`flat`を一度に行うよ 😲
 
 ```javascript
 const operatingSystemMakers = [
@@ -157,7 +157,7 @@ console.log(operatingSystemMakers); // [{"name":"Microsoft","operatingSystems":[
 
 ## includes
 
-`includes`は配列の中に与えられた値が見つかったら`true`、見つからなかったら`false`を返すよ。
+`includes`は配列の中に与えられた値が見つかったら`true`、見つからなかったら`false`を返すよ 😀
 
 ```javascript
 const animals = ["dog", "cat", "fish"];
@@ -171,7 +171,7 @@ console.log(includesHamster); // false
 
 ## some
 
-`some`は`includes`と似てるけど、関数を使って条件を書くことができるんだ。
+`some`は`includes`と似てるけど、関数を使って条件を書くことができるんだ 😶
 
 ```javascript
 const animals = [
@@ -189,7 +189,7 @@ console.log(includesFish); // false
 
 ## every
 
-`every`は`some`と違って、全部の要素が条件を満たしていれば`true`、一つでも条件を満たしていなかったら`false`を返すよ。
+`every`は`some`と違って、全部の要素が条件を満たしていれば`true`、一つでも条件を満たしていなかったら`false`を返すよ 🙂
 
 ```javascript
 const animals = [
@@ -207,7 +207,7 @@ console.log(allAreMammal); // false
 
 ## sort
 
-`sort`は要素を順番通りに並び替えるよ。
+`sort`は要素を順番通りに並び替えるよ 😀
 
 ⚠️ 他の関数と違って、元の配列の順番を変えちゃうから注意してね！
 
@@ -229,7 +229,7 @@ console.log(sortedItems); // [1,2,3,4]
 console.log(items); // [4,2,3,1]
 ```
 
-どういう順番で並べるかを指定したい場合は、関数を渡すことができるよ。
+どういう順番で並べるかを指定したい場合は、関数を渡すことができるよ 🧐
 
 ```javascript
 const items = [4, 2, 3, 1];
