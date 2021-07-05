@@ -1,6 +1,6 @@
 export const ElementID = {
-  FiddleCode: "fiddle-code",
-  FiddleExecute: "fiddle-execute",
-  FiddleOutput: "fiddle-output",
+  JavaScriptFiddleCode: "javascript-fiddle-code",
+  JavaScriptFiddleExecute: "javascript-fiddle-execute",
+  JavaScriptFiddleOutput: "javascript-fiddle-output",
   NextInstruction: "next-instruction",
 };

@@ -5,11 +5,15 @@ import { getDriver } from "./driver";
 
 export const executeJavaScript = (code: string) => {
   return setInputValue(
-    getDriver().findElement(By.id(ElementID.FiddleCode)),
+    getDriver().findElement(By.id(ElementID.JavaScriptFiddleCode)),
     code
-  ).then(() => getDriver().findElement(By.id(ElementID.FiddleExecute)).click());
+  ).then(() =>
+    getDriver().findElement(By.id(ElementID.JavaScriptFiddleExecute)).click()
+  );
 };
 
 export const getExecutionResult = (): PromiseLike<string> => {
-  return getDriver().findElement(By.id(ElementID.FiddleOutput)).getText();
+  return getDriver()
+    .findElement(By.id(ElementID.JavaScriptFiddleOutput))
+    .getText();
 };
