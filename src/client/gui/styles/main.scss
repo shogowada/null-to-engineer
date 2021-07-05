@@ -2,9 +2,11 @@
 
 $margin-main-frame: 30px;
 $margin-small: 3px;
+$padding-small: 5px;
 $padding-medium: 5px 15px;
 $padding-large: 5px 30px;
 $shadow-color: rgba(0, 0, 0, 0.2);
+$execute-button-color: green;
 $font-size: 16px;
 
 body {
@@ -12,6 +14,26 @@ body {
   background-color: #eeeeee;
   margin: 0;
   padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  padding: $padding-small;
+  border-radius: $margin-small;
+  border: 1px solid $execute-button-color;
+  color: $execute-button-color;
+  background: rgba(0, 0, 0, 0);
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    color: white;
+    background: $execute-button-color;
+  }
 }
 
 .main-container {
@@ -82,7 +104,6 @@ body {
 
   a {
     color: inherit;
-    text-decoration: none;
   }
 }
 
@@ -102,13 +123,16 @@ body {
 
   a {
     color: inherit;
-    text-decoration: none;
   }
+}
+
+#next-instruction {
+  margin: $margin-main-frame 0;
 }
 
 #fiddle-code {
   margin: 0 $margin-small $margin-small $margin-small;
-  padding: $padding-medium;
+  border-radius: $margin-small;
   width: calc(100% - #{$margin-small * 2});
   height: 200px;
   box-sizing: border-box;
