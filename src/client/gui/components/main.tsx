@@ -36,6 +36,6 @@ const scrollHashElementIntoView = (hash: string): void => {
   if (element) {
     element.scrollIntoView();
   } else {
-    throw new Error(`Element with ID ${id} is not found`);
+    throw new Error(`Element with ID ${id} is not found for hash ${hash}`);
   }
 };
