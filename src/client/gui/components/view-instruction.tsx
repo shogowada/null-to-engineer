@@ -8,6 +8,7 @@ import {
   InstructionMetadataList,
   RoutePath,
 } from "../../../common";
+import { Skeleton } from "./skeleton";
 
 interface Props {
   id: InstructionID;
@@ -16,6 +17,7 @@ interface Props {
 
 export const ViewInstruction = (props: Props) => {
   const [html, setHTML] = React.useState<string>("");
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -26,13 +28,28 @@ export const ViewInstruction = (props: Props) => {
         setErrorMessage(
           "ページの読み込みに失敗しました😝あとでもう一度試してください"
         )
-      );
+      )
+      .then(() => setIsLoading(false));
   }, [props.id]);
 
   const nextID: InstructionID | null = React.useMemo(
     () => getNextInstructionIDOrNull(props.id),
     [props.id]
   );
+
+  const renderContent = () => {
+    if (isLoading) {
+      return (
+        <React.Fragment>
+          <Skeleton height="40px" margin="0 0 15px 0" />
+          <Skeleton height="20px" margin="0 0 5px 0" />
+          <Skeleton height="20px" margin="0" />
+        </React.Fragment>
+      );
+    } else {
+      return <div dangerouslySetInnerHTML={{ __html: html }} />;
+    }
+  };
 
   const renderNextInstructionLink = (nextID: InstructionID) => {
     const metadata: InstructionMetadata = InstructionMetadataList.find(
@@ -54,7 +71,7 @@ export const ViewInstruction = (props: Props) => {
   return (
     <div className="instruction-pane">
       {errorMessage && <div>{errorMessage}</div>}
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      {renderContent()}
       {nextID && renderNextInstructionLink(nextID)}
     </div>
   );

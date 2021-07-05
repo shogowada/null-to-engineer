@@ -5,13 +5,14 @@ $margin-small: 3px;
 $padding-small: 5px;
 $padding-medium: 5px 15px;
 $padding-large: 5px 30px;
+$body-background-color: #eeeeee;
 $shadow-color: rgba(0, 0, 0, 0.2);
 $execute-button-color: green;
 $font-size: 16px;
 
 body {
   font-family: sans-serif;
-  background-color: #eeeeee;
+  background-color: $body-background-color;
   margin: 0;
   padding: 0;
 }
