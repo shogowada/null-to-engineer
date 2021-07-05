@@ -13,7 +13,20 @@ app.use(
   })
 );
 
-app.use(`/webapi/json-rpc`, jsonRPCRouter);
+app.use("/webapi/json-rpc", jsonRPCRouter);
+
+const packageJSON: any = require(path.join(
+  __dirname,
+  "..",
+  "..",
+  "package.json"
+));
+app.use("/webapi", (req, res) => {
+  res.send({
+    name: packageJSON.name,
+    version: packageJSON.version,
+  });
+});
 
 const publicDir = path.join(__dirname, "..", "..", "public");
 app.use(express.static(publicDir));
