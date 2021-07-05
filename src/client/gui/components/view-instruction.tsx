@@ -56,24 +56,24 @@ export const ViewInstruction = (props: Props) => {
       (metadata) => metadata.id === nextID
     )!;
     return (
-      <div>
-        <Link
-          id={ElementID.NextInstruction}
-          to={RoutePath.instruction(nextID)}
-          style={{ float: "right" }}
-        >
-          次は {metadata.name} 👉
-        </Link>
-      </div>
+      <Link
+        id={ElementID.NextInstruction}
+        to={RoutePath.instruction(nextID)}
+        style={{ float: "right" }}
+      >
+        次は {metadata.name} 👉
+      </Link>
     );
   };
 
   return (
-    <div className="instruction-pane">
-      {errorMessage && <div>{errorMessage}</div>}
-      {renderContent()}
+    <React.Fragment>
+      <div className="instruction-pane">
+        {errorMessage && <div>{errorMessage}</div>}
+        {renderContent()}
+      </div>
       {nextID && renderNextInstructionLink(nextID)}
-    </div>
+    </React.Fragment>
   );
 };
 
