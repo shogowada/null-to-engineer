@@ -17,19 +17,14 @@ interface Props {
 
 export const ViewInstruction = (props: Props) => {
   const [html, setHTML] = React.useState<string>("");
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     setHTML("");
     props
       .fetchHTML(props.id)
       .then(setHTML, () =>
-        setErrorMessage(
-          "ページの読み込みに失敗しました😝あとでもう一度試してください"
-        )
-      )
-      .then(() => setIsLoading(false));
+        setHTML("ページの読み込みに失敗しました😝あとでもう一度試してください")
+      );
   }, [props.id]);
 
   const nextID: InstructionID | null = React.useMemo(
@@ -38,7 +33,7 @@ export const ViewInstruction = (props: Props) => {
   );
 
   const renderContent = () => {
-    if (isLoading) {
+    if (!html) {
       return (
         <React.Fragment>
           <Skeleton height="40px" margin="0 0 15px 0" />
@@ -68,10 +63,7 @@ export const ViewInstruction = (props: Props) => {
 
   return (
     <React.Fragment>
-      <div className="instruction-pane">
-        {errorMessage && <div>{errorMessage}</div>}
-        {renderContent()}
-      </div>
+      <div className="instruction-pane">{renderContent()}</div>
       {nextID && renderNextInstructionLink(nextID)}
     </React.Fragment>
   );
