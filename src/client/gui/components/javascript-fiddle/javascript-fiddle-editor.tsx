@@ -6,7 +6,9 @@ interface Props {
   onCodeChange: (code: string) => void;
 }
 
-export const FiddleEditor: React.FunctionComponent<Props> = (props: Props) => {
+export const JavaScriptFiddleEditor: React.FunctionComponent<Props> = (
+  props: Props
+) => {
   return (
     <textarea
       id={ElementID.FiddleCode}

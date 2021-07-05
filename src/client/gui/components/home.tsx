@@ -1,7 +1,7 @@
 import * as React from "react";
 import { InstructionID, InstructionIDs } from "../../../common";
 import { ConnectedViewInstruction } from "../containers/connected-view-instruction";
-import { Fiddle } from "./fiddle";
+import { JavaScriptFiddle } from "./javascript-fiddle";
 import { ConnectedViewChapters } from "../containers/connected-view-chapters";
 
 interface Props {
@@ -27,7 +27,7 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
         <ConnectedViewInstruction id={instructionID} />
       </div>
       <div className="item-fiddle">
-        <Fiddle />
+        <JavaScriptFiddle />
       </div>
     </div>
   );

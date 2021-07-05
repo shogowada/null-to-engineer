@@ -48,7 +48,9 @@ return (console) => {
 };`;
 };
 
-export const FiddleOutput: React.FunctionComponent<Props> = (props: Props) => {
+export const JavaScriptFiddleOutput: React.FunctionComponent<Props> = (
+  props: Props
+) => {
   const [logs, setLogs] = React.useState<string[]>([]);
 
   return (
