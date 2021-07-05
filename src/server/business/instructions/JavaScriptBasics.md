@@ -50,12 +50,12 @@ console.log("Hello, " + "World!"); // Hello, World!
 数字を使って計算もできるよ！
 
 ```javascript
-console.log(`3 + 2 = ${3 + 2}`); // 5
-console.log(`3 - 2 = ${3 - 2}`); // 1
-console.log(`3 * 2 = ${3 * 2}`); // 6
-console.log(`3 / 2 = ${3 / 2}`); // 1.5
+console.log(3 + 2); // 5
+console.log(3 - 2); // 1
+console.log(3 * 2); // 6
+console.log(3 / 2); // 1.5
 // %は割り算の余りを計算するよ
-console.log(`3 % 2 = ${3 % 2}`); // 1
+console.log(3 % 2); // 1
 ```
 
 `()`を使って優先的に計算する場所を指定することもできるよ。
