@@ -34,5 +34,7 @@
 
 ## 管理人
 
-このサイトは[@wada_shogo](https://twitter.com/wada_shogo)が管理しています。
+このサイトは<a href="https://twitter.com/wada_shogo" target="_blank">@wada_shogo</a>が管理しています。
 何か問題があったらツイッターの DM などで教えてください 😊
+
+© <a href="https://twitter.com/wada_shogo" target="_blank">Shogo Wada</a>. All rights reserved.
