@@ -33,7 +33,7 @@ export const Main: React.FunctionComponent = () => {
 const scrollHashElementIntoView = (hash: string): void => {
   const id: string = decodeURIComponent(hash.replace("#", ""));
   const element = document.getElementById(id);
-  if (element) {
+  if (element && element.offsetParent) {
     element.scrollIntoView();
   } else {
     throw new Error(`Element with ID ${id} is not found for hash ${hash}`);

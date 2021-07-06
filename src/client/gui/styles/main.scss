@@ -45,53 +45,32 @@ button {
     grid-template-columns: auto;
     grid-template-rows: max-content auto;
     grid-template-areas:
-      "chapters"
+      "tabs"
       "contents";
   }
 
-  .item-chapters {
-    grid-area: chapters;
-    .chapters-pane {
-      height: 30px;
-    }
+  .item-tabs {
+    grid-area: tabs;
   }
 
-  .item-instruction {
-    &.visible {
-      grid-area: contents;
-    }
+  .item-chapters {
+    grid-area: contents;
 
     &.hidden {
       display: none;
     }
   }
 
-  .toggle-fiddle {
-    position: absolute;
-    right: 0;
-    top: 150px;
-    transform: rotate(-90deg);
-    transform-origin: bottom right;
+  .item-instruction {
+    grid-area: contents;
 
-    margin: 0;
-    border-radius: $margin-small $margin-small 0 0;
-    border: 1px solid blue;
-    border-bottom: none;
-    background: rgba(255, 255, 255, 1);
-    color: black;
-
-    &:hover {
-      border: 1px solid white;
-      border-bottom: none;
-      background: blue;
-      color: white;
+    &.hidden {
+      display: none;
     }
   }
 
   .item-fiddle {
-    &.visible {
-      grid-area: contents;
-    }
+    grid-area: contents;
 
     &.hidden {
       display: none;
@@ -105,6 +84,10 @@ button {
     grid-template-columns: max-content 1fr 1fr;
     grid-template-rows: auto;
     grid-template-areas: "chapters instruction fiddle";
+  }
+
+  .item-tabs {
+    display: none;
   }
 
   .item-chapters {
@@ -132,8 +115,7 @@ button {
   overflow-y: auto;
 
   .chapters-pane {
-    margin: $margin-main-frame ($margin-main-frame / 2) $margin-main-frame
-      $margin-main-frame;
+    margin: $margin-main-frame ($margin-main-frame / 2);
   }
 }
 
@@ -141,8 +123,7 @@ button {
   overflow-y: auto;
 
   .instruction-pane {
-    margin: $margin-main-frame $margin-main-frame $margin-main-frame
-      ($margin-main-frame / 2);
+    margin: $margin-main-frame ($margin-main-frame / 2);
     border-radius: 10px;
     padding: $padding-large;
     box-shadow: 0 0 ($margin-main-frame / 2) $shadow-color;
@@ -160,7 +141,7 @@ button {
 
 .item-fiddle {
   overflow-y: auto;
-  margin: $margin-main-frame $margin-main-frame $margin-main-frame 0;
+  margin: $margin-main-frame ($margin-main-frame / 2);
 }
 
 .instruction-list {

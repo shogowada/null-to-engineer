@@ -3,8 +3,8 @@ import { InstructionID, InstructionIDs } from "../../../common";
 import { ConnectedViewInstruction } from "../containers/connected-view-instruction";
 import { JavaScriptFiddle } from "./javascript-fiddle";
 import { ConnectedViewChapters } from "../containers/connected-view-chapters";
-import { ToggleFiddle } from "./toggle-fiddle";
 import { createClassName } from "./create-class-name";
+import { useLocation } from "react-router";
 
 interface Props {
   match: {
@@ -12,7 +12,15 @@ interface Props {
   };
 }
 
+enum Tab {
+  Chapters,
+  Instruction,
+  Fiddle,
+}
+
 export const Home: React.FunctionComponent<Props> = (props: Props) => {
+  const { pathname, hash } = useLocation();
+
   const instructionID: InstructionID = React.useMemo(
     () =>
       InstructionIDs.find((id) => id === props.match.params.id) ||
@@ -20,17 +28,37 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
     [props.match.params.id]
   );
 
-  const [isFiddleVisible, setIsFiddleVisible] = React.useState<boolean>(false);
+  const [currentTab, setCurrentTab] = React.useState<Tab>(Tab.Instruction);
+
+  React.useEffect(() => {
+    setCurrentTab(Tab.Instruction);
+  }, [pathname, hash]);
 
   return (
     <div className="main-container">
-      <div className="item-chapters">
+      <div className="item-tabs">
+        <button type="button" onClick={() => setCurrentTab(Tab.Chapters)}>
+          目次
+        </button>
+        <button type="button" onClick={() => setCurrentTab(Tab.Instruction)}>
+          記事
+        </button>
+        <button type="button" onClick={() => setCurrentTab(Tab.Fiddle)}>
+          コードエディタ
+        </button>
+      </div>
+      <div
+        className={createClassName([
+          "item-chapters",
+          currentTab === Tab.Chapters ? "visible" : "hidden",
+        ])}
+      >
         <ConnectedViewChapters selectedInstructionID={instructionID} />
       </div>
       <div
         className={createClassName([
           "item-instruction",
-          isFiddleVisible ? "hidden" : "visible",
+          currentTab === Tab.Instruction ? "visible" : "hidden",
         ])}
       >
         <ConnectedViewInstruction id={instructionID} />
@@ -38,7 +66,7 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
       <div
         className={createClassName([
           "item-fiddle",
-          isFiddleVisible ? "visible" : "hidden",
+          currentTab === Tab.Fiddle ? "visible" : "hidden",
         ])}
       >
         <JavaScriptFiddle />
@@ -50,10 +78,6 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
         </a>
         . All rights reserved.
       </div>
-      <ToggleFiddle
-        visible={isFiddleVisible}
-        onClick={() => setIsFiddleVisible((prevState) => !prevState)}
-      />
     </div>
   );
 };
