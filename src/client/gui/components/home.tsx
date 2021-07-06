@@ -29,6 +29,13 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
       <div className="item-fiddle">
         <JavaScriptFiddle />
       </div>
+      <div className="copyright">
+        ©{" "}
+        <a href="https://twitter.com/wada_shogo" target="_blank">
+          Shogo Wada
+        </a>
+        . All rights reserved.
+      </div>
     </div>
   );
 };
