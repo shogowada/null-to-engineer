@@ -78,7 +78,7 @@ export const JavaScriptFiddleOutput: React.FunctionComponent<Props> = (
           }
         }}
       >
-        ️実行️ ▶️
+        実行 ▶️
       </button>
       <pre
         id={ElementID.JavaScriptFiddleOutput}

@@ -13,9 +13,13 @@ export const JavaScriptFiddleEditor: React.FunctionComponent<Props> = (
     <textarea
       id={ElementID.JavaScriptFiddleCode}
       value={props.code}
+      autoCorrect="off"
+      autoCapitalize="none"
       placeholder="ここにコードを書いてね✍️"
       onChange={(event) => {
-        props.onCodeChange(event.target.value);
+        props.onCodeChange(
+          event.target.value.replace(/[‘’]/g, "'").replace(/[“”]/g, '"')
+        );
       }}
     />
   );

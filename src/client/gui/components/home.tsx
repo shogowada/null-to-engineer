@@ -5,6 +5,7 @@ import { JavaScriptFiddle } from "./javascript-fiddle";
 import { ConnectedViewChapters } from "../containers/connected-view-chapters";
 import { createClassName } from "./create-class-name";
 import { useLocation } from "react-router";
+import { SideTab } from "./side-tab";
 
 interface Props {
   match: {
@@ -34,22 +35,47 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
     setCurrentTab(Tab.Instruction);
   }, [pathname, hash]);
 
+  const renderSideTabs = () => {
+    switch (currentTab) {
+      case Tab.Chapters: {
+        return (
+          <SideTab
+            text={Tab.Instruction}
+            side="right"
+            onClick={() => setCurrentTab(Tab.Instruction)}
+          />
+        );
+      }
+      case Tab.Instruction: {
+        return (
+          <React.Fragment>
+            <SideTab
+              text={Tab.Chapters}
+              side="left"
+              onClick={() => setCurrentTab(Tab.Chapters)}
+            />
+            <SideTab
+              text={Tab.Fiddle}
+              side="right"
+              onClick={() => setCurrentTab(Tab.Fiddle)}
+            />
+          </React.Fragment>
+        );
+      }
+      case Tab.Fiddle: {
+        return (
+          <SideTab
+            text={Tab.Instruction}
+            side="left"
+            onClick={() => setCurrentTab(Tab.Instruction)}
+          />
+        );
+      }
+    }
+  };
+
   return (
     <div className="main-container">
-      <div className="item-tabs">
-        {[Tab.Chapters, Tab.Instruction, Tab.Fiddle].map((tab) => {
-          return (
-            <button
-              key={tab}
-              type="button"
-              className={tab === currentTab ? "selected" : undefined}
-              onClick={() => setCurrentTab(tab)}
-            >
-              {tab}
-            </button>
-          );
-        })}
-      </div>
       <div
         className={createClassName([
           "item-chapters",
@@ -74,6 +100,7 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
       >
         <JavaScriptFiddle />
       </div>
+      {renderSideTabs()}
     </div>
   );
 };
