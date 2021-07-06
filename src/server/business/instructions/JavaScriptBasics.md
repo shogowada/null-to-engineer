@@ -1,5 +1,7 @@
 # 初めての JavaScript
 
+## Hello, World!
+
 まずはコードエディタに下の文字列を入力して、「実行」のボタンを押してみて！
 
 ```javascript

@@ -6,6 +6,7 @@ export const InstructionMetadataList: InstructionMetadata[] = [
     id: InstructionID.JavaScriptBasics,
     name: "初めての JavaScript",
     sections: [
+      "Hello, World!",
       "コメント",
       "文字列",
       "数字",
