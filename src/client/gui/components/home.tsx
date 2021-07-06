@@ -13,9 +13,9 @@ interface Props {
 }
 
 enum Tab {
-  Chapters,
-  Instruction,
-  Fiddle,
+  Chapters = "目次",
+  Instruction = "記事",
+  Fiddle = "コードエディタ",
 }
 
 export const Home: React.FunctionComponent<Props> = (props: Props) => {
@@ -37,15 +37,18 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
   return (
     <div className="main-container">
       <div className="item-tabs">
-        <button type="button" onClick={() => setCurrentTab(Tab.Chapters)}>
-          目次
-        </button>
-        <button type="button" onClick={() => setCurrentTab(Tab.Instruction)}>
-          記事
-        </button>
-        <button type="button" onClick={() => setCurrentTab(Tab.Fiddle)}>
-          コードエディタ
-        </button>
+        {[Tab.Chapters, Tab.Instruction, Tab.Fiddle].map((tab) => {
+          return (
+            <button
+              key={tab}
+              type="button"
+              className={tab === currentTab ? "selected" : undefined}
+              onClick={() => setCurrentTab(tab)}
+            >
+              {tab}
+            </button>
+          );
+        })}
       </div>
       <div
         className={createClassName([
@@ -70,13 +73,6 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
         ])}
       >
         <JavaScriptFiddle />
-      </div>
-      <div className="copyright">
-        ©{" "}
-        <a href="https://twitter.com/wada_shogo" target="_blank">
-          Shogo Wada
-        </a>
-        . All rights reserved.
       </div>
     </div>
   );
