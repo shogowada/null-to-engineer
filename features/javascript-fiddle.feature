@@ -1,7 +1,7 @@
 Feature: JavaScript fiddle
 
   @gui
-  Scenario: Run fiddle
+  Scenario: Run JavaScript fiddle
     When I execute the following JavaScript:
     """
     console.info("This is info️");
