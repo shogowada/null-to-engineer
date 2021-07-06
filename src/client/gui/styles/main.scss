@@ -131,7 +131,7 @@ button {
   margin: 0 0 $margin-main-frame 0;
 }
 
-#fiddle-code {
+#javascript-fiddle-code {
   margin: 0 $margin-small $margin-small $margin-small;
   border-radius: $margin-small;
   width: calc(100% - #{$margin-small * 2});
@@ -141,12 +141,12 @@ button {
   font-family: monospace;
 }
 
-#fiddle-execute {
+#javascript-fiddle-execute {
   width: calc(100% - #{$margin-small * 2});
   margin: 0 $margin-small;
 }
 
-#fiddle-output {
+#javascript-fiddle-output {
   border-radius: $margin-small;
   padding: $padding-medium;
   margin: $margin-small;

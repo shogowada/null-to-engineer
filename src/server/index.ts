@@ -21,7 +21,7 @@ const packageJSON: any = require(path.join(
   "..",
   "package.json"
 ));
-app.use("/webapi", (req, res) => {
+app.get("/webapi", (req, res) => {
   res.send({
     name: packageJSON.name,
     version: packageJSON.version,
