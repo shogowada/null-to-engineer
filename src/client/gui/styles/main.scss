@@ -1,5 +1,7 @@
 @import "~highlight.js/styles/github.css";
 
+$tablet-width: 768px;
+
 $margin-main-frame: 30px;
 $margin-small: 3px;
 $padding-small: 5px;
@@ -37,16 +39,96 @@ button {
   }
 }
 
+@media screen and (max-width: $tablet-width) {
+  .main-container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: max-content auto;
+    grid-template-areas:
+      "chapters"
+      "contents";
+  }
+
+  .item-chapters {
+    grid-area: chapters;
+    .chapters-pane {
+      height: 30px;
+    }
+  }
+
+  .item-instruction {
+    &.visible {
+      grid-area: contents;
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+
+  .toggle-fiddle {
+    position: absolute;
+    right: 0;
+    top: 150px;
+    transform: rotate(-90deg);
+    transform-origin: bottom right;
+
+    margin: 0;
+    border-radius: $margin-small $margin-small 0 0;
+    border: 1px solid blue;
+    border-bottom: none;
+    background: rgba(255, 255, 255, 1);
+    color: black;
+
+    &:hover {
+      border: 1px solid white;
+      border-bottom: none;
+      background: blue;
+      color: white;
+    }
+  }
+
+  .item-fiddle {
+    &.visible {
+      grid-area: contents;
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+}
+
+@media screen and (min-width: $tablet-width) {
+  .main-container {
+    display: grid;
+    grid-template-columns: max-content 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "chapters instruction fiddle";
+  }
+
+  .item-chapters {
+    grid-area: chapters;
+  }
+
+  .item-instruction {
+    grid-area: instruction;
+  }
+
+  .toggle-fiddle {
+    display: none;
+  }
+
+  .item-fiddle {
+    grid-area: fiddle;
+  }
+}
+
 .main-container {
-  display: grid;
-  grid-template-columns: max-content 1fr 1fr;
-  grid-template-rows: auto;
-  grid-template-areas: "chapters instruction fiddle";
   height: 100vh;
 }
 
 .item-chapters {
-  grid-area: chapters;
   overflow-y: auto;
 
   .chapters-pane {
@@ -56,11 +138,11 @@ button {
 }
 
 .item-instruction {
-  grid-area: instruction;
   overflow-y: auto;
 
   .instruction-pane {
-    margin: $margin-main-frame ($margin-main-frame / 2);
+    margin: $margin-main-frame $margin-main-frame $margin-main-frame
+      ($margin-main-frame / 2);
     border-radius: 10px;
     padding: $padding-large;
     box-shadow: 0 0 ($margin-main-frame / 2) $shadow-color;
@@ -70,13 +152,15 @@ button {
   p {
     margin: 40px auto;
   }
+
+  #next-instruction {
+    margin: 0 $margin-main-frame $margin-main-frame 0;
+  }
 }
 
 .item-fiddle {
-  grid-area: fiddle;
   overflow-y: auto;
-  margin: $margin-main-frame $margin-main-frame $margin-main-frame
-    ($margin-main-frame / 2);
+  margin: $margin-main-frame $margin-main-frame $margin-main-frame 0;
 }
 
 .instruction-list {
@@ -125,10 +209,6 @@ button {
   a {
     color: inherit;
   }
-}
-
-#next-instruction {
-  margin: 0 0 $margin-main-frame 0;
 }
 
 #javascript-fiddle-code {

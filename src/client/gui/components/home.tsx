@@ -3,6 +3,8 @@ import { InstructionID, InstructionIDs } from "../../../common";
 import { ConnectedViewInstruction } from "../containers/connected-view-instruction";
 import { JavaScriptFiddle } from "./javascript-fiddle";
 import { ConnectedViewChapters } from "../containers/connected-view-chapters";
+import { ToggleFiddle } from "./toggle-fiddle";
+import { createClassName } from "./create-class-name";
 
 interface Props {
   match: {
@@ -18,15 +20,27 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
     [props.match.params.id]
   );
 
+  const [isFiddleVisible, setIsFiddleVisible] = React.useState<boolean>(false);
+
   return (
     <div className="main-container">
       <div className="item-chapters">
         <ConnectedViewChapters selectedInstructionID={instructionID} />
       </div>
-      <div className="item-instruction">
+      <div
+        className={createClassName([
+          "item-instruction",
+          isFiddleVisible ? "hidden" : "visible",
+        ])}
+      >
         <ConnectedViewInstruction id={instructionID} />
       </div>
-      <div className="item-fiddle">
+      <div
+        className={createClassName([
+          "item-fiddle",
+          isFiddleVisible ? "visible" : "hidden",
+        ])}
+      >
         <JavaScriptFiddle />
       </div>
       <div className="copyright">
@@ -36,6 +50,10 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
         </a>
         . All rights reserved.
       </div>
+      <ToggleFiddle
+        visible={isFiddleVisible}
+        onClick={() => setIsFiddleVisible((prevState) => !prevState)}
+      />
     </div>
   );
 };
