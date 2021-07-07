@@ -2,20 +2,20 @@ import * as React from "react";
 import { ElementID } from "../../../../common";
 
 interface Props {
-  code: string;
-  onChange: (code: string) => void;
+  html: string;
+  onChange: (html: string) => void;
 }
 
-export const JavaScriptFiddleEditor: React.FunctionComponent<Props> = (
+export const HTMLFiddleEditor: React.FunctionComponent<Props> = (
   props: Props
 ) => {
   return (
     <textarea
-      id={ElementID.JavaScriptFiddleCode}
-      value={props.code}
+      id={ElementID.HTMLFiddleCode}
+      value={props.html}
       autoCorrect="off"
       autoCapitalize="none"
-      placeholder="ここにコードを書いてね✍️"
+      placeholder="ここにHTMLを書いてね✍️"
       onChange={(event) => {
         props.onChange(
           event.target.value.replace(/[‘’]/g, "'").replace(/[“”]/g, '"')

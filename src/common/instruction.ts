@@ -1,5 +1,6 @@
 export enum ChapterID {
   JavaScriptBasics = "JavaScriptBasics",
+  HTMLBasics = "HTMLBasics",
   AboutNullToEngineer = "AboutNullToEngineer",
 }
 
@@ -8,6 +9,9 @@ export enum InstructionID {
   JavaScriptConditionalOperations = "JavaScriptConditionalOperations",
   JavaScriptArrayOperations = "JavaScriptArrayOperations",
   JavaScriptLoopOperations = "JavaScriptLoopOperations",
+
+  HTMLBasics = "HTMLBasics",
+
   AboutNullToEngineer = "AboutNullToEngineer",
 }
 
@@ -27,6 +31,17 @@ export interface InstructionMetadata {
   sections: string[];
 }
 
+export enum FiddleType {
+  None = "None",
+  JavaScript = "JavaScript",
+  HTML = "HTML",
+}
+
+export interface InstructionConfiguration {
+  id: InstructionID;
+  fiddleType: FiddleType;
+}
+
 export const Chapters: Chapter[] = [
   {
     id: ChapterID.JavaScriptBasics,
@@ -39,6 +54,11 @@ export const Chapters: Chapter[] = [
     ],
   },
   {
+    id: ChapterID.HTMLBasics,
+    name: "HTML 基本編 ✍️",
+    instructionIDs: [InstructionID.HTMLBasics],
+  },
+  {
     id: ChapterID.AboutNullToEngineer,
     name: "このサイトについて 🦋",
     instructionIDs: [InstructionID.AboutNullToEngineer],
@@ -48,3 +68,46 @@ export const Chapters: Chapter[] = [
 export const InstructionIDs: InstructionID[] = Chapters.flatMap(
   (chapter) => chapter.instructionIDs
 );
+
+export const getInstructionConfiguration = (
+  id: InstructionID
+): InstructionConfiguration => {
+  switch (id) {
+    case InstructionID.AboutNullToEngineer: {
+      return {
+        id,
+        fiddleType: FiddleType.None,
+      };
+    }
+    case InstructionID.HTMLBasics: {
+      return {
+        id,
+        fiddleType: FiddleType.HTML,
+      };
+    }
+    case InstructionID.JavaScriptArrayOperations: {
+      return {
+        id,
+        fiddleType: FiddleType.JavaScript,
+      };
+    }
+    case InstructionID.JavaScriptBasics: {
+      return {
+        id,
+        fiddleType: FiddleType.JavaScript,
+      };
+    }
+    case InstructionID.JavaScriptConditionalOperations: {
+      return {
+        id,
+        fiddleType: FiddleType.JavaScript,
+      };
+    }
+    case InstructionID.JavaScriptLoopOperations: {
+      return {
+        id,
+        fiddleType: FiddleType.JavaScript,
+      };
+    }
+  }
+};

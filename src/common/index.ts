@@ -5,4 +5,5 @@ export * from "./eventually";
 export * from "./instruction";
 export * from "./instruction-metadata-list";
 export * from "./json-rpc";
+export * from "./require";
 export * from "./route-path";

@@ -17,3 +17,10 @@ export const getExecutionResult = (): PromiseLike<string> => {
     .findElement(By.id(ElementID.JavaScriptFiddleOutput))
     .getText();
 };
+
+export const executeHTML = (html: string) => {
+  return setInputValue(
+    getDriver().findElement(By.id(ElementID.HTMLFiddleCode)),
+    html
+  ).then(() => getDriver().findElement(By.id(ElementID.HTMLFiddleExecute)));
+};

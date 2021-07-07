@@ -1,9 +1,19 @@
 import { Then, When } from "@cucumber/cucumber";
 import { expect } from "chai";
-import { executeJavaScript, getExecutionResult } from "./drivers";
+import {
+  executeHTML,
+  executeJavaScript,
+  getExecutionResult,
+  selectHTMLInstruction,
+  selectJavaScriptInstruction,
+} from "./drivers";
 
 When(/^I execute the following JavaScript:$/, (code: string) => {
-  return executeJavaScript(code);
+  return selectJavaScriptInstruction().then(() => executeJavaScript(code));
+});
+
+When(/^I execute the following HTML:$/, (html: string) => {
+  return selectHTMLInstruction().then(() => executeHTML(html));
 });
 
 Then(
@@ -13,3 +23,7 @@ Then(
     expect(actual).to.equal(expected);
   }
 );
+
+Then(/^it should output the following HTML:$/, (expectedHTML: string) => {
+  return "pending";
+});
