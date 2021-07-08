@@ -8,7 +8,6 @@ import {
   selectHTMLInstruction,
   selectJavaScriptInstruction,
 } from "./drivers";
-import { WebElement } from "selenium-webdriver";
 
 When(/^I execute the following JavaScript:$/, (code: string) => {
   return selectJavaScriptInstruction().then(() => executeJavaScript(code));

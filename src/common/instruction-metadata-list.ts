@@ -50,7 +50,11 @@ export const InstructionMetadataList: InstructionMetadata[] = [
       "for ループ",
     ],
   },
-  { id: InstructionID.HTMLBasics, name: "初めての HTML", sections: [] },
+  {
+    id: InstructionID.HTMLBasics,
+    name: "初めての HTML",
+    sections: ["HTML って何だ？", "Hello, World!", "タグ", "<h1>から<h6>"],
+  },
   {
     id: InstructionID.AboutNullToEngineer,
     name: "このサイトについて",
