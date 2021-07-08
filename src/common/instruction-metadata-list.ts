@@ -53,7 +53,18 @@ export const InstructionMetadataList: InstructionMetadata[] = [
   {
     id: InstructionID.HTMLBasics,
     name: "初めての HTML",
-    sections: ["HTML って何だ？", "Hello, World!", "タグ", "<h1>から<h6>"],
+    sections: [
+      "HTML って何だ？",
+      "Hello, World!",
+      "タグ",
+      "<h1>から<h6>：見出し",
+      "<br>：改行",
+      "<p>：段落",
+      "<a>：リンク",
+      "<ul>：リスト",
+      "<img>：画像",
+      "<table>：テーブル",
+    ],
   },
   {
     id: InstructionID.AboutNullToEngineer,
