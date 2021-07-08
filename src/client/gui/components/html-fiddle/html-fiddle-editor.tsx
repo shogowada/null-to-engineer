@@ -12,6 +12,7 @@ export const HTMLFiddleEditor: React.FunctionComponent<Props> = (
   return (
     <textarea
       id={ElementID.HTMLFiddleCode}
+      className="fiddle-code"
       value={props.html}
       autoCorrect="off"
       autoCapitalize="none"

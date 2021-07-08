@@ -8,16 +8,11 @@ export const JavaScriptFiddle: React.FunctionComponent = () => {
   const [logs, setLogs] = React.useState<string[]>([]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-      }}
-    >
+    <div className="single-fiddle-container">
       <JavaScriptFiddleEditor code={code} onChange={setCode} />
       <button
         id={ElementID.JavaScriptFiddleExecute}
+        className="fiddle-execute"
         type="button"
         onClick={() => {
           setLogs([]);

@@ -12,8 +12,10 @@ export const JavaScriptFiddleOutput: React.FunctionComponent<Props> = (
   return (
     <pre
       id={ElementID.JavaScriptFiddleOutput}
-      className={createClassName([props.logs.length ? "" : "empty"])}
-      style={{ flex: 1 }}
+      className={createClassName([
+        "fiddle-output",
+        props.logs.length ? "" : "empty",
+      ])}
     >
       {props.logs.length
         ? props.logs.join("\n")

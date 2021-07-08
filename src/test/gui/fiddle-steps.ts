@@ -3,10 +3,12 @@ import { expect } from "chai";
 import {
   executeHTML,
   executeJavaScript,
-  getExecutionResult,
+  getJavaScriptExecutionResult,
+  getHTMLExecutionResult,
   selectHTMLInstruction,
   selectJavaScriptInstruction,
 } from "./drivers";
+import { WebElement } from "selenium-webdriver";
 
 When(/^I execute the following JavaScript:$/, (code: string) => {
   return selectJavaScriptInstruction().then(() => executeJavaScript(code));
@@ -19,11 +21,12 @@ When(/^I execute the following HTML:$/, (html: string) => {
 Then(
   /^it should output the following execution result:$/,
   async (expected: string) => {
-    const actual: string = await getExecutionResult();
+    const actual: string = await getJavaScriptExecutionResult();
     expect(actual).to.equal(expected);
   }
 );
 
-Then(/^it should output the following HTML:$/, (expectedHTML: string) => {
-  return "pending";
+Then(/^it should output the following HTML:$/, async (expectedHTML: string) => {
+  const actualHTML: string = await getHTMLExecutionResult();
+  expect(actualHTML).to.equal(expectedHTML);
 });
