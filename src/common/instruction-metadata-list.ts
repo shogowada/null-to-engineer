@@ -61,7 +61,7 @@ export const InstructionMetadataList: InstructionMetadata[] = [
       "<br>：改行",
       "<p>：段落",
       "<a>：リンク",
-      "<ul>：リスト",
+      "<ul>と<ol>：リスト",
       "<img>：画像",
       "<table>：テーブル",
     ],
