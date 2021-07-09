@@ -1,11 +1,17 @@
 import * as React from "react";
-import { InstructionID, InstructionIDs } from "../../../common";
+import {
+  getInstructionConfiguration,
+  InstructionConfiguration,
+  InstructionID,
+  InstructionIDs,
+} from "../../../common";
 import { ConnectedViewInstruction } from "../containers/connected-view-instruction";
 import { JavaScriptFiddle } from "./javascript-fiddle";
 import { ConnectedViewChapters } from "../containers/connected-view-chapters";
 import { createClassName } from "./create-class-name";
 import { useLocation } from "react-router";
 import { SideTab } from "./side-tab";
+import { Fiddle } from "./fiddle";
 
 interface Props {
   match: {
@@ -27,6 +33,11 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
       InstructionIDs.find((id) => id === props.match.params.id) ||
       InstructionID.JavaScriptBasics,
     [props.match.params.id]
+  );
+
+  const instructionConfiguration: InstructionConfiguration = React.useMemo(
+    () => getInstructionConfiguration(instructionID),
+    [instructionID]
   );
 
   const [currentTab, setCurrentTab] = React.useState<Tab>(Tab.Instruction);
@@ -98,7 +109,7 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
           currentTab === Tab.Fiddle ? "visible" : "hidden",
         ])}
       >
-        <JavaScriptFiddle />
+        <Fiddle type={instructionConfiguration.fiddleType} />
       </div>
       {renderSideTabs()}
     </div>

@@ -184,8 +184,8 @@ if (null) {
 if (undefined) {
   console.log("実行されない");
 }
-// NaNはNot a Numberの略。「数字じゃない」ことを示す値だね。
-// 例えば文字列を数字で割ろうとすると（例："hello" / 3）、NaNになるよ。
+// NaNはNot a Numberの略。「数値じゃない」ことを示す値だね。
+// 例えば文字列を数値で割ろうとすると（例："hello" / 3）、NaNになるよ。
 if (NaN) {
   console.log("実行されない");
 }

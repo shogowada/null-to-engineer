@@ -31,6 +31,7 @@ export const ViewInstructionLinks: React.FunctionComponent<Props> = (
         return (
           <li
             key={instructionMetadata.id}
+            data-instruction-id={instructionMetadata.id}
             className={createClassName([
               "instruction-list-item",
               selected ? "selected" : null,

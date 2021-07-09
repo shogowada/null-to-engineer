@@ -1,5 +1,6 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const publicDir = path.join(__dirname, "public");
 
@@ -41,6 +42,14 @@ module.exports = {
       template: path.join(__dirname, "index.html"),
       title: "０から始めるプログラミング",
       hash: true,
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.join(__dirname, "imgs", "*.jpg"),
+          to: path.join(publicDir),
+        },
+      ],
     }),
   ],
   output: {
