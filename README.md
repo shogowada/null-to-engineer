@@ -4,7 +4,7 @@
 
 ## 記事
 
-記事は[`./src/server/business/instructions`](./src/server/business/instructions)に Markdown としてまとめられている。
+記事は[`./instructions`](./instructions)に Markdown としてまとめられている。
 サーバーは実行時にこれらからそれぞれの記事の題名（最初の行のヘッダー）や目次（その後`##`で宣言されたヘッダー）を読み込み、
 クライアントへ渡すための HTML へと変換する。
 

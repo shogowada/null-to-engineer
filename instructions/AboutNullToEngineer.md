@@ -14,7 +14,7 @@
 ### 技術編
 
 - ✅ JavaScript の基礎
-- ☑️ HTML の基礎
+  -️ ✅ HTML の基礎
 - ☑️ CSS の基礎
 - ☑️ JavaScript、HTML、CSS を組み合わせる
 - ☑️ React で TODO アプリ（クライアント）

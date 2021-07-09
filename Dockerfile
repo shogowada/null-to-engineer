@@ -21,6 +21,7 @@ RUN rm -rf ./node_modules/ && \
 
 COPY --from=client /app/public/ ./public/
 COPY --from=server /app/src/server ./src/server/
+COPY ./instructions ./instructions
 
 HEALTHCHECK --start-period=10s --retries=1 CMD curl -f http://localhost/webapi || exit 1
 

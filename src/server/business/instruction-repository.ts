@@ -7,11 +7,12 @@ import {
   InstructionIDs,
   InstructionMetadata,
 } from "../../common";
+import { configuration } from "../infrastructure";
 import { createInstruction } from "./instruction-factory";
 
 const loadMarkdown = (instructionID: InstructionID): string => {
   return fs.readFileSync(
-    path.join(__dirname, "instructions", `${instructionID}.md`),
+    path.join(configuration.rootDir, "instructions", `${instructionID}.md`),
     { encoding: "utf-8" }
   );
 };
