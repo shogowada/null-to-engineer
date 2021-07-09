@@ -1,6 +1,7 @@
 FROM null-to-web-engineer:base as client
 
 COPY webpack.config.js ./index.html ./
+COPY ./imgs ./imgs
 COPY ./src/client ./src/client/
 RUN npm run build && \
   npm run unit-test-client

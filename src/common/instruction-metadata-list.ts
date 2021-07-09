@@ -56,7 +56,7 @@ export const InstructionMetadataList: InstructionMetadata[] = [
     sections: [
       "HTML って何だ？",
       "Hello, World!",
-      "タグ",
+      "要素とタグ",
       "<h1>から<h6>：見出し",
       "<br>：改行",
       "<p>：段落",
@@ -64,6 +64,7 @@ export const InstructionMetadataList: InstructionMetadata[] = [
       "<ul>と<ol>：リスト",
       "<img>：画像",
       "<table>：テーブル",
+      "その他の要素",
     ],
   },
   {

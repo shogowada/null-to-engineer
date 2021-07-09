@@ -2,6 +2,21 @@ import * as marked from "marked";
 import * as highlightJS from "highlight.js";
 import { Instruction, InstructionID } from "../../common";
 
+marked.use({
+  renderer: {
+    link: (href: string, title: string, text: string): string => {
+      const attributes: string = [
+        `href="${href}"`,
+        title ? `title="${title}"` : "",
+        'target="_blank"',
+      ]
+        .filter((attribute) => attribute)
+        .join(" ");
+      return `<a ${attributes}>${text}</a>`;
+    },
+  },
+});
+
 export const createInstruction = (
   instructionID: InstructionID,
   markdown: string

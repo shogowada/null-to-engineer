@@ -57,6 +57,7 @@
     "chai": "^4.3.4",
     "chromedriver": "^91.0.1",
     "connected-react-router": "^6.9.1",
+    "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^5.2.6",
     "history": "^4.10.1",
     "html-webpack-plugin": "^5.3.1",
