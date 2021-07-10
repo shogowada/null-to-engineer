@@ -67,7 +67,11 @@ export const InstructionMetadataList: InstructionMetadata[] = [
       "その他の要素",
     ],
   },
-  { id: InstructionID.CSSBasics, name: "初めての CSS", sections: [] },
+  {
+    id: InstructionID.CSSBasics,
+    name: "初めての CSS",
+    sections: ["CSS って何だ？", "色を変えてみる"],
+  },
   { id: InstructionID.CSSAsElement, name: "要素としての CSS", sections: [] },
   { id: InstructionID.CSSAsFile, name: "ファイルとしての CSS", sections: [] },
   {
