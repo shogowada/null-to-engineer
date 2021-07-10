@@ -11,12 +11,15 @@ export const HTMLWithCSSFiddle: React.FunctionComponent = () => {
   const [compiledHTML, setCompiledHTML] = React.useState<string>("");
 
   return (
-    <div>
-      <HTMLFiddleEditor html={html} onChange={setHTML} />
-      <CSSFiddleEditor css={css} onChange={setCSS} />
+    <div className="two-fiddle-container">
+      <div className="fiddle-code-container">
+        <HTMLFiddleEditor html={html} onChange={setHTML} />
+        <CSSFiddleEditor css={css} onChange={setCSS} />
+      </div>
       <button
         type="button"
         id={ElementID.HTMLFiddleExecute}
+        className="fiddle-execute"
         onClick={() => {
           const linkElement: string = `<link rel="stylesheet" type="text/css" href="data:text/css;base64,${btoa(
             css

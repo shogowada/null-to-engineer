@@ -16,7 +16,7 @@ export const JavaScriptFiddleEditor: React.FunctionComponent<Props> = (
       value={props.code}
       autoCorrect="off"
       autoCapitalize="none"
-      placeholder="ここにコードを書いてね✍️"
+      placeholder="ここに JavaScript を書いてね ✍️"
       onChange={(event) => {
         props.onChange(
           event.target.value.replace(/[‘’]/g, "'").replace(/[“”]/g, '"')

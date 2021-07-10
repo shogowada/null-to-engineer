@@ -16,7 +16,7 @@ export const CSSFiddleEditor: React.FunctionComponent<Props> = (
       value={props.css}
       autoCorrect="off"
       autoCapitalize="none"
-      placeholder="ここにCSSを書いてね🎨"
+      placeholder="ここに CSS を書いてね ✍️"
       onChange={(event) => {
         props.onChange(
           event.target.value.replace(/[‘’]/g, "'").replace(/[“”]/g, '"')
