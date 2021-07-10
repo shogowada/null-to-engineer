@@ -12,6 +12,7 @@ $shadow-color: rgba(0, 0, 0, 0.2);
 $thick-shadow-color: rgba(0, 0, 0, 0.4);
 $tab-button-color: deepskyblue;
 $execute-button-color: green;
+$code-border-color: lightgray;
 $grayed-out-color: rgba(0, 0, 0, 0.5);
 $font-size: 16px;
 $animation-duration: 0.25s;
@@ -300,8 +301,30 @@ code {
 }
 
 code.language-javascript,
-code.language-html {
+code.language-html,
+code.language-css {
   display: block;
-  padding: 20px;
+  padding: 35px 20px 20px 20px;
   overflow-x: auto;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-right: 1px solid $code-border-color;
+    border-bottom: 1px solid $code-border-color;
+    border-radius: 0 0 $margin-small 0;
+    padding: 2px;
+  }
+}
+
+code.language-javascript::before {
+  content: "JavaScript";
+}
+code.language-html::before {
+  content: "HTML";
+}
+code.language-css::before {
+  content: "CSS";
 }
