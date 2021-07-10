@@ -201,11 +201,11 @@ console.log(text); // あ、変わっちゃった！
 ```javascript
 // {}を使ってオブジェクトを作ろう！
 const person = {
-  name: "Mercury Veca",
-  age: 20,
+  name: "つばさ",
+  age: 35,
 };
 // .を使ってオブジェクトが持っている値を取りだそう！
-console.log(`${person.name}は${person.age}才です！`); // Mercury Vecaは20才です！
+console.log(`${person.name}は${person.age}才です！`); // つばさは35才です！
 ```
 
 ## 関数
@@ -217,10 +217,10 @@ console.log(`${person.name}は${person.age}才です！`); // Mercury Vecaは20�
 ```javascript
 const introduce = () => {
   const person = {
-    name: "Mercury Veca",
-    age: 20,
+    name: "つばさ",
+    age: 35,
   };
-  console.log(`${person.name}は${person.age}才です！`);
+  console.log(`${person.name}は${person.age}才です！`); // つばさは35才です！
 };
 
 introduce(); // ()を使って関数を呼ぼう！
@@ -235,15 +235,15 @@ const introduce = (person) => {
 };
 
 const personA = {
-  name: "Mercury Veca",
-  age: 20,
+  name: "つばさ",
+  age: 35,
 };
 const personB = {
-  name: "Karpos Boris",
-  age: 15,
+  name: "けい",
+  age: 27,
 };
-introduce(personA); // Mercury Vecaは20才です！
-introduce(personB); // Karpos Borisは15才です！
+introduce(personA); // つばさは35才です！
+introduce(personB); // けいは27才です！
 ```
 
 パラメータは何個でも受け取れるよ。下の例では`name`と`age`の二つのパラメータを受け取っているね。
@@ -254,10 +254,10 @@ const introduce = (name, age) => {
 };
 
 const person = {
-  name: "Mercury Veca",
-  age: 20,
+  name: "つばさ",
+  age: 35,
 };
-introduce(person.name, person.age); // Mercury Vecaは20才です！
+introduce(person.name, person.age); // つばさは35才です！
 ```
 
 `return`を使うと、一つだけ何かを返すこともできるんだ。
@@ -269,11 +269,11 @@ const createIntroduction = (person) => {
 };
 
 const person = {
-  name: "Mercury Veca",
-  age: 20,
+  name: "つばさ",
+  age: 35,
 };
 // 返された文字列をconsole.logを使って表示しよう！
-console.log(createIntroduction(person)); // Mercury Vecaは20才です！
+console.log(createIntroduction(person)); // つばさは35才です！
 ```
 
 ## 配列
@@ -287,13 +287,13 @@ const introduce = (person) => {
 // []を使って配列を作ろう！
 // 各要素は,を使って区切ってね。
 const people = [
-  { name: "Mercury Veca", age: 20 },
-  { name: "Karpos Boris", age: 15 },
+  { name: "つばさ", age: 35 },
+  { name: "けい", age: 27 },
 ];
 // []を使って要素を取りだそう！
 // 0を使うと最初の要素、1を使うと二つ目の要素を取り出せるよ。
-introduce(people[0]); // Mercury Vecaは20才です！
-introduce(people[1]); // Karpos Borisは15才です！
+introduce(people[0]); // つばさは35才です！
+introduce(people[1]); // けいは27才です！
 ```
 
 ## クラス
@@ -318,8 +318,8 @@ class Person {
 
 // classはnewで宣言
 // newで渡した値は、そのclassのconstructorに渡されるよ
-const personA = new Person("Mercury Veca", 20);
-const personB = new Person("Karpos Boris", 15);
-personA.introduce(); // Mercury Vecaは20才です！
-personB.introduce(); // Karpos Borisは15才です！
+const personA = new Person("つばさ", 35);
+const personB = new Person("けい", 27);
+personA.introduce(); // つばさは35才です！
+personB.introduce(); // けいは27才です！
 ```
