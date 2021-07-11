@@ -13,5 +13,12 @@
     />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
-  <body></body>
+  <body>
+    <div id="mount">
+      <div id="html-to-be-injected"></div>
+    </div>
+    <script>
+      window.__PRELOADED_STATE__ = "preloaded-state-to-be-injected";
+    </script>
+  </body>
 </html>

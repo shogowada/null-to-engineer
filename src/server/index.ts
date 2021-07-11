@@ -2,7 +2,8 @@ import * as path from "path";
 import * as express from "express";
 import * as helmet from "helmet";
 import * as compression from "compression";
-import { jsonRPCRouter } from "./api";
+import { configuration } from "./infrastructure";
+import { handleRender, jsonRPCRouter } from "./api";
 
 const app = express();
 
@@ -28,11 +29,8 @@ app.get("/webapi", (req, res) => {
   });
 });
 
-const publicDir = path.join(__dirname, "..", "..", "public");
-app.use(express.static(publicDir));
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(publicDir, "index.html"));
-});
+app.use(express.static(configuration.publicDir));
+app.get("/*", handleRender);
 
 const Port = 80;
 console.log(`Starting server on ${Port}`);

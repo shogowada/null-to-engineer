@@ -42,6 +42,7 @@ module.exports = {
       template: path.join(__dirname, "index.html"),
       title: "０から始めるプログラミング",
       hash: true,
+      filename: "index.template.html",
     }),
     new CopyPlugin({
       patterns: [
