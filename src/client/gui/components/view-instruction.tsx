@@ -12,20 +12,16 @@ import { Skeleton } from "./skeleton";
 
 interface Props {
   id: InstructionID;
-  fetchHTML: (id: InstructionID) => PromiseLike<string>;
+  html: string;
+  fetchHTML: (id: InstructionID) => PromiseLike<unknown>;
 }
 
 export const ViewInstruction = (props: Props) => {
-  const [html, setHTML] = React.useState<string>("");
-
   React.useEffect(() => {
-    setHTML("");
     props
       .fetchHTML(props.id)
-      .then(setHTML, () =>
-        setHTML(
-          `何かよく分からないエラーが起きちゃった 🤭<br/>後でもう一度試してみて 🙏`
-        )
+      .then(undefined, (error) =>
+        console.error(`${props.id}の読み込みに失敗しました`, error)
       );
   }, [props.id]);
 
@@ -35,7 +31,7 @@ export const ViewInstruction = (props: Props) => {
   );
 
   const renderContent = () => {
-    if (!html) {
+    if (!props.html) {
       return (
         <React.Fragment>
           <Skeleton height="40px" margin="0 0 15px 0" />
@@ -44,7 +40,7 @@ export const ViewInstruction = (props: Props) => {
         </React.Fragment>
       );
     } else {
-      return <div dangerouslySetInnerHTML={{ __html: html }} />;
+      return <div dangerouslySetInnerHTML={{ __html: props.html }} />;
     }
   };
 

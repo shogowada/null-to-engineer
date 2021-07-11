@@ -1,6 +1,6 @@
 FROM null-to-web-engineer:base as client
 
-COPY webpack.config.js ./index.html ./
+COPY webpack.config.js ./index.template.html ./
 COPY ./imgs ./imgs
 COPY ./src/client ./src/client/
 RUN npm run build && \
@@ -8,6 +8,7 @@ RUN npm run build && \
 
 FROM null-to-web-engineer:base as server
 
+COPY ./src/client ./src/client/
 COPY ./src/server ./src/server/
 RUN npm run check-type && \
   npm run unit-test-server
@@ -20,6 +21,7 @@ RUN rm -rf ./node_modules/ && \
   mv ./prod_node_modules/ ./node_modules
 
 COPY --from=client /app/public/ ./public/
+COPY --from=server /app/src/client ./src/client/
 COPY --from=server /app/src/server ./src/server/
 COPY ./instructions ./instructions
 

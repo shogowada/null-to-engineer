@@ -13,5 +13,12 @@
     />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
-  <body></body>
+  <body>
+    <div id="mount">
+      <div id="html-placeholder"></div>
+    </div>
+    <script>
+      window.__PRELOADED_STATE__ = "preloaded-state-placeholder";
+    </script>
+  </body>
 </html>

@@ -1,7 +1,21 @@
 import { InstructionContent } from "../../../common";
+import {
+  AddInstructionContentAction,
+  InstructionContentActionType,
+} from "../actions";
+
+type Action = AddInstructionContentAction;
 
 export const instructionContents = (
-  state: InstructionContent[] = []
+  state: InstructionContent[] = [],
+  action: Action
 ): InstructionContent[] => {
-  return state;
+  switch (action.type) {
+    case InstructionContentActionType.AddInstructionContent: {
+      return [...state, action.content];
+    }
+    default: {
+      return state;
+    }
+  }
 };
