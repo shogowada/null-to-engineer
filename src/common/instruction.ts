@@ -15,6 +15,7 @@ export enum InstructionID {
 
   CSSBasics = "CSSBasics",
   CSSAsElement = "CSSAsElement",
+  CSSSelectors = "CSSSelectors",
   CSSAsFile = "CSSAsFile",
 
   AboutNullToEngineer = "AboutNullToEngineer",
@@ -70,6 +71,7 @@ export const Chapters: Chapter[] = [
     instructionIDs: [
       InstructionID.CSSBasics,
       InstructionID.CSSAsElement,
+      InstructionID.CSSSelectors,
       InstructionID.CSSAsFile,
     ],
   },
@@ -107,6 +109,12 @@ export const getInstructionConfiguration = (
       };
     }
     case InstructionID.CSSBasics: {
+      return {
+        id,
+        fiddleType: FiddleType.HTML,
+      };
+    }
+    case InstructionID.CSSSelectors: {
       return {
         id,
         fiddleType: FiddleType.HTML,

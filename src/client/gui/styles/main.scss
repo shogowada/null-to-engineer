@@ -298,33 +298,33 @@ code {
   border-radius: 3px;
   padding: 3px 6px;
   margin: auto 3px;
-}
 
-code.language-javascript,
-code.language-html,
-code.language-css {
-  display: block;
-  padding: 35px 20px 20px 20px;
-  overflow-x: auto;
-  position: relative;
+  &.language-javascript,
+  &.language-html,
+  &.language-css {
+    display: block;
+    padding: 30px 20px 20px 20px;
+    overflow-x: auto;
+    position: relative;
 
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-right: 1px solid $code-border-color;
-    border-bottom: 1px solid $code-border-color;
-    border-radius: 0 0 $margin-small 0;
-    padding: 2px;
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-right: 1px solid $code-border-color;
+      border-bottom: 1px solid $code-border-color;
+      border-radius: 0 0 $margin-small 0;
+      padding: 2px;
+    }
   }
-}
 
-code.language-javascript::before {
-  content: "JavaScript";
-}
-code.language-html::before {
-  content: "HTML";
-}
-code.language-css::before {
-  content: "CSS";
+  &.language-javascript::before {
+    content: "JavaScript";
+  }
+  &.language-html::before {
+    content: "HTML";
+  }
+  &.language-css::before {
+    content: "CSS";
+  }
 }

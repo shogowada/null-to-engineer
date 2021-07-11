@@ -70,7 +70,7 @@ export const InstructionMetadataList: InstructionMetadata[] = [
   {
     id: InstructionID.CSSBasics,
     name: "初めての CSS",
-    sections: ["CSS って何だ？", "色を変えてみる"],
+    sections: ["CSS って何だ？", "色を変えてみる", "他のプロパティ"],
   },
   {
     id: InstructionID.CSSAsElement,
@@ -78,9 +78,22 @@ export const InstructionMetadataList: InstructionMetadata[] = [
     sections: ["<style>（CSS）"],
   },
   {
+    id: InstructionID.CSSSelectors,
+    name: "CSS セレクタ",
+    sections: [
+      "要素形セレクタ",
+      "クラスセレクタ",
+      "ID セレクタ",
+      "属性セレクタ",
+      "疑似クラス",
+      "疑似要素",
+      "組み合わせ",
+    ],
+  },
+  {
     id: InstructionID.CSSAsFile,
     name: "ファイルとしての CSS",
-    sections: ["<link>（他のファイルを読み込む）", "CSS ファイルの中身"],
+    sections: ["<link>（ファイルを読み込む）", "CSS ファイルの中身"],
   },
   {
     id: InstructionID.AboutNullToEngineer,
