@@ -15,6 +15,7 @@ import {
   createReducer,
 } from "../../client/presentation";
 import { Main } from "../../client/gui/components/main";
+import { StaticRouter } from "react-router";
 
 export const handleRender = (req: Request, res: Response) => {
   res.send(render(req.path));
@@ -38,9 +39,9 @@ const render = (path: string): string => {
 
   const html: string = ReactDOMServer.renderToString(
     <Provider store={store}>
-      <ConnectedRouter history={history}>
+      <StaticRouter location={path}>
         <Main />
-      </ConnectedRouter>
+      </StaticRouter>
     </Provider>
   );
 
@@ -50,8 +51,8 @@ const render = (path: string): string => {
   );
 
   return indexTemplateHTML
-    .replace('<div id="html-to-be-injected"></div>', html)
-    .replace('"preloaded-state-to-be-injected"', preloadedState);
+    .replace('<div id="html-placeholder"></div>', html)
+    .replace('"preloaded-state-placeholder"', preloadedState);
 };
 
 const getInstructionContent = (path: string): InstructionContent | null => {

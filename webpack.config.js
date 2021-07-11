@@ -1,6 +1,7 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const publicDir = path.join(__dirname, "public");
 
@@ -18,19 +19,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          "style-loader",
-          "css-loader",
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: () => [require("autoprefixer")],
-              },
-            },
-          },
-          "sass-loader",
-        ],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
     ],
   },
@@ -38,8 +27,9 @@ module.exports = {
     extensions: [".js", ".json", ".ts", ".tsx"],
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new HTMLWebpackPlugin({
-      template: path.join(__dirname, "index.html"),
+      template: path.join(__dirname, "index.template.html"),
       title: "０から始めるプログラミング",
       hash: true,
       filename: "index.template.html",
