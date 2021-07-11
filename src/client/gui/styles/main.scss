@@ -169,6 +169,13 @@ button {
     padding: $padding-large;
     box-shadow: 0 0 $margin-small $shadow-color;
     background-color: white;
+    opacity: 1;
+    transition: opacity $animation-duration ease;
+
+    &.loading {
+      opacity: 0.2;
+      transition: opacity $animation-duration ease;
+    }
   }
 
   p {

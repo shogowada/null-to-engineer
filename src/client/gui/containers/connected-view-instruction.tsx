@@ -15,16 +15,26 @@ interface Props {
 export const ConnectedViewInstruction: React.FunctionComponent<Props> = (
   props: Props
 ) => {
+  const [lastLoadedHTML, setLastLoadedHTML] = React.useState<string>("");
+
   const dispatch: AppDispatch = useDispatch();
-  const instructionContent: InstructionContent | undefined = useSelector(
-    (state: AppState) =>
-      state.instructionContents.find((content) => content.id === props.id)
-  );
+  const loadedHTML: string | undefined = useSelector((state: AppState) => {
+    const instructionContent: InstructionContent | undefined =
+      state.instructionContents.find((content) => content.id === props.id);
+    return instructionContent?.html;
+  });
+
+  React.useEffect(() => {
+    if (loadedHTML) {
+      setLastLoadedHTML(loadedHTML);
+    }
+  }, [loadedHTML]);
 
   return (
     <ViewInstruction
       id={props.id}
-      html={instructionContent?.html || ""}
+      html={loadedHTML || lastLoadedHTML}
+      isLoading={!loadedHTML}
       fetchHTML={(id: InstructionID): PromiseLike<unknown> => {
         return dispatch(fetchInstructionContent(id));
       }}

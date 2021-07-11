@@ -8,10 +8,11 @@ import {
   InstructionMetadataList,
   RoutePath,
 } from "../../../common";
-import { Skeleton } from "./skeleton";
+import { createClassName } from "./create-class-name";
 
 interface Props {
   id: InstructionID;
+  isLoading: boolean;
   html: string;
   fetchHTML: (id: InstructionID) => PromiseLike<unknown>;
 }
@@ -30,20 +31,6 @@ export const ViewInstruction = (props: Props) => {
     [props.id]
   );
 
-  const renderContent = () => {
-    if (!props.html) {
-      return (
-        <React.Fragment>
-          <Skeleton height="40px" margin="0 0 15px 0" />
-          <Skeleton height="20px" margin="0 0 5px 0" />
-          <Skeleton height="20px" margin="0" />
-        </React.Fragment>
-      );
-    } else {
-      return <div dangerouslySetInnerHTML={{ __html: props.html }} />;
-    }
-  };
-
   const renderNextInstructionLink = (nextID: InstructionID) => {
     const metadata: InstructionMetadata = InstructionMetadataList.find(
       (metadata) => metadata.id === nextID
@@ -61,7 +48,14 @@ export const ViewInstruction = (props: Props) => {
 
   return (
     <React.Fragment>
-      <div className="instruction-pane">{renderContent()}</div>
+      <div
+        className={createClassName([
+          "instruction-pane",
+          props.isLoading ? "loading" : null,
+        ])}
+      >
+        <div dangerouslySetInnerHTML={{ __html: props.html }} />
+      </div>
       {nextID && renderNextInstructionLink(nextID)}
     </React.Fragment>
   );
