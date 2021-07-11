@@ -1,6 +1,6 @@
 {
   "name": "null-to-web-engineer",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "",
   "main": "/src/server/index.ts",
   "scripts": {
