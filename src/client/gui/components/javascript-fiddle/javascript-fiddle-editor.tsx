@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ElementID } from "../../../../common";
+import { FiddleEditor } from "../fiddle-editor";
 
 interface Props {
   code: string;
@@ -10,18 +11,11 @@ export const JavaScriptFiddleEditor: React.FunctionComponent<Props> = (
   props: Props
 ) => {
   return (
-    <textarea
+    <FiddleEditor
       id={ElementID.JavaScriptFiddleCode}
-      className="fiddle-code"
+      name="JavaScript"
       value={props.code}
-      autoCorrect="off"
-      autoCapitalize="none"
-      placeholder="ここに JavaScript を書いてね ✍️"
-      onChange={(event) => {
-        props.onChange(
-          event.target.value.replace(/[‘’]/g, "'").replace(/[“”]/g, '"')
-        );
-      }}
+      onChange={props.onChange}
     />
   );
 };

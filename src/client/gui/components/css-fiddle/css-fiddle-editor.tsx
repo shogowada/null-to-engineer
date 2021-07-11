@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ElementID } from "../../../../common";
+import { FiddleEditor } from "../fiddle-editor";
 
 interface Props {
   css: string;
@@ -10,18 +11,11 @@ export const CSSFiddleEditor: React.FunctionComponent<Props> = (
   props: Props
 ) => {
   return (
-    <textarea
+    <FiddleEditor
       id={ElementID.CSSFiddleCode}
-      className="fiddle-code"
+      name="CSS"
       value={props.css}
-      autoCorrect="off"
-      autoCapitalize="none"
-      placeholder="ここに CSS を書いてね ✍️"
-      onChange={(event) => {
-        props.onChange(
-          event.target.value.replace(/[‘’]/g, "'").replace(/[“”]/g, '"')
-        );
-      }}
+      onChange={props.onChange}
     />
   );
 };
