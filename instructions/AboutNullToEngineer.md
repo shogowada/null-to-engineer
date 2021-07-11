@@ -9,13 +9,13 @@
 
 ## ロードマップ
 
-いつ変更するか分かりませんが、現在以下のようなコンテンツを作成しようと思っています。
+ロードマップはいつ変更するか分かりませんが、現在以下のようなコンテンツを作成しようと思っています。
 
 ### 技術編
 
 - ✅ JavaScript の基礎
 - ✅ HTML の基礎
-- ☑️ CSS の基礎
+- ✅ CSS の基礎
 - ☑️ JavaScript、HTML、CSS を組み合わせる
 - ☑️ React で TODO アプリ（クライアント）
 - ☑️ React で TODO アプリ（フルスタック）
@@ -39,6 +39,7 @@
 
 ### 番外編
 
+- ☑️ プログラミング入門者へ思うこと
 - ☑️ 面接での心得
   - ☑️ 技術面接
   - ☑️ 設計面接
@@ -47,6 +48,6 @@
 ## 管理人
 
 このサイトは<a href="https://twitter.com/wada_shogo" target="_blank">@wada_shogo</a>が管理しています。
-何か問題があったらツイッターの DM などで教えてください 😊
+何か問題や質問があったらツイッターの DM などで教えてください 😊
 
 © <a href="https://twitter.com/wada_shogo" target="_blank">Shogo Wada</a>. All rights reserved.
