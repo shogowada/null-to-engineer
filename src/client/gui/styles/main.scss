@@ -12,6 +12,7 @@ $shadow-color: rgba(0, 0, 0, 0.2);
 $thick-shadow-color: rgba(0, 0, 0, 0.4);
 $tab-button-color: deepskyblue;
 $execute-button-color: green;
+$code-border-color: lightgray;
 $grayed-out-color: rgba(0, 0, 0, 0.5);
 $font-size: 16px;
 $animation-duration: 0.25s;
@@ -232,39 +233,61 @@ button {
   }
 }
 
+.fiddle-code {
+  margin: 0 $margin-small $margin-small $margin-small;
+  border: 1px solid black;
+  border-radius: $margin-small;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+
+.fiddle-execute {
+  width: calc(100% - #{$margin-small * 2});
+  margin: 0 $margin-small;
+}
+
+.fiddle-output {
+  flex: 1;
+  border: 1px solid black;
+  border-radius: $margin-small;
+  padding: $padding-medium;
+  margin: $margin-small;
+  background: white;
+  box-shadow: 0 0 $margin-small $shadow-color;
+  overflow-y: auto;
+
+  &.empty {
+    color: $grayed-out-color;
+  }
+}
+
 .single-fiddle-container {
   display: flex;
   flex-direction: column;
   height: 100%;
 
   .fiddle-code {
-    margin: 0 $margin-small $margin-small $margin-small;
-    border: 1px solid black;
-    border-radius: $margin-small;
     width: calc(100% - #{$margin-small * 2});
     height: 200px;
-    box-sizing: border-box;
     resize: vertical;
-    font-family: monospace;
   }
+}
 
-  .fiddle-execute {
-    width: calc(100% - #{$margin-small * 2});
-    margin: 0 $margin-small;
-  }
+.two-fiddle-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
-  .fiddle-output {
-    flex: 1;
-    border: 1px solid black;
-    border-radius: $margin-small;
-    padding: $padding-medium;
-    margin: $margin-small;
-    background: white;
-    box-shadow: 0 0 $margin-small $shadow-color;
-    overflow-y: auto;
+  .fiddle-code-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 200px;
+    resize: vertical;
 
-    &.empty {
-      color: $grayed-out-color;
+    .fiddle-code {
+      flex: 1;
+      resize: none;
     }
   }
 }
@@ -275,11 +298,33 @@ code {
   border-radius: 3px;
   padding: 3px 6px;
   margin: auto 3px;
-}
 
-code.language-javascript,
-code.language-html {
-  display: block;
-  padding: 20px;
-  overflow-x: auto;
+  &.language-javascript,
+  &.language-html,
+  &.language-css {
+    display: block;
+    padding: 30px 20px 20px 20px;
+    overflow-x: auto;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-right: 1px solid $code-border-color;
+      border-bottom: 1px solid $code-border-color;
+      border-radius: 0 0 $margin-small 0;
+      padding: 2px;
+    }
+  }
+
+  &.language-javascript::before {
+    content: "JavaScript";
+  }
+  &.language-html::before {
+    content: "HTML";
+  }
+  &.language-css::before {
+    content: "CSS";
+  }
 }

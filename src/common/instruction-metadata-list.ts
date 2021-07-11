@@ -68,6 +68,34 @@ export const InstructionMetadataList: InstructionMetadata[] = [
     ],
   },
   {
+    id: InstructionID.CSSBasics,
+    name: "初めての CSS",
+    sections: ["CSS って何だ？", "色を変えてみる", "他のプロパティ"],
+  },
+  {
+    id: InstructionID.CSSAsElement,
+    name: "要素としての CSS",
+    sections: ["<style>（CSS）"],
+  },
+  {
+    id: InstructionID.CSSSelectors,
+    name: "CSS セレクタ",
+    sections: [
+      "要素形セレクタ",
+      "クラスセレクタ",
+      "ID セレクタ",
+      "属性セレクタ",
+      "疑似クラス",
+      "疑似要素",
+      "組み合わせ",
+    ],
+  },
+  {
+    id: InstructionID.CSSAsFile,
+    name: "ファイルとしての CSS",
+    sections: ["<link>（ファイルを読み込む）", "CSS ファイルの中身"],
+  },
+  {
     id: InstructionID.AboutNullToEngineer,
     name: "このサイトについて",
     sections: ["このサイトを作った理由", "ロードマップ", "管理人"],
