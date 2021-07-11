@@ -23,7 +23,9 @@ export const ViewInstruction = (props: Props) => {
     props
       .fetchHTML(props.id)
       .then(setHTML, () =>
-        setHTML("ページの読み込みに失敗しました😝あとでもう一度試してください")
+        setHTML(
+          `何かよく分からないエラーが起きちゃった 🤭<br/>後でもう一度試してみて 🙏`
+        )
       );
   }, [props.id]);
 

@@ -27,7 +27,10 @@ export interface Chapter {
   instructionIDs: InstructionID[];
 }
 
-export interface Instruction extends InstructionMetadata {
+export type Instruction = InstructionContent & InstructionMetadata;
+
+export interface InstructionContent {
+  id: InstructionID;
   html: string;
 }
 

@@ -6,7 +6,6 @@ import {
   InstructionIDs,
 } from "../../../common";
 import { ConnectedViewInstruction } from "../containers/connected-view-instruction";
-import { JavaScriptFiddle } from "./javascript-fiddle";
 import { ConnectedViewChapters } from "../containers/connected-view-chapters";
 import { createClassName } from "./create-class-name";
 import { useLocation } from "react-router";

@@ -1,6 +1,7 @@
 import * as React from "react";
-import { InstructionID } from "../../../common";
-import { instructionHTMLSelector } from "../../presentation";
+import { useDispatch } from "react-redux";
+import { InstructionContent, InstructionID } from "../../../common";
+import { AppDispatch, fetchInstructionContent } from "../../presentation";
 import { ViewInstruction } from "../components/view-instruction";
 
 interface Props {
@@ -10,12 +11,17 @@ interface Props {
 export const ConnectedViewInstruction: React.FunctionComponent<Props> = (
   props: Props
 ) => {
+  const dispatch: AppDispatch = useDispatch();
+
   return (
     <ViewInstruction
       id={props.id}
-      fetchHTML={(id: InstructionID): PromiseLike<string> =>
-        instructionHTMLSelector(id)
-      }
+      fetchHTML={async (id: InstructionID): Promise<string> => {
+        const content: InstructionContent = await dispatch(
+          fetchInstructionContent(id)
+        );
+        return content.html;
+      }}
     />
   );
 };
