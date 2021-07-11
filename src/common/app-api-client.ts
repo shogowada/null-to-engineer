@@ -1,7 +1,7 @@
 import fetch, { Response } from "node-fetch";
 import { JSONRPCClient } from "json-rpc-2.0";
 import { GetInstructionHTMLParams, JSONRPCMethodNames } from "./json-rpc";
-import { InstructionID, InstructionMetadata } from "./instruction";
+import { InstructionID } from "./instruction";
 
 export class AppAPIClient {
   private jsonRPCClient: JSONRPCClient;
@@ -30,12 +30,6 @@ export class AppAPIClient {
     return this.jsonRPCClient.request(
       JSONRPCMethodNames.GetInstructionHTML,
       params
-    );
-  }
-
-  getInstructionMetadataList(): PromiseLike<InstructionMetadata[]> {
-    return this.jsonRPCClient.request(
-      JSONRPCMethodNames.GetInstructionMetadataList
     );
   }
 

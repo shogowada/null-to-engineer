@@ -1,5 +1,4 @@
 import * as React from "react";
-import { ElementID } from "../../../common";
 
 interface Props {
   id: string;
