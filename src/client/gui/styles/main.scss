@@ -314,7 +314,8 @@ code {
       border-right: 1px solid $code-border-color;
       border-bottom: 1px solid $code-border-color;
       border-radius: 0 0 $margin-small 0;
-      padding: 2px;
+      padding: 2px 5px;
+      color: gray;
     }
   }
 
