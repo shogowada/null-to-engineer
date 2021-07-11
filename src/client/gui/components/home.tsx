@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  DefaultInstructionID,
   getInstructionConfiguration,
   InstructionConfiguration,
   InstructionID,
@@ -30,7 +31,7 @@ export const Home: React.FunctionComponent<Props> = (props: Props) => {
   const instructionID: InstructionID = React.useMemo(
     () =>
       InstructionIDs.find((id) => id === props.match.params.id) ||
-      InstructionID.JavaScriptBasics,
+      DefaultInstructionID,
     [props.match.params.id]
   );
 

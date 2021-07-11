@@ -21,6 +21,8 @@ export enum InstructionID {
   AboutNullToEngineer = "AboutNullToEngineer",
 }
 
+export const DefaultInstructionID = InstructionID.JavaScriptBasics;
+
 export interface Chapter {
   id: ChapterID;
   name: string;

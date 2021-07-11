@@ -6,8 +6,13 @@ import { createStore } from "redux";
 import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
 import { Provider } from "react-redux";
-import { ConnectedRouter, push } from "connected-react-router";
-import { Instruction, InstructionContent, InstructionID } from "../../common";
+import { push } from "connected-react-router";
+import {
+  DefaultInstructionID,
+  Instruction,
+  InstructionContent,
+  InstructionID,
+} from "../../common";
 import { configuration } from "../infrastructure";
 import { getInstruction } from "../business";
 import {
@@ -31,11 +36,8 @@ const render = (path: string): string => {
   const store = createStore(createReducer(history));
 
   store.dispatch(push(path));
-  const instructionContent: InstructionContent | null =
-    getInstructionContent(path);
-  if (instructionContent) {
-    store.dispatch(addInstructionContent(instructionContent));
-  }
+  const instructionContent: InstructionContent = getInstructionContent(path);
+  store.dispatch(addInstructionContent(instructionContent));
 
   const html: string = ReactDOMServer.renderToString(
     <Provider store={store}>
@@ -55,24 +57,20 @@ const render = (path: string): string => {
     .replace('"preloaded-state-placeholder"', preloadedState);
 };
 
-const getInstructionContent = (path: string): InstructionContent | null => {
-  const instructionID: InstructionID | null = getInstructionID(path);
-  if (instructionID) {
-    const instruction: Instruction = getInstruction(instructionID);
-    return {
-      id: instructionID,
-      html: instruction.html,
-    };
-  } else {
-    return null;
-  }
+const getInstructionContent = (path: string): InstructionContent => {
+  const instructionID: InstructionID = getInstructionID(path);
+  const instruction: Instruction = getInstruction(instructionID);
+  return {
+    id: instructionID,
+    html: instruction.html,
+  };
 };
 
-const getInstructionID = (path: string): InstructionID | null => {
+const getInstructionID = (path: string): InstructionID => {
   const groups = /^\/instructions\/(\w+).*$/.exec(path);
   if (groups) {
     return groups[1] as InstructionID;
   } else {
-    return null;
+    return DefaultInstructionID;
   }
 };
