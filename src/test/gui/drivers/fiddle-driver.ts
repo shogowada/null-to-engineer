@@ -43,6 +43,45 @@ export const executeHTMLWithCSS = (html: string, css: string) => {
     );
 };
 
+export const executeJavaScriptHTMLCSS = (
+  javaScript: string,
+  html: string,
+  css: string
+) => {
+  return setInputValue(
+    getDriver().findElement(By.id(ElementID.JavaScriptFiddleCode)),
+    javaScript
+  )
+    .then(() =>
+      setInputValue(
+        getDriver().findElement(By.id(ElementID.HTMLFiddleCode)),
+        html
+      )
+    )
+    .then(() =>
+      setInputValue(
+        getDriver().findElement(By.id(ElementID.CSSFiddleCode)),
+        css
+      )
+    )
+    .then(() =>
+      getDriver().findElement(By.id(ElementID.HTMLFiddleExecute)).click()
+    );
+};
+
+export const clickOnHTMLExecutionResult = async (cssSelector: string) => {
+  const iFrameElement: WebElement = await getDriver().findElement(
+    By.id(ElementID.HTMLFiddleOutput)
+  );
+  return getDriver().executeScript<string>(
+    `const iFrameElement = arguments[0];
+const cssSelector = arguments[1];
+return iFrameElement.contentDocument.querySelector(cssSelector).click();`,
+    iFrameElement,
+    cssSelector
+  );
+};
+
 export const getHTMLExecutionResult = async (): Promise<string> => {
   const iFrameElement: WebElement = await getDriver().findElement(
     By.id(ElementID.HTMLFiddleOutput)

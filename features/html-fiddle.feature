@@ -57,4 +57,5 @@ Feature: HTML fiddle
       paragraphsElement.appendChild(pElement);
     });
     """
+    And I click on "#create-element" element
     Then "p" element should have "backgroundColor" styled as "rgb(255, 0, 0)"

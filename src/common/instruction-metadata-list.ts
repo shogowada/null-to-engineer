@@ -6,6 +6,7 @@ export const InstructionMetadataList: InstructionMetadata[] = [
     id: InstructionID.JavaScriptBasics,
     name: "初めての JavaScript",
     sections: [
+      "JavaScript って何だ？",
       "Hello, World!",
       "コメント",
       "文字列",
@@ -95,6 +96,7 @@ export const InstructionMetadataList: InstructionMetadata[] = [
     name: "ファイルとしての CSS",
     sections: ["<link>（ファイルを読み込む）", "CSS ファイルの中身"],
   },
+  { id: InstructionID.WebsiteBasics, name: "ウェブサイトの基本", sections: [] },
   {
     id: InstructionID.AboutNullToEngineer,
     name: "このサイトについて",

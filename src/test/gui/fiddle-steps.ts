@@ -11,8 +11,10 @@ import {
   selectHTMLWithCSSInstruction,
   executeHTMLWithCSS,
   getHTMLExecutionResultStyle,
+  selectJavaScriptHTMLCSSInstruction,
+  executeJavaScriptHTMLCSS,
+  clickOnHTMLExecutionResult,
 } from "./drivers";
-import { WebElement } from "selenium-webdriver";
 
 When(/^I execute the following JavaScript:$/, (javaScript: string) => {
   return selectJavaScriptInstruction().then(() =>
@@ -25,8 +27,12 @@ When(/^I execute the following HTML:$/, (html: string) => {
 });
 
 When(/^I execute the following:$/, (code: string) => {
-  const { html, css } = extractFileContent(code);
-  if (html && css) {
+  const { html, css, javaScript } = extractFileContent(code);
+  if (html && javaScript) {
+    return selectJavaScriptHTMLCSSInstruction().then(() =>
+      executeJavaScriptHTMLCSS(javaScript, html, css)
+    );
+  } else if (html && css) {
     return selectHTMLWithCSSInstruction().then(() =>
       executeHTMLWithCSS(html, css)
     );
@@ -38,12 +44,14 @@ When(/^I execute the following:$/, (code: string) => {
 interface FileContent {
   html: string;
   css: string;
+  javaScript: string;
 }
 
 const extractFileContent = (code: string): FileContent => {
   const HTMLTag = "// HTML";
   const CSSTag = "// CSS";
-  const Tags = [HTMLTag, CSSTag];
+  const JavaScriptTag = "// JavaScript";
+  const Tags = [HTMLTag, CSSTag, JavaScriptTag];
   const lines: string[] = code.split(/[\n\r]/g);
 
   interface Accumulator {
@@ -78,15 +86,28 @@ const extractFileContent = (code: string): FileContent => {
               },
             };
           }
+          case JavaScriptTag: {
+            return {
+              ...accumulator,
+              content: {
+                ...accumulator.content,
+                javaScript: `${accumulator.content.javaScript}${os.EOL}${line}`,
+              },
+            };
+          }
           default: {
             throw new Error(`Unsupported tag: ${accumulator.tag}`);
           }
         }
       }
     },
-    { tag: "", content: { html: "", css: "" } }
+    { tag: "", content: { html: "", css: "", javaScript: "" } }
   ).content;
 };
+
+When(/^I click on "([^"]+)" element$/, (cssSelector: string) => {
+  return clickOnHTMLExecutionResult(cssSelector);
+});
 
 Then(
   /^it should output the following execution result:$/,
