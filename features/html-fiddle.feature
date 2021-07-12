@@ -36,3 +36,25 @@ Feature: HTML fiddle
     }
     """
     Then "p" element should have "backgroundColor" styled as "rgb(255, 0, 0)"
+
+  @gui
+  Scenario: Run JavaScript, HTML, CSS fiddle
+    When I execute the following:
+    """
+    // HTML
+    <button id="create-element" type="button">Create Element</button>
+    <div id="paragraphs"/>
+    // CSS
+    p {
+      background-color: red;
+    }
+    // JavaScript
+    document.getElementById("create-element").addEventListener("click", () => {
+      const pElement = document.createElement("p");
+      pElement.innerHTML = "Hello, World!";
+
+      const paragraphsElement = document.getElementById("paragraphs");
+      paragraphsElement.appendChild(pElement);
+    });
+    """
+    Then "p" element should have "backgroundColor" styled as "rgb(255, 0, 0)"
