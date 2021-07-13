@@ -59,3 +59,25 @@ Feature: HTML fiddle
     """
     And I click on "#create-element" element
     Then "p" element should have "backgroundColor" styled as "rgb(255, 0, 0)"
+
+  @gui
+  Scenario: Declaring the same global variable over multiple executions
+    Because it needs to clear its namespace on every run
+    When I execute the following:
+    """
+    // HTML
+    <div id="output"/>
+    // JavaScript
+    const text = "Hello, World!";
+    document.getElementById("output").innerHTML = text;
+    """
+    Then "#output" element should say "Hello, World!"
+    When I execute the following:
+    """
+    // HTML
+    <div id="output"/>
+    // JavaScript
+    const text = "Let's say something else!";
+    document.getElementById("output").innerHTML = text;
+    """
+    Then "#output" element should say "Let's say something else!"

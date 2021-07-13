@@ -8,21 +8,30 @@ interface Props {
 export const HTMLFiddleOutput: React.FunctionComponent<Props> = (
   props: Props
 ) => {
-  const iFrameRef = React.useRef<HTMLIFrameElement>(null);
+  // In context of executing the code declaring the same global variables from previous run
+  // facing JavaScript context is not reset on each run, resulting in conflict of global variables between runs
+  // we decided to keep track of the code updates
+  // to achieve force recreating the iframe on each run by changing its key each time
+  // accepting that the code becomes less self-explanatory
+  const [updateCount, setUpdateCount] = React.useState<number>(0);
 
   React.useEffect(() => {
-    if (iFrameRef.current) {
-      const iFrame: HTMLIFrameElement = iFrameRef.current;
-      iFrame.contentWindow!.document.open();
-      iFrame.contentWindow!.document.write(props.html);
-      iFrame.contentWindow!.document.close();
-    }
-  }, [iFrameRef.current, props.html]);
+    setUpdateCount((prevState) => prevState + 1);
+  }, [props.html]);
+
+  React.useEffect(() => {
+    const iFrame: HTMLIFrameElement = document.getElementById(
+      ElementID.HTMLFiddleOutput
+    )! as HTMLIFrameElement;
+    iFrame.contentWindow!.document.open();
+    iFrame.contentWindow!.document.write(props.html);
+    iFrame.contentWindow!.document.close();
+  }, [updateCount]);
 
   return (
     <iframe
+      key={updateCount}
       id={ElementID.HTMLFiddleOutput}
-      ref={iFrameRef}
       className="fiddle-output"
     />
   );

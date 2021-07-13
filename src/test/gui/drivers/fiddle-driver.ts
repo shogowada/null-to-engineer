@@ -112,3 +112,16 @@ return iFrameElement.contentWindow.getComputedStyle(
     styleName
   );
 };
+
+export const getHTMLExecutionResultText = async (cssSelector: string) => {
+  const iFrameElement: WebElement = await getDriver().findElement(
+    By.id(ElementID.HTMLFiddleOutput)
+  );
+  return getDriver().executeScript<string>(
+    `const iFrameElement = arguments[0];
+const cssSelector = arguments[1];
+return iFrameElement.contentDocument.querySelector(cssSelector).innerText`,
+    iFrameElement,
+    cssSelector
+  );
+};

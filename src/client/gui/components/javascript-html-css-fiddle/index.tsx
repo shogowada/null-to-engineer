@@ -1,8 +1,8 @@
 import * as React from "react";
+import { ElementID } from "../../../../common";
 import { HTMLFiddleEditor } from "../html-fiddle/html-fiddle-editor";
 import { CSSFiddleEditor } from "../css-fiddle/css-fiddle-editor";
 import { JavaScriptFiddleEditor } from "../javascript-fiddle/javascript-fiddle-editor";
-import { ElementID } from "../../../../common";
 import { HTMLFiddleOutput } from "../html-fiddle/html-fiddle-output";
 
 export const JavaScriptHTMLCSSFiddle: React.FunctionComponent = () => {

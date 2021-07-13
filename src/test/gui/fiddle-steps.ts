@@ -14,6 +14,7 @@ import {
   selectJavaScriptHTMLCSSInstruction,
   executeJavaScriptHTMLCSS,
   clickOnHTMLExecutionResult,
+  getHTMLExecutionResultText,
 } from "./drivers";
 
 When(/^I execute the following JavaScript:$/, (javaScript: string) => {
@@ -130,5 +131,13 @@ Then(
       styleName
     );
     expect(value).to.equal(expectedValue);
+  }
+);
+
+Then(
+  /^"([^"]+)" element should say "([^"]+)"$/,
+  async (cssSelector: string, text: string) => {
+    const value: string = await getHTMLExecutionResultText(cssSelector);
+    expect(value).to.equal(text);
   }
 );

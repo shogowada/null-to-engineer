@@ -96,7 +96,11 @@ export const InstructionMetadataList: InstructionMetadata[] = [
     name: "ファイルとしての CSS",
     sections: ["<link>（ファイルを読み込む）", "CSS ファイルの中身"],
   },
-  { id: InstructionID.WebsiteBasics, name: "ウェブサイトの基本", sections: [] },
+  {
+    id: InstructionID.WebsiteBasics,
+    name: "JavaScript と HTML 🧐",
+    sections: ["組み合わせ"],
+  },
   {
     id: InstructionID.AboutNullToEngineer,
     name: "このサイトについて",
