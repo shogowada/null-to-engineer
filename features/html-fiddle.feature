@@ -66,18 +66,25 @@ Feature: HTML fiddle
     When I execute the following:
     """
     // HTML
+    <button id="button" onclick="onClick();">Test</button>
     <div id="output"/>
     // JavaScript
-    const text = "Hello, World!";
-    document.getElementById("output").innerHTML = text;
+    const onClick = () => {
+      document.getElementById("output").innerHTML = "Hello, World!";
+    };
     """
+    And I click on "#button" element
     Then "#output" element should say "Hello, World!"
     When I execute the following:
     """
     // HTML
+    <button id="button" onclick="onClick();">Test</button>
     <div id="output"/>
     // JavaScript
-    const text = "Let's say something else!";
-    document.getElementById("output").innerHTML = text;
+    const onClick = () => {
+      document.getElementById("output").innerHTML = "Let's say something else!";
+    };
     """
+    And I click on "#button" element
     Then "#output" element should say "Let's say something else!"
+    And I should see no error log

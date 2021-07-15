@@ -14,23 +14,27 @@ export const HTMLFiddleOutput: React.FunctionComponent<Props> = (
   // to achieve force recreating the iframe on each run by changing its key each time
   // accepting that the code becomes less self-explanatory
   const [updateCount, setUpdateCount] = React.useState<number>(0);
+  const [lastUpdatedCount, setLastUpdatedCount] = React.useState<number>(0);
+  const iFrameRef = React.useRef<HTMLIFrameElement>(null);
 
   React.useEffect(() => {
     setUpdateCount((prevState) => prevState + 1);
   }, [props.html]);
 
   React.useEffect(() => {
-    const iFrame: HTMLIFrameElement = document.getElementById(
-      ElementID.HTMLFiddleOutput
-    )! as HTMLIFrameElement;
-    iFrame.contentWindow!.document.open();
-    iFrame.contentWindow!.document.write(props.html);
-    iFrame.contentWindow!.document.close();
-  }, [updateCount]);
+    if (iFrameRef.current && updateCount !== lastUpdatedCount) {
+      const iFrame: HTMLIFrameElement = iFrameRef.current;
+      iFrame.contentWindow!.document.open();
+      iFrame.contentWindow!.document.write(props.html);
+      iFrame.contentWindow!.document.close();
+      setLastUpdatedCount(updateCount);
+    }
+  }, [iFrameRef.current, updateCount]);
 
   return (
     <iframe
       key={updateCount}
+      ref={iFrameRef}
       id={ElementID.HTMLFiddleOutput}
       className="fiddle-output"
     />

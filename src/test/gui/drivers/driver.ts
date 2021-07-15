@@ -20,10 +20,7 @@ const getLoggingPrefs = (): logging.Preferences => {
 };
 
 export const getBrowserLogs = async (): Promise<string> => {
-  const entries: logging.Entry[] = await getDriver()
-    .manage()
-    .logs()
-    .get(logging.Type.BROWSER);
+  const entries: logging.Entry[] = await getBrowserLogEntries();
 
   return entries
     .map(
@@ -33,6 +30,10 @@ export const getBrowserLogs = async (): Promise<string> => {
         }`
     )
     .join(os.EOL);
+};
+
+export const getBrowserLogEntries = (): PromiseLike<logging.Entry[]> => {
+  return getDriver().manage().logs().get(logging.Type.BROWSER);
 };
 
 export const clearBrowserLogs = getBrowserLogs;
