@@ -16,10 +16,11 @@
     "e2e-test": "npm run e2e-test-api && npm run e2e-test-gui",
     "e2e-test-api": "cucumber-js --profile api",
     "e2e-test-gui": "cucumber-js --profile gui",
-    "e2e-test-wip": "npm run e2e-test-api-wip && npm run e2e-test-gui-api",
+    "e2e-test-wip": "npm run e2e-test-api-wip && npm run e2e-test-gui-wip",
     "e2e-test-api-wip": "cucumber-js --profile apiWIP",
     "e2e-test-gui-wip": "cucumber-js --profile guiWIP",
-    "test": "npm run format && npm run build-base && docker-compose --file docker-compose.yml --file docker-compose.test.yml up --build --abort-on-container-exit"
+    "test": "npm run format && npm run build-base && docker-compose --file docker-compose.yml --file docker-compose.test.yml up --build --abort-on-container-exit",
+    "test-wip": "npm run format && npm run build-base && docker-compose --file docker-compose.yml --file docker-compose.test.yml --file docker-compose.test-wip.yml up --build --abort-on-container-exit"
   },
   "author": "",
   "license": "UNLICENSED",
