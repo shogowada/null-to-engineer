@@ -99,7 +99,7 @@ export const InstructionMetadataList: InstructionMetadata[] = [
   {
     id: InstructionID.WebsiteBasics,
     name: "JavaScript と HTML 🧐",
-    sections: ["組み合わせ"],
+    sections: ["イベント"],
   },
   {
     id: InstructionID.AboutNullToEngineer,
