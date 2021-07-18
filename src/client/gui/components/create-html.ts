@@ -1,30 +1,10 @@
 import * as React from "react";
+import { ConsoleLog, ConsoleLogLevel, ConsoleLogLevels } from "../../../common";
 
 export interface CompileHTMLOptions {
   html?: string;
   css?: string;
   javaScript?: string;
-}
-
-export enum ConsoleLogLevel {
-  Info = "info",
-  Log = "log",
-  Warning = "warn",
-  Error = "error",
-  Debug = "debug",
-}
-
-const ConsoleLogLevels: ConsoleLogLevel[] = [
-  ConsoleLogLevel.Info,
-  ConsoleLogLevel.Log,
-  ConsoleLogLevel.Warning,
-  ConsoleLogLevel.Error,
-  ConsoleLogLevel.Debug,
-];
-
-export interface ConsoleLog {
-  level: ConsoleLogLevel;
-  message: string;
 }
 
 const ConsoleLogMessageSource = "html-fiddle-iframe";

@@ -1,6 +1,5 @@
 import * as React from "react";
-import { ElementID } from "../../../../common";
-import { ConsoleLog } from "../create-html";
+import { ConsoleLog, ElementID } from "../../../../common";
 import { createClassName } from "../create-class-name";
 
 interface Props {
@@ -46,7 +45,11 @@ export const HTMLFiddleOutput: React.FunctionComponent<Props> = (
           ])}
         >
           {props.logs.length
-            ? props.logs.map((log) => log.message).join("\n")
+            ? props.logs.map((log) => (
+                <div className="console-log" data-level={log.level}>
+                  {log.message}
+                </div>
+              ))
             : "コードを実行すると、結果がここに表示されるよ👀"}
         </pre>
         <iframe

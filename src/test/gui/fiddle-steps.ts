@@ -1,6 +1,7 @@
 import * as os from "os";
-import { Then, When } from "@cucumber/cucumber";
+import { DataTable, Then, When } from "@cucumber/cucumber";
 import { expect } from "chai";
+import { ConsoleLog } from "../../common";
 import {
   executeHTML,
   executeJavaScript,
@@ -15,6 +16,7 @@ import {
   executeJavaScriptHTMLCSS,
   clickOnHTMLExecutionResult,
   getHTMLExecutionResultText,
+  getConsoleLogs,
 } from "./drivers";
 
 When(/^I execute the following JavaScript:$/, (javaScript: string) => {
@@ -115,6 +117,15 @@ Then(
   async (expected: string) => {
     const actual: string = await getJavaScriptExecutionResult();
     expect(actual).to.equal(expected);
+  }
+);
+
+Then(
+  /^it should output the following console logs:$/,
+  async (dataTable: DataTable) => {
+    const expected: ConsoleLog[] = dataTable.hashes();
+    const actual: ConsoleLog[] = await getConsoleLogs();
+    expect(expected).to.deep.equal(actual);
   }
 );
 

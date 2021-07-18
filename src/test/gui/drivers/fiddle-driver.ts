@@ -1,5 +1,6 @@
+import * as os from "os";
 import { By, WebElement } from "selenium-webdriver";
-import { ElementID } from "../../../common";
+import { ConsoleLog, ConsoleLogLevel, ElementID } from "../../../common";
 import { setInputValue } from "./input-driver";
 import { getDriver } from "./driver";
 
@@ -12,10 +13,25 @@ export const executeJavaScript = (code: string) => {
   );
 };
 
-export const getJavaScriptExecutionResult = (): PromiseLike<string> => {
-  return getDriver()
+export const getJavaScriptExecutionResult = async (): Promise<string> => {
+  const consoleLogs: ConsoleLog[] = await getConsoleLogs();
+  return consoleLogs.map((log) => log.message).join(os.EOL);
+};
+
+export const getConsoleLogs = async (): Promise<ConsoleLog[]> => {
+  const elements: WebElement[] = await getDriver()
     .findElement(By.id(ElementID.JavaScriptFiddleOutput))
-    .getText();
+    .findElements(By.css(".console-log"));
+
+  return Promise.all(elements.map(getConsoleLog));
+};
+
+const getConsoleLog = async (element: WebElement): Promise<ConsoleLog> => {
+  const [message, level] = await Promise.all([
+    element.getText(),
+    element.getAttribute("data-level"),
+  ]);
+  return { level: level as ConsoleLogLevel, message };
 };
 
 export const executeHTML = (html: string) => {
