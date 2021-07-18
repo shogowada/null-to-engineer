@@ -1,8 +1,12 @@
 import * as React from "react";
 import { ElementID } from "../../../../common";
+import { ConsoleLog } from "../create-html";
+import { createClassName } from "../create-class-name";
 
 interface Props {
   html: string;
+  logs: ConsoleLog[];
+  logOnly?: boolean;
 }
 
 export const HTMLFiddleOutput: React.FunctionComponent<Props> = (
@@ -31,12 +35,28 @@ export const HTMLFiddleOutput: React.FunctionComponent<Props> = (
     }
   }, [iFrameRef.current, updateCount]);
 
-  return (
-    <iframe
-      key={updateCount}
-      ref={iFrameRef}
-      id={ElementID.HTMLFiddleOutput}
-      className="fiddle-output"
-    />
-  );
+  if (props.logOnly) {
+    return (
+      <pre
+        id={ElementID.JavaScriptFiddleOutput}
+        className={createClassName([
+          "fiddle-output",
+          props.logs.length ? "" : "empty",
+        ])}
+      >
+        {props.logs.length
+          ? props.logs.join("\n")
+          : "コードを実行すると、結果がここに表示されるよ👀"}
+      </pre>
+    );
+  } else {
+    return (
+      <iframe
+        key={updateCount}
+        ref={iFrameRef}
+        id={ElementID.HTMLFiddleOutput}
+        className="fiddle-output"
+      />
+    );
+  }
 };

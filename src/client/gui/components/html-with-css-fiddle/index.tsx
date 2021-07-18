@@ -9,7 +9,7 @@ export const HTMLWithCSSFiddle: React.FunctionComponent = () => {
   const [html, setHTML] = React.useState<string>("");
   const [css, setCSS] = React.useState<string>("");
 
-  const [compiledHTML, compileHTML] = useCompiledHTML();
+  const [compiledHTML, consoleLogs, compileHTML] = useCompiledHTML();
 
   return (
     <div className="two-fiddle-container">
@@ -27,7 +27,7 @@ export const HTMLWithCSSFiddle: React.FunctionComponent = () => {
       >
         実行 ▶️
       </button>
-      <HTMLFiddleOutput html={compiledHTML} />
+      <HTMLFiddleOutput html={compiledHTML} logs={consoleLogs} />
     </div>
   );
 };

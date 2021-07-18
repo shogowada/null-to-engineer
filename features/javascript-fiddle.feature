@@ -22,3 +22,16 @@ Feature: JavaScript fiddle
     Value: 2
     Value: 3
     """
+
+  @gui
+  Scenario: Run JavaScript fiddle
+    When I execute the following JavaScript:
+    """
+    console.log("This is log");
+    console.clear();
+    console.log("This is log after the clear");
+    """
+    Then it should output the following execution result:
+    """
+    This is log after the clear
+    """
