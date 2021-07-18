@@ -125,6 +125,7 @@ const createPeakConsoleJavaScript = (): string => {
     console[level] = function() {
       original.apply(this, arguments);
       window.parent.postMessage({
+        source: ${JSON.stringify(ConsoleLogMessageSource)},
         type: level,
         args: Array.from(arguments)
       }, location.origin);
@@ -134,6 +135,7 @@ const createPeakConsoleJavaScript = (): string => {
   console.clear = function() {
     original.apply(this, arguments);
     window.parent.postMessage({
+      source: ${JSON.stringify(ConsoleLogMessageSource)},
       type: "clear"
     }, location.origin);
   };

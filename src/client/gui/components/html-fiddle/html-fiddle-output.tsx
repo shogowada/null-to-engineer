@@ -37,17 +37,26 @@ export const HTMLFiddleOutput: React.FunctionComponent<Props> = (
 
   if (props.logOnly) {
     return (
-      <pre
-        id={ElementID.JavaScriptFiddleOutput}
-        className={createClassName([
-          "fiddle-output",
-          props.logs.length ? "" : "empty",
-        ])}
-      >
-        {props.logs.length
-          ? props.logs.join("\n")
-          : "コードを実行すると、結果がここに表示されるよ👀"}
-      </pre>
+      <React.Fragment>
+        <pre
+          id={ElementID.JavaScriptFiddleOutput}
+          className={createClassName([
+            "fiddle-output",
+            props.logs.length ? "" : "empty",
+          ])}
+        >
+          {props.logs.length
+            ? props.logs.map((log) => log.message).join("\n")
+            : "コードを実行すると、結果がここに表示されるよ👀"}
+        </pre>
+        <iframe
+          key={updateCount}
+          ref={iFrameRef}
+          id={ElementID.HTMLFiddleOutput}
+          className="fiddle-output"
+          style={{ display: "none" }}
+        />
+      </React.Fragment>
     );
   } else {
     return (
