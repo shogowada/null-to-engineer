@@ -33,3 +33,60 @@ buttonElement.addEventListener("click", () => {
   buttonElement.innerHTML = `${counter} 回押した`;
 });
 ```
+
+## JavaScript で要素を作る
+
+HTML じゃなくて、JavaScript を使って新しい要素を作ることもできるんだ 😁
+
+```javascript
+// createElement で新しい要素を作る
+const divElement = document.createElement("div");
+divElement.innerHTML = "Hello, World!";
+
+// document.body はウェブサイトの本体の要素だよ！
+// その要素に appendChild で今作った要素を追加してみよう
+document.body.appendChild(divElement);
+```
+
+もちろん、JavaScript で作った要素にも CSS が適応されるよ！
+
+```css
+div {
+  background-color: green;
+}
+```
+
+```javascript
+const divElement = document.createElement("div");
+divElement.innerHTML = "Hello, World!";
+
+document.body.appendChild(divElement);
+```
+
+HTML で作った要素に、JavaScript で作った要素を追加することも 😲
+
+```html
+<div id="my-div">HTMLで作った要素</div>
+```
+
+```javascript
+const divElementCreatedByHTML = document.getElementById("my-div");
+
+const divElementCreatedByJavaScript = document.createElement("div");
+divElementCreatedByJavaScript.innerHTML = "JavaScriptで作った要素";
+divElementCreatedByHTML.appendChild(divElementCreatedByJavaScript);
+```
+
+## もっと簡単な方法
+
+何だか色々なことができそうで楽しいけど、こうやってウェブサイトの仕組みを一つずつ作っていくのはとても大変そうだね 😵‍💫
+大丈夫、みんな同じことを思ってるよ 🤗
+実際大変過ぎて、もうこうやって作られているウェブサイトはほとんどないんじゃないかな 🤔
+
+こうやってウェブサイトを作るのは本当に大変だから、みんなもっと簡単に作る方法はないかと試行錯誤しているんだ。
+その工夫の中で、ウェブサイトをもっと簡単に作るための方法がいくつも産まれた。
+その中でも、みんなに再利用できる仕組みを作って公開してくれた人たちがいるんだ 👏
+
+そういう再利用可能なソフトウェアのことを「ライブラリ」や「フレームワーク」と呼ぶよ。
+例えば最近では、[React](https://reactjs.org)や[Vue](https://vuejs.org)が[人気](https://2020.stateofjs.com/en-US/technologies/front-end-frameworks/)だね 🙂
+どのライブラリを使ってもいいんだけど、次は React を使って簡単なウェブサイトを作ってみようか 🥳
