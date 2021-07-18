@@ -16,7 +16,7 @@
 - ✅ JavaScript の基礎
 - ✅ HTML の基礎
 - ✅ CSS の基礎
-- ☑️ JavaScript、HTML、CSS を組み合わせる
+- ✅ JavaScript、HTML、CSS を組み合わせる
 - ☑️ React で TODO アプリ（クライアント）
 - ☑️ React で TODO アプリ（フルスタック）
   - ☑️ ローカルの開発環境構築

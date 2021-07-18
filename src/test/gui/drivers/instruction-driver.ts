@@ -17,6 +17,9 @@ export const selectHTMLInstruction = () =>
 export const selectHTMLWithCSSInstruction = () =>
   selectInstructionByFiddleType(FiddleType.HTMLWithCSS);
 
+export const selectJavaScriptHTMLCSSInstruction = () =>
+  selectInstructionByFiddleType(FiddleType.JavaScriptHTMLCSS);
+
 const selectInstructionByFiddleType = (fiddleType: FiddleType) => {
   const javaScriptInstructionID: InstructionID = requireDefined(
     InstructionIDs.find(

@@ -3,6 +3,7 @@ import { FiddleType } from "../../../common";
 import { JavaScriptFiddle } from "./javascript-fiddle";
 import { HTMLFiddle } from "./html-fiddle";
 import { HTMLWithCSSFiddle } from "./html-with-css-fiddle";
+import { JavaScriptHTMLCSSFiddle } from "./javascript-html-css-fiddle";
 
 interface Props {
   type: FiddleType;
@@ -18,6 +19,9 @@ export const Fiddle: React.FunctionComponent<Props> = (props: Props) => {
     }
     case FiddleType.JavaScript: {
       return <JavaScriptFiddle />;
+    }
+    case FiddleType.JavaScriptHTMLCSS: {
+      return <JavaScriptHTMLCSSFiddle />;
     }
     case FiddleType.None: {
       return null;

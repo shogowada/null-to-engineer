@@ -1,0 +1,4 @@
+version: "3"
+services:
+  test:
+    command: "npm run e2e-test-wip"

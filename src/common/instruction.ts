@@ -2,6 +2,7 @@ export enum ChapterID {
   JavaScriptBasics = "JavaScriptBasics",
   HTMLBasics = "HTMLBasics",
   CSSBasics = "CSSBasics",
+  WebsiteBasics = "WebsiteBasics",
   AboutNullToEngineer = "AboutNullToEngineer",
 }
 
@@ -17,6 +18,8 @@ export enum InstructionID {
   CSSAsElement = "CSSAsElement",
   CSSSelectors = "CSSSelectors",
   CSSAsFile = "CSSAsFile",
+
+  WebsiteBasics = "WebsiteBasics",
 
   AboutNullToEngineer = "AboutNullToEngineer",
 }
@@ -45,6 +48,7 @@ export interface InstructionMetadata {
 export enum FiddleType {
   None = "None",
   JavaScript = "JavaScript",
+  JavaScriptHTMLCSS = "JavaScriptHTMLCSS",
   HTML = "HTML",
   HTMLWithCSS = "HTMLWithCSS",
 }
@@ -79,6 +83,11 @@ export const Chapters: Chapter[] = [
       InstructionID.CSSSelectors,
       InstructionID.CSSAsFile,
     ],
+  },
+  {
+    id: ChapterID.WebsiteBasics,
+    name: "ウェブサイト基本編 🤩",
+    instructionIDs: [InstructionID.WebsiteBasics],
   },
   {
     id: ChapterID.AboutNullToEngineer,
@@ -153,6 +162,12 @@ export const getInstructionConfiguration = (
       return {
         id,
         fiddleType: FiddleType.JavaScript,
+      };
+    }
+    case InstructionID.WebsiteBasics: {
+      return {
+        id,
+        fiddleType: FiddleType.JavaScriptHTMLCSS,
       };
     }
   }

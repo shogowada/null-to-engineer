@@ -299,6 +299,27 @@ button {
   }
 }
 
+.three-fiddle-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .fiddle-code-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 300px;
+    resize: vertical;
+
+    .fiddle-code {
+      flex: 1;
+      resize: none;
+      min-width: 250px;
+    }
+  }
+}
+
 code {
   background: #f6f8fa;
   border: 1px solid lightgray;
