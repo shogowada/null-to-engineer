@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Chapters, InstructionID } from "../../../common";
+import { Chapters, InstructionID, InstructionMetadata } from "../../../common";
 import { ViewInstructionLinks } from "./view-instruction-links";
 
 interface Props {
   selectedInstructionID: InstructionID;
+  instructionMetadataList: InstructionMetadata[];
   onClick: (href: string) => void;
 }
 
@@ -17,6 +18,7 @@ export const ViewChapters: React.FunctionComponent<Props> = (props: Props) => {
             <ViewInstructionLinks
               selectedInstructionID={props.selectedInstructionID}
               instructionIDs={chapter.instructionIDs}
+              instructionMetadataList={props.instructionMetadataList}
               onClick={props.onClick}
             />
           </ul>

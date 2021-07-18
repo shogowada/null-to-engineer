@@ -5,6 +5,7 @@ import { createMemoryHistory } from "history";
 import { createStore } from "redux";
 import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
+import { StaticRouter } from "react-router";
 import { Provider } from "react-redux";
 import { push } from "connected-react-router";
 import {
@@ -14,13 +15,12 @@ import {
   InstructionID,
 } from "../../common";
 import { configuration } from "../infrastructure";
-import { getInstruction } from "../business";
+import { getInstruction, getInstructionMetadataList } from "../business";
 import {
   addInstructionContent,
   createReducer,
 } from "../../client/presentation";
 import { Main } from "../../client/gui/components/main";
-import { StaticRouter } from "react-router";
 
 export const handleRender = (req: Request, res: Response) => {
   res.send(render(req.path));
@@ -33,7 +33,9 @@ const indexTemplateHTML: string = fs.readFileSync(
 
 const render = (path: string): string => {
   const history = createMemoryHistory();
-  const store = createStore(createReducer(history));
+  const store = createStore(createReducer(history), {
+    instructionMetadataList: getInstructionMetadataList(),
+  });
 
   store.dispatch(push(path));
   const instructionContent: InstructionContent = getInstructionContent(path);

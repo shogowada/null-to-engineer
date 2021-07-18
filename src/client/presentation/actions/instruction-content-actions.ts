@@ -32,7 +32,16 @@ export const fetchInstructionContent =
     if (content) {
       return content;
     } else {
-      const html: string = await instructionHTMLSelector(id);
+      const html: string = await instructionHTMLSelector(id).then(
+        undefined,
+        (error) => {
+          const metadata = getState().instructionMetadataList.find(
+            (metadata) => metadata.id === id
+          )!;
+          console.error(`「${metadata.name}」の読み込みに失敗しました`, error);
+          return `「${metadata.name}」の読み込みに失敗しちゃった 🤭<br />後でもう一度試してみて 🙏`;
+        }
+      );
       return dispatch(addInstructionContent({ id, html })).content;
     }
   };

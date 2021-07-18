@@ -18,9 +18,6 @@
 
 記事は[`./instructions`](./instructions)に Markdown としてまとめられています。
 
-ビルド時には[`./src/generate-code.ts`](./src/generate-code.ts)によってこれらの記事からメタデータ（題名や目次）を抽出し、
-[`./src/common/instruction-metadata-list.ts`](./src/common/instruction-metadata-list.ts)に出力します。
-
 サーバーは実行時に全ての記事を HTML へと変換します。HTML は API を通じて、必要なときに必要な分だけクライアントに渡されます。
 
 ## 開発

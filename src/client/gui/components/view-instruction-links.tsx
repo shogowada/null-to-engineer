@@ -1,17 +1,13 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import {
-  InstructionID,
-  InstructionMetadata,
-  InstructionMetadataList,
-  RoutePath,
-} from "../../../common";
+import { InstructionID, InstructionMetadata, RoutePath } from "../../../common";
 import { createClassName } from "./create-class-name";
 import { ViewSectionLinks } from "./view-section-links";
 
 interface Props {
   selectedInstructionID: InstructionID;
   instructionIDs: InstructionID[];
+  instructionMetadataList: InstructionMetadata[];
   onClick: (href: string) => void;
 }
 
@@ -22,7 +18,7 @@ export const ViewInstructionLinks: React.FunctionComponent<Props> = (
     <React.Fragment>
       {props.instructionIDs.map((instructionID) => {
         const instructionMetadata: InstructionMetadata =
-          InstructionMetadataList.find(
+          props.instructionMetadataList.find(
             (metadata) => metadata.id === instructionID
           )!;
         const href: string = RoutePath.instruction(instructionMetadata.id);

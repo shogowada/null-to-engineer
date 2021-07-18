@@ -1,6 +1,10 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { InstructionContent, InstructionID } from "../../../common";
+import {
+  InstructionContent,
+  InstructionID,
+  InstructionMetadata,
+} from "../../../common";
 import {
   AppDispatch,
   AppState,
@@ -24,6 +28,13 @@ export const ConnectedViewInstruction: React.FunctionComponent<Props> = (
     return instructionContent?.html;
   });
 
+  const instructionMetadata: InstructionMetadata = useSelector(
+    (state: AppState) =>
+      state.instructionMetadataList.find(
+        (metadata) => metadata.id === props.id
+      )!
+  );
+
   React.useEffect(() => {
     if (loadedHTML) {
       setLastLoadedHTML(loadedHTML);
@@ -33,6 +44,7 @@ export const ConnectedViewInstruction: React.FunctionComponent<Props> = (
   return (
     <ViewInstruction
       id={props.id}
+      metadata={instructionMetadata}
       html={loadedHTML || lastLoadedHTML}
       isLoading={!loadedHTML}
       fetchHTML={(id: InstructionID): PromiseLike<unknown> => {

@@ -5,13 +5,13 @@ import {
   ElementID,
   InstructionID,
   InstructionMetadata,
-  InstructionMetadataList,
   RoutePath,
 } from "../../../common";
 import { createClassName } from "./create-class-name";
 
 interface Props {
   id: InstructionID;
+  metadata: InstructionMetadata;
   isLoading: boolean;
   html: string;
   fetchHTML: (id: InstructionID) => PromiseLike<unknown>;
@@ -32,16 +32,13 @@ export const ViewInstruction = (props: Props) => {
   );
 
   const renderNextInstructionLink = (nextID: InstructionID) => {
-    const metadata: InstructionMetadata = InstructionMetadataList.find(
-      (metadata) => metadata.id === nextID
-    )!;
     return (
       <Link
         id={ElementID.NextInstruction}
         to={RoutePath.instruction(nextID)}
         style={{ float: "right" }}
       >
-        次は {metadata.name} 👉
+        次は {props.metadata.name} 👉
       </Link>
     );
   };
