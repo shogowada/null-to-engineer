@@ -1,6 +1,8 @@
 import * as React from "react";
-import { ConsoleLog, ElementID } from "../../../../common";
+import { ConsoleLog } from "../../../../common";
 import { createClassName } from "../create-class-name";
+import { ConsoleLogOutput } from "./console-log-output";
+import { HTMLOutput } from "./html-output";
 
 interface Props {
   html: string;
@@ -8,67 +10,74 @@ interface Props {
   logOnly?: boolean;
 }
 
+enum Tab {
+  HTML = "HTML",
+  ConsoleLog = "ConsoleLog",
+}
+
+const Tabs: Tab[] = [Tab.HTML, Tab.ConsoleLog];
+
+const mapTabToDisplayText = (tab: Tab): string => {
+  switch (tab) {
+    case Tab.ConsoleLog: {
+      return "コンソールログ";
+    }
+    default: {
+      return tab;
+    }
+  }
+};
+
 export const HTMLFiddleOutput: React.FunctionComponent<Props> = (
   props: Props
 ) => {
-  // In context of executing the code declaring the same global variables from previous run
-  // facing JavaScript context is not reset on each run, resulting in conflict of global variables between runs
-  // we decided to keep track of the code updates
-  // to achieve force recreating the iframe on each run by changing its key each time
-  // accepting that the code becomes less self-explanatory
-  const [updateCount, setUpdateCount] = React.useState<number>(0);
-  const [lastUpdatedCount, setLastUpdatedCount] = React.useState<number>(0);
-  const iFrameRef = React.useRef<HTMLIFrameElement>(null);
+  const [currentTab, setCurrentTab] = React.useState<Tab>(() =>
+    props.logOnly ? Tab.ConsoleLog : Tab.HTML
+  );
 
   React.useEffect(() => {
-    setUpdateCount((prevState) => prevState + 1);
-  }, [props.html]);
-
-  React.useEffect(() => {
-    if (iFrameRef.current && updateCount !== lastUpdatedCount) {
-      const iFrame: HTMLIFrameElement = iFrameRef.current;
-      iFrame.contentWindow!.document.open();
-      iFrame.contentWindow!.document.write(props.html);
-      iFrame.contentWindow!.document.close();
-      setLastUpdatedCount(updateCount);
+    if (props.logOnly) {
+      setCurrentTab(Tab.ConsoleLog);
+    } else {
+      setCurrentTab(Tab.HTML);
     }
-  }, [iFrameRef.current, updateCount]);
+  }, [props.logOnly]);
 
   if (props.logOnly) {
     return (
-      <React.Fragment>
-        <pre
-          id={ElementID.JavaScriptFiddleOutput}
-          className={createClassName([
-            "fiddle-output",
-            props.logs.length ? "" : "empty",
-          ])}
-        >
-          {props.logs.length
-            ? props.logs.map((log) => (
-                <div className="console-log" data-level={log.level}>
-                  {log.message}
-                </div>
-              ))
-            : "コードを実行すると、結果がここに表示されるよ👀"}
-        </pre>
-        <iframe
-          key={updateCount}
-          ref={iFrameRef}
-          id={ElementID.HTMLFiddleOutput}
-          className="fiddle-output"
-          style={{ display: "none" }}
-        />
-      </React.Fragment>
+      <div className="fiddle-output-container">
+        <ConsoleLogOutput logs={props.logs} />
+        <HTMLOutput html={props.html} headless />
+      </div>
     );
   } else {
     return (
-      <iframe
-        key={updateCount}
-        ref={iFrameRef}
-        id={ElementID.HTMLFiddleOutput}
-        className="fiddle-output"
-      />
+      <div className="fiddle-output-container">
+        <ul className="nav-tabs">
+          {Tabs.map((tab) => (
+            <li
+              key={tab}
+              className={createClassName([
+                "tab",
+                tab === currentTab ? "selected" : null,
+              ])}
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  setCurrentTab(tab);
+                }}
+              >
+                {mapTabToDisplayText(tab)}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div className="fiddle-output-content">
+          <HTMLOutput html={props.html} />
+          <ConsoleLogOutput logs={props.logs} />
+        </div>
+      </div>
     );
   }
 };

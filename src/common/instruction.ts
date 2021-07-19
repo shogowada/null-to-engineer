@@ -91,7 +91,7 @@ export const Chapters: Chapter[] = [
   },
   {
     id: ChapterID.AboutNullToEngineer,
-    name: "このサイトについて 🦋",
+    name: "このサイトについて 💻",
     instructionIDs: [InstructionID.AboutNullToEngineer],
   },
 ];
