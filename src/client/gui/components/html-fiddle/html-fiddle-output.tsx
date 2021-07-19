@@ -53,7 +53,7 @@ export const HTMLFiddleOutput: React.FunctionComponent<Props> = (
   } else {
     return (
       <div className="fiddle-output-container">
-        <ul className="nav-tabs">
+        <ul className="tabs">
           {Tabs.map((tab) => (
             <li
               key={tab}
@@ -73,8 +73,20 @@ export const HTMLFiddleOutput: React.FunctionComponent<Props> = (
             </li>
           ))}
         </ul>
-        <div className="fiddle-output-content">
+        <div
+          className={createClassName([
+            "tab-content",
+            currentTab === Tab.HTML ? "visible" : null,
+          ])}
+        >
           <HTMLOutput html={props.html} />
+        </div>
+        <div
+          className={createClassName([
+            "tab-content",
+            currentTab === Tab.ConsoleLog ? "visible" : null,
+          ])}
+        >
           <ConsoleLogOutput logs={props.logs} />
         </div>
       </div>

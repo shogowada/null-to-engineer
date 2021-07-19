@@ -254,8 +254,9 @@ $button-transition: background-color $animation-duration ease,
   height: 100%;
 
   .fiddle-code {
+    flex: 1;
     width: calc(100% - #{$margin-small * 2});
-    height: 200px;
+    min-height: 200px;
     resize: vertical;
   }
 }
@@ -266,10 +267,11 @@ $button-transition: background-color $animation-duration ease,
   height: 100%;
 
   .fiddle-code-container {
+    flex: 1;
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 200px;
+    min-height: 200px;
     resize: vertical;
 
     .fiddle-code {
@@ -285,11 +287,12 @@ $button-transition: background-color $animation-duration ease,
   height: 100%;
 
   .fiddle-code-container {
+    flex: 1;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    height: 300px;
+    min-height: 300px;
     resize: vertical;
 
     .fiddle-code {
@@ -322,13 +325,13 @@ $button-transition: background-color $animation-duration ease,
   &.log-only {
     display: block;
 
-    .nav-tabs {
+    .tabs {
       display: none;
     }
   }
 }
 
-.nav-tabs {
+.tabs {
   list-style: none;
   display: flex;
   margin: 0;
@@ -338,7 +341,6 @@ $button-transition: background-color $animation-duration ease,
   .tab {
     border-radius: $margin-small $margin-small 0 0;
     border: 1px solid $output-border-color;
-    border-bottom: none;
     padding: $padding-medium;
     margin-bottom: -1px;
 
@@ -348,7 +350,6 @@ $button-transition: background-color $animation-duration ease,
 
       button {
         color: black;
-        font-weight: bold;
       }
     }
 
@@ -364,10 +365,17 @@ $button-transition: background-color $animation-duration ease,
   }
 }
 
-.fiddle-output-content {
+.tab-content {
+  flex: 1;
   border: 1px solid $output-border-color;
   border-top: none;
+  border-radius: 0 $margin-small $margin-small $margin-small;
   padding: $margin-small;
+  display: none;
+
+  &.visible {
+    display: flex;
+  }
 }
 
 #html-fiddle-output {
