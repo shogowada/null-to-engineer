@@ -386,7 +386,6 @@ $button-transition: background-color $animation-duration ease,
 }
 
 #javascript-fiddle-output {
-  padding: $padding-medium;
   margin: 0;
   overflow-y: auto;
   background-color: white;
@@ -395,6 +394,21 @@ $button-transition: background-color $animation-duration ease,
 
   &.empty {
     color: $grayed-out-color;
+  }
+
+  .console-log {
+    padding: $margin-small;
+    border-bottom: 1px solid $output-border-color;
+
+    &[data-level="error"] {
+      background-color: pink;
+      color: red;
+    }
+
+    &[data-level="warn"] {
+      background-color: lightyellow;
+      color: saddlebrown;
+    }
   }
 }
 

@@ -13,11 +13,6 @@ export const executeJavaScript = (code: string) => {
   );
 };
 
-export const getJavaScriptExecutionResult = async (): Promise<string> => {
-  const consoleLogs: ConsoleLog[] = await getConsoleLogs();
-  return consoleLogs.map((log) => log.message).join(os.EOL);
-};
-
 export const getConsoleLogs = async (): Promise<ConsoleLog[]> => {
   const elements: WebElement[] = await selectConsoleLogTab().then(() =>
     getDriver()

@@ -1,22 +1,21 @@
 import * as os from "os";
 import { DataTable, Then, When } from "@cucumber/cucumber";
 import { expect } from "chai";
-import { ConsoleLog } from "../../common";
+import { ConsoleLog, ConsoleLogLevel } from "../../common";
 import {
-  executeHTML,
-  executeJavaScript,
-  getJavaScriptExecutionResult,
-  getHTMLExecutionResult,
-  selectHTMLInstruction,
-  selectJavaScriptInstruction,
-  selectHTMLWithCSSInstruction,
-  executeHTMLWithCSS,
-  getHTMLExecutionResultStyle,
-  selectJavaScriptHTMLCSSInstruction,
-  executeJavaScriptHTMLCSS,
   clickOnHTMLExecutionResult,
-  getHTMLExecutionResultText,
+  executeHTML,
+  executeHTMLWithCSS,
+  executeJavaScript,
+  executeJavaScriptHTMLCSS,
   getConsoleLogs,
+  getHTMLExecutionResult,
+  getHTMLExecutionResultStyle,
+  getHTMLExecutionResultText,
+  selectHTMLInstruction,
+  selectHTMLWithCSSInstruction,
+  selectJavaScriptHTMLCSSInstruction,
+  selectJavaScriptInstruction,
 } from "./drivers";
 
 When(/^I execute the following JavaScript:$/, (javaScript: string) => {
@@ -113,19 +112,24 @@ When(/^I click on "([^"]+)" element$/, (cssSelector: string) => {
 });
 
 Then(
-  /^it should output the following execution result:$/,
-  async (expected: string) => {
-    const actual: string = await getJavaScriptExecutionResult();
-    expect(actual).to.equal(expected);
-  }
-);
-
-Then(
   /^it should output the following console logs:$/,
   async (dataTable: DataTable) => {
     const expected: ConsoleLog[] = dataTable.hashes();
     const actual: ConsoleLog[] = await getConsoleLogs();
     expect(expected).to.deep.equal(actual);
+  }
+);
+
+Then(
+  /^it should log an error containing "([^"]+)"$/,
+  async (message: string) => {
+    const logs: ConsoleLog[] = await getConsoleLogs();
+    const errorLogs: ConsoleLog[] = logs.filter(
+      (log) => log.level === ConsoleLogLevel.Error
+    );
+    expect(errorLogs).to.have.lengthOf(1);
+    const errorLog: ConsoleLog = errorLogs[0];
+    expect(errorLog.message).to.contain(message);
   }
 );
 

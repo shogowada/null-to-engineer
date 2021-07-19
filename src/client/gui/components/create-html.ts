@@ -119,6 +119,14 @@ const createPeakConsoleJavaScript = (): string => {
       type: "clear"
     }, location.origin);
   };
+
+  window.addEventListener("error", (event) => {
+    window.parent.postMessage({
+      source: ${JSON.stringify(ConsoleLogMessageSource)},
+      type: ${JSON.stringify(ConsoleLogLevel.Error)},
+      args: [event.message]
+    }, location.origin);
+  });
 })();`;
 };
 
