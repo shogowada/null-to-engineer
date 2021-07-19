@@ -67,6 +67,7 @@ export const HTMLFiddleOutput: React.FunctionComponent<Props> = (
                 onClick={() => {
                   setCurrentTab(tab);
                 }}
+                data-tab={tab}
               >
                 {mapTabToDisplayText(tab)}
               </button>

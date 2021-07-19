@@ -19,9 +19,11 @@ export const getJavaScriptExecutionResult = async (): Promise<string> => {
 };
 
 export const getConsoleLogs = async (): Promise<ConsoleLog[]> => {
-  const elements: WebElement[] = await getDriver()
-    .findElement(By.id(ElementID.JavaScriptFiddleOutput))
-    .findElements(By.css(".console-log"));
+  const elements: WebElement[] = await selectConsoleLogTab().then(() =>
+    getDriver()
+      .findElement(By.id(ElementID.JavaScriptFiddleOutput))
+      .findElements(By.css(".console-log"))
+  );
 
   return Promise.all(elements.map(getConsoleLog));
 };
@@ -32,6 +34,15 @@ const getConsoleLog = async (element: WebElement): Promise<ConsoleLog> => {
     element.getAttribute("data-level"),
   ]);
   return { level: level as ConsoleLogLevel, message };
+};
+
+const selectConsoleLogTab = () => {
+  return getDriver()
+    .findElement(By.css('[data-tab="ConsoleLog"]'))
+    .then(
+      (element) => element.click(),
+      () => undefined
+    );
 };
 
 export const executeHTML = (html: string) => {
