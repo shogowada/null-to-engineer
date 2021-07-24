@@ -13,7 +13,7 @@ HTML（HyperText Markup Language）はウェブサイトの骨組みを作るも
 Hello, World!
 ```
 
-下に"Hello, World!"と出力されたかな？
+下に"Hello, World!"と表示されたかな？
 そう、これだけでも立派な HTML なんだ。
 あれ？普通の文字列と何も変わらないね 😲
 

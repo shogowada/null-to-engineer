@@ -50,3 +50,11 @@ Feature: JavaScript fiddle
     throw new Error("Do not panic! This is only a test.");
     """
     Then it should log an error containing "Do not panic! This is only a test."
+
+  @gui
+  Scenario: Log syntax error
+    When I execute the following JavaScript:
+    """
+    const 1;
+    """
+    Then it should log an error containing "SyntaxError"

@@ -4,7 +4,47 @@
 
 沢山あるから、今全部覚える必要はないよ 😄「こういうこと出来るんだな」というのを知っておいて、必要になったらここにきて思い出して 😊
 
-## 配列に要素を追加
+## 要素を取り出す
+
+`[]`を使って、配列の中から要素を取り出すことができるよ 🙂
+
+```javascript
+const items = ["a", "b", "c"];
+console.log(items[0]); // a
+console.log(items[1]); // b
+console.log(items[2]); // c
+```
+
+`[]`の中の数字はインデックスと呼ばれるよ。インデックスは`0`から始まるから、一番最初の要素を取り出したいときは`[0]`を使うんだ。
+逆に一番最後の要素を取り出したい場合は、配列の長さ − １をインデックスとして使うといいね 👍
+
+```javascript
+const items = ["a", "b", "c"];
+// length は配列の長さを教えてくれるよ
+console.log(items.length); // 3
+console.log(items[items.length - 1]); // c
+```
+
+他にも色々な取り出し方があるよ！
+
+```javascript
+const items = ["a", "b", "c"];
+
+const [first, second, third] = items;
+console.log(first); // a
+console.log(second); // b
+console.log(third); // c
+```
+
+```javascript
+const items = ["a", "b", "c"];
+
+const [head, ...tails] = items;
+console.log(head); // a
+console.log(tails); // ["b","c"]
+```
+
+## 新しい要素を追加
 
 配列に新しい要素を追加したい場合、`[...items, newItem]`という書き方で新しい配列を作ることができるよ 🙂
 

@@ -313,6 +313,7 @@ $button-transition: background-color $animation-duration ease,
   margin: $margin-small;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 
   .fiddle-output {
     flex: 1;
@@ -372,6 +373,7 @@ $button-transition: background-color $animation-duration ease,
   border-radius: 0 $margin-small $margin-small $margin-small;
   padding: $margin-small;
   display: none;
+  overflow-y: auto;
 
   &.visible {
     display: flex;
@@ -401,7 +403,7 @@ $button-transition: background-color $animation-duration ease,
     border-bottom: 1px solid $output-border-color;
 
     &[data-level="error"] {
-      background-color: pink;
+      background-color: #fadbd8;
       color: red;
     }
 

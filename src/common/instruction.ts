@@ -3,12 +3,14 @@ export enum ChapterID {
   HTMLBasics = "HTMLBasics",
   CSSBasics = "CSSBasics",
   WebsiteBasics = "WebsiteBasics",
+  FrontEndTODOAppWithReact = "FrontEndTODOAppWithReact",
   AboutNullToEngineer = "AboutNullToEngineer",
 }
 
 export enum InstructionID {
   JavaScriptBasics = "JavaScriptBasics",
   JavaScriptConditionalOperations = "JavaScriptConditionalOperations",
+  JavaScriptObjectOperations = "JavaScriptObjectOperations",
   JavaScriptArrayOperations = "JavaScriptArrayOperations",
   JavaScriptLoopOperations = "JavaScriptLoopOperations",
 
@@ -61,17 +63,18 @@ export interface InstructionConfiguration {
 export const Chapters: Chapter[] = [
   {
     id: ChapterID.JavaScriptBasics,
-    name: "JavaScript 基本編 🥳",
+    name: "JavaScript 基本編 🤖",
     instructionIDs: [
       InstructionID.JavaScriptBasics,
       InstructionID.JavaScriptConditionalOperations,
+      InstructionID.JavaScriptObjectOperations,
       InstructionID.JavaScriptArrayOperations,
       InstructionID.JavaScriptLoopOperations,
     ],
   },
   {
     id: ChapterID.HTMLBasics,
-    name: "HTML 基本編 ✍️",
+    name: "HTML 基本編 🏠",
     instructionIDs: [InstructionID.HTMLBasics],
   },
   {
@@ -88,6 +91,11 @@ export const Chapters: Chapter[] = [
     id: ChapterID.WebsiteBasics,
     name: "ウェブサイト基本編 🤩",
     instructionIDs: [InstructionID.WebsiteBasics],
+  },
+  {
+    id: ChapterID.FrontEndTODOAppWithReact,
+    name: "React で TODO アプリ ✨",
+    instructionIDs: [],
   },
   {
     id: ChapterID.AboutNullToEngineer,
@@ -159,6 +167,12 @@ export const getInstructionConfiguration = (
       };
     }
     case InstructionID.JavaScriptLoopOperations: {
+      return {
+        id,
+        fiddleType: FiddleType.JavaScript,
+      };
+    }
+    case InstructionID.JavaScriptObjectOperations: {
       return {
         id,
         fiddleType: FiddleType.JavaScript,

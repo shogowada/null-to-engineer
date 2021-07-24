@@ -73,10 +73,9 @@ export const useCompiledHTML = (): [
 
   const compileHTML = ({ html, css, javaScript }: CompileHTMLOptions): void => {
     const cssObjectURL = createURL(css || "", CSSType);
-    const javaScriptObjectURL = createURL(
-      `"use strict";${createPeakConsoleJavaScript()}${javaScript || ""}`,
-      JavaScriptType
-    );
+
+    javaScript = createJavaScript(javaScript || "");
+    const javaScriptObjectURL = createURL(javaScript, JavaScriptType);
 
     setCSSObjectURL(cssObjectURL);
     setJavaScriptObjectURL(javaScriptObjectURL);
@@ -84,7 +83,7 @@ export const useCompiledHTML = (): [
     const linkElement: string = `<link rel="stylesheet" type="${CSSType}" href="${cssObjectURL}">`;
     const scriptElement: string = `<script defer type="${JavaScriptType}" src="${javaScriptObjectURL}"></script>`;
 
-    setConsoleLogs([]);
+    setConsoleLogs(getSyntaxErrorLogs(javaScript));
     setCompiledHTML(`${linkElement}
 ${scriptElement}
 ${html || ""}`);
@@ -98,8 +97,9 @@ const createURL = (input: string, type: string): string => {
   return URL.createObjectURL(blob);
 };
 
-const createPeakConsoleJavaScript = (): string => {
-  return `(() => {
+const createJavaScript = (javaScript: string): string => {
+  return `"use strict";
+(() => {
   ${JSON.stringify(ConsoleLogLevels)}.map(level => {
     const original = console[level];
     console[level] = function() {
@@ -127,7 +127,17 @@ const createPeakConsoleJavaScript = (): string => {
       args: [event.message]
     }, location.origin);
   });
-})();`;
+})();
+${javaScript}`;
+};
+
+const getSyntaxErrorLogs = (javaScript: string): ConsoleLog[] => {
+  try {
+    Function(javaScript);
+    return [];
+  } catch (exception) {
+    return [{ level: ConsoleLogLevel.Error, message: exception.toString() }];
+  }
 };
 
 const mapLogArgsToLog = (
