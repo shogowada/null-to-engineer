@@ -8,16 +8,19 @@ import {
   RoutePath,
 } from "../../../common";
 import { createClassName } from "./create-class-name";
+import { usePrevious } from "./use-previous";
 
 interface Props {
   id: InstructionID;
-  metadata: InstructionMetadata;
+  nextInstructionMetadata: InstructionMetadata | null;
   isLoading: boolean;
-  html: string;
+  html: string | null;
   fetchHTML: (id: InstructionID) => PromiseLike<unknown>;
 }
 
 export const ViewInstruction = (props: Props) => {
+  const prevHTML: string = usePrevious(props.html) || "";
+
   React.useEffect(() => {
     props
       .fetchHTML(props.id)
@@ -26,19 +29,16 @@ export const ViewInstruction = (props: Props) => {
       );
   }, [props.id]);
 
-  const nextID: InstructionID | null = React.useMemo(
-    () => getNextInstructionIDOrNull(props.id),
-    [props.id]
-  );
-
-  const renderNextInstructionLink = (nextID: InstructionID) => {
+  const renderNextInstructionLink = (
+    nextInstructionMetadata: InstructionMetadata
+  ) => {
     return (
       <Link
         id={ElementID.NextInstruction}
-        to={RoutePath.instruction(nextID)}
+        to={RoutePath.instruction(nextInstructionMetadata.id)}
         style={{ float: "right" }}
       >
-        次は {props.metadata.name} 👉
+        次は {nextInstructionMetadata.name} 👉
       </Link>
     );
   };
@@ -51,26 +51,10 @@ export const ViewInstruction = (props: Props) => {
           props.isLoading ? "loading" : null,
         ])}
       >
-        <div dangerouslySetInnerHTML={{ __html: props.html }} />
+        <div dangerouslySetInnerHTML={{ __html: props.html || prevHTML }} />
       </div>
-      {nextID && renderNextInstructionLink(nextID)}
+      {props.nextInstructionMetadata &&
+        renderNextInstructionLink(props.nextInstructionMetadata)}
     </React.Fragment>
   );
-};
-
-const getNextInstructionIDOrNull = (
-  instructionID: InstructionID
-): InstructionID | null => {
-  const instructionIDs: InstructionID[] = Chapters.flatMap(
-    (chapter) => chapter.instructionIDs
-  );
-  const index: number = instructionIDs.findIndex(
-    (thisInstructionID) => thisInstructionID === instructionID
-  );
-  const nextIndex: number = index + 1;
-  if (nextIndex < instructionIDs.length) {
-    return instructionIDs[nextIndex];
-  } else {
-    return null;
-  }
 };
