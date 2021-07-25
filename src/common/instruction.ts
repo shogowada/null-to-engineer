@@ -96,7 +96,7 @@ export const Chapters: Chapter[] = [
   },
   {
     id: ChapterID.FrontEndTODOAppWithReact,
-    name: "React で TODO アプリ ✨",
+    name: "React 基本編 ✨",
     instructionIDs: [InstructionID.ReactBasics],
   },
   {

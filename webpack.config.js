@@ -30,7 +30,7 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new HTMLWebpackPlugin({
       template: path.join(__dirname, "index.template.html"),
-      title: "nullからエンジニア",
+      title: "経験 null からエンジニア",
       hash: true,
       filename: "index.template.html",
     }),
