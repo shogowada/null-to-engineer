@@ -1,7 +1,7 @@
 import * as os from "os";
 import { DataTable, Then, When } from "@cucumber/cucumber";
 import { expect } from "chai";
-import { ConsoleLog, ConsoleLogLevel } from "../../common";
+import { ConsoleLog, ConsoleLogLevel, eventually } from "../../common";
 import {
   clickOnHTMLExecutionResult,
   executeHTML,
@@ -134,8 +134,13 @@ Then(
 );
 
 Then(/^it should output the following HTML:$/, async (expectedHTML: string) => {
-  const actualHTML: string = await getHTMLExecutionResult();
-  expect(actualHTML).to.equal(expectedHTML);
+  return eventually(
+    async () => {
+      const actualHTML: string = await getHTMLExecutionResult();
+      expect(actualHTML).to.equal(expectedHTML);
+    },
+    { timeout: 5 * 1000, interval: 250 }
+  );
 });
 
 Then(

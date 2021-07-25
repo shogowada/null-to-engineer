@@ -93,3 +93,30 @@ Feature: HTML fiddle
     And I click on "#button" element
     Then "#output" element should say "Let's say something else!"
     And I should see no error log
+
+  @gui
+  Scenario: Render React
+    When I execute the following HTML:
+    """
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"/ >
+
+    <script type="text/babel">
+      const mountElement = document.getElementById("root");
+      ReactDOM.render(<h1>Hello, World!</h1>, mountElement);
+    </script>
+    """
+    Then it should output the following HTML:
+    """
+    <div id="root"><h1>Hello, World!</h1></div>
+    """

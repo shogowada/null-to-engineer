@@ -23,6 +23,8 @@ export enum InstructionID {
 
   WebsiteBasics = "WebsiteBasics",
 
+  ReactBasics = "ReactBasics",
+
   AboutNullToEngineer = "AboutNullToEngineer",
 }
 
@@ -95,7 +97,7 @@ export const Chapters: Chapter[] = [
   {
     id: ChapterID.FrontEndTODOAppWithReact,
     name: "React で TODO アプリ ✨",
-    instructionIDs: [],
+    instructionIDs: [InstructionID.ReactBasics],
   },
   {
     id: ChapterID.AboutNullToEngineer,
@@ -176,6 +178,12 @@ export const getInstructionConfiguration = (
       return {
         id,
         fiddleType: FiddleType.JavaScript,
+      };
+    }
+    case InstructionID.ReactBasics: {
+      return {
+        id,
+        fiddleType: FiddleType.HTML,
       };
     }
     case InstructionID.WebsiteBasics: {

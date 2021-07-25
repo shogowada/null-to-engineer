@@ -401,6 +401,7 @@ $button-transition: background-color $animation-duration ease,
   .console-log {
     padding: $margin-small;
     border-bottom: 1px solid $output-border-color;
+    white-space: normal;
 
     &[data-level="error"] {
       background-color: #fadbd8;
