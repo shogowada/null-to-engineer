@@ -55,14 +55,19 @@ Feature: HTML fiddle
 
       const paragraphsElement = document.getElementById("paragraphs");
       paragraphsElement.appendChild(pElement);
+
+      console.log("Hello, World!");
     });
     """
     And I click on "#create-element" element
     Then "p" element should have "backgroundColor" styled as "rgb(255, 0, 0)"
+    And it should output the following console logs:
+      | level | message       |
+      | log   | Hello, World! |
 
   @gui
   Scenario: Declaring the same global variable over multiple executions
-    Because it needs to clear its namespace on every run
+  Because it needs to clear its namespace on every run
     When I execute the following:
     """
     // HTML

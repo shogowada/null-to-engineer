@@ -10,9 +10,9 @@ $padding-large: 5px 30px;
 $body-background-color: #eeeeee;
 $shadow-color: rgba(0, 0, 0, 0.2);
 $thick-shadow-color: rgba(0, 0, 0, 0.4);
-$tab-button-color: deepskyblue;
 $execute-button-color: green;
 $code-border-color: lightgray;
+$output-border-color: lightgray;
 $grayed-out-color: rgba(0, 0, 0, 0.5);
 $font-size: 16px;
 $animation-duration: 0.25s;
@@ -30,24 +30,6 @@ a {
 
 $button-transition: background-color $animation-duration ease,
   border-color $animation-duration ease, color $animation-duration ease;
-
-button {
-  padding: $padding-small;
-  border-radius: $margin-small;
-  border: 1px solid $execute-button-color;
-  color: $execute-button-color;
-  background: rgba(0, 0, 0, 0);
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: $button-transition;
-
-  &:hover {
-    color: white;
-    background: $execute-button-color;
-    transition: $button-transition;
-  }
-}
 
 @media screen and (max-width: $tablet-width) {
   .main-container {
@@ -189,7 +171,7 @@ button {
 
 .item-fiddle {
   overflow-y: auto;
-  margin: $margin-main-frame ($margin-main-frame / 2);
+  padding: $margin-main-frame ($margin-main-frame / 2);
 }
 
 .instruction-list {
@@ -240,32 +222,30 @@ button {
   }
 }
 
+.fiddle-execute {
+  padding: $padding-small;
+  border-radius: $margin-small;
+  border: 1px solid $execute-button-color;
+  color: $execute-button-color;
+  background: rgba(0, 0, 0, 0);
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: $button-transition;
+
+  &:hover {
+    color: white;
+    background: $execute-button-color;
+    transition: $button-transition;
+  }
+}
+
 .fiddle-code {
   margin: 0 $margin-small $margin-small $margin-small;
-  border: 1px solid black;
+  border: 1px solid $code-border-color;
   border-radius: $margin-small;
   box-sizing: border-box;
   font-family: monospace;
-}
-
-.fiddle-execute {
-  width: calc(100% - #{$margin-small * 2});
-  margin: 0 $margin-small;
-}
-
-.fiddle-output {
-  flex: 1;
-  border: 1px solid black;
-  border-radius: $margin-small;
-  padding: $padding-medium;
-  margin: $margin-small;
-  background: white;
-  box-shadow: 0 0 $margin-small $shadow-color;
-  overflow-y: auto;
-
-  &.empty {
-    color: $grayed-out-color;
-  }
 }
 
 .single-fiddle-container {
@@ -274,8 +254,9 @@ button {
   height: 100%;
 
   .fiddle-code {
+    flex: 1;
     width: calc(100% - #{$margin-small * 2});
-    height: 200px;
+    min-height: 200px;
     resize: vertical;
   }
 }
@@ -286,10 +267,11 @@ button {
   height: 100%;
 
   .fiddle-code-container {
+    flex: 1;
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 200px;
+    min-height: 200px;
     resize: vertical;
 
     .fiddle-code {
@@ -305,17 +287,129 @@ button {
   height: 100%;
 
   .fiddle-code-container {
+    flex: 1;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    height: 300px;
+    min-height: 300px;
     resize: vertical;
 
     .fiddle-code {
       flex: 1;
       resize: none;
       min-width: 250px;
+    }
+  }
+}
+
+.fiddle-execute {
+  width: calc(100% - #{$margin-small * 2});
+  margin: 0 $margin-small;
+}
+
+.fiddle-output-container {
+  flex: 1;
+  margin: $margin-small;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  .fiddle-output {
+    flex: 1;
+
+    &.hidden {
+      display: none;
+    }
+  }
+
+  &.log-only {
+    display: block;
+
+    .tabs {
+      display: none;
+    }
+  }
+}
+
+.tabs {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding-left: 0;
+  border-bottom: 1px solid $output-border-color;
+
+  .tab {
+    border-radius: $margin-small $margin-small 0 0;
+    border: 1px solid $output-border-color;
+    padding: $padding-medium;
+    margin-bottom: -1px;
+
+    &.selected {
+      border-bottom: 1px solid $body-background-color;
+      z-index: 1;
+
+      button {
+        color: black;
+      }
+    }
+
+    button {
+      border: none;
+      height: 100%;
+      color: $grayed-out-color;
+
+      &:hover {
+        color: $execute-button-color;
+      }
+    }
+  }
+}
+
+.tab-content {
+  flex: 1;
+  border: 1px solid $output-border-color;
+  border-top: none;
+  border-radius: 0 $margin-small $margin-small $margin-small;
+  padding: $margin-small;
+  display: none;
+  overflow-y: auto;
+
+  &.visible {
+    display: flex;
+  }
+}
+
+#html-fiddle-output {
+  margin: 0;
+  background-color: white;
+  border: 1px solid $output-border-color;
+  border-radius: $margin-small;
+}
+
+#javascript-fiddle-output {
+  margin: 0;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid $output-border-color;
+  border-radius: $margin-small;
+
+  &.empty {
+    color: $grayed-out-color;
+  }
+
+  .console-log {
+    padding: $margin-small;
+    border-bottom: 1px solid $output-border-color;
+
+    &[data-level="error"] {
+      background-color: #fadbd8;
+      color: red;
+    }
+
+    &[data-level="warn"] {
+      background-color: lightyellow;
+      color: saddlebrown;
     }
   }
 }

@@ -1,12 +1,12 @@
 import * as React from "react";
-import { ElementID } from "../../../../common";
+import { ConsoleLog, ElementID } from "../../../../common";
 import { createClassName } from "../create-class-name";
 
 interface Props {
-  logs: string[];
+  logs: ConsoleLog[];
 }
 
-export const JavaScriptFiddleOutput: React.FunctionComponent<Props> = (
+export const ConsoleLogOutput: React.FunctionComponent<Props> = (
   props: Props
 ) => {
   return (
@@ -18,7 +18,11 @@ export const JavaScriptFiddleOutput: React.FunctionComponent<Props> = (
       ])}
     >
       {props.logs.length
-        ? props.logs.join("\n")
+        ? props.logs.map((log) => (
+            <div className="console-log" data-level={log.level}>
+              {log.message}
+            </div>
+          ))
         : "コードを実行すると、結果がここに表示されるよ👀"}
     </pre>
   );

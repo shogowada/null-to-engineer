@@ -1,4 +1,4 @@
-# JavaScript と HTML 🧐
+# JavaScript と HTML
 
 多くのウェブサイトは JavaScript、HTML、CSS を組み合わせて作られているよ。
 HTML と CSS の組み合わせはもう学んだけど、JavaScript と HTML の組み合わせはまだだね！
@@ -41,12 +41,16 @@ HTML じゃなくて、JavaScript を使って新しい要素を作ることも�
 ```javascript
 // createElement で新しい要素を作る
 const divElement = document.createElement("div");
+// innerHTML では、要素のタグに囲まれてる部分を変えることができるよ
+// つまりこれで <div>Hello, World!</div> という要素を作れるね！
 divElement.innerHTML = "Hello, World!";
 
 // document.body はウェブサイトの本体の要素だよ！
 // その要素に appendChild で今作った要素を追加してみよう
 document.body.appendChild(divElement);
 ```
+
+"Hello, World!"と表示されたかな？
 
 もちろん、JavaScript で作った要素にも CSS が適応されるよ！
 
@@ -80,7 +84,6 @@ divElementCreatedByHTML.appendChild(divElementCreatedByJavaScript);
 ## もっと簡単な方法
 
 何だか色々なことができそうで楽しいけど、こうやってウェブサイトの仕組みを一つずつ作っていくのはとても大変そうだね 😵‍💫
-大丈夫、みんな同じことを思ってるよ 🤗
 実際大変過ぎて、もうこうやって作られているウェブサイトはほとんどないんじゃないかな 🤔
 
 こうやってウェブサイトを作るのは本当に大変だから、みんなもっと簡単に作る方法はないかと試行錯誤しているんだ。
