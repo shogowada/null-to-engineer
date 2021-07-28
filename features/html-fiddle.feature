@@ -120,3 +120,15 @@ Feature: HTML fiddle
     """
     <div id="root"><h1>Hello, World!</h1></div>
     """
+
+  @gui
+  Scenario Outline: Remember code for <fiddleType> fiddle
+    Given I have some code for <fiddleType> fiddle
+    When I refresh the page
+    Then it should remember the code
+    Examples:
+      | fiddleType        |
+      | JavaScript        |
+      | JavaScriptHTMLCSS |
+      | HTML              |
+      | HTMLWithCSS       |

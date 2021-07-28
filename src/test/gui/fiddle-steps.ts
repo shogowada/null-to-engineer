@@ -1,7 +1,15 @@
 import * as os from "os";
-import { DataTable, Then, When } from "@cucumber/cucumber";
+import { DataTable, Given, Then, When } from "@cucumber/cucumber";
 import { expect } from "chai";
-import { ConsoleLog, ConsoleLogLevel, eventually } from "../../common";
+import {
+  ConsoleLog,
+  ConsoleLogLevel,
+  eventually,
+  FiddleType,
+  getInstructionConfiguration,
+  InstructionID,
+  InstructionIDs,
+} from "../../common";
 import {
   clickOnHTMLExecutionResult,
   executeHTML,
@@ -9,14 +17,65 @@ import {
   executeJavaScript,
   executeJavaScriptHTMLCSS,
   getConsoleLogs,
+  getCSS,
+  getHTML,
   getHTMLExecutionResult,
   getHTMLExecutionResultStyle,
   getHTMLExecutionResultText,
+  getJavaScript,
   selectHTMLInstruction,
   selectHTMLWithCSSInstruction,
+  selectInstruction,
   selectJavaScriptHTMLCSSInstruction,
   selectJavaScriptInstruction,
+  setHTML,
+  setHTMLWithCSS,
+  setJavaScript,
+  setJavaScriptHTMLCSS,
 } from "./drivers";
+import {
+  getTheCSS,
+  getTheHTML,
+  getTheJavaScript,
+  setTheCSS,
+  setTheHTML,
+  setTheJavaScript,
+} from "./the-code";
+import { getTheInstructionID, setTheInstructionID } from "./the-instruction";
+
+Given(/^I have some code for (\w+) fiddle$/, (fiddleType: FiddleType) => {
+  const instructionID: InstructionID = InstructionIDs.map(
+    getInstructionConfiguration
+  ).find((configuration) => configuration.fiddleType === fiddleType)!.id;
+  setTheInstructionID(instructionID);
+
+  const javaScript: string = `// JavaScript ${new Date()}`;
+  const html: string = `<!-- HTML ${new Date()} -->`;
+  const css: string = `/* CSS ${new Date()} */`;
+  setTheJavaScript(javaScript);
+  setTheHTML(html);
+  setTheCSS(css);
+
+  return selectInstruction(instructionID).then((): PromiseLike<unknown> => {
+    switch (fiddleType) {
+      case FiddleType.JavaScriptHTMLCSS: {
+        return setJavaScriptHTMLCSS(javaScript, html, css);
+      }
+      case FiddleType.JavaScript: {
+        return setJavaScript(javaScript);
+      }
+      case FiddleType.HTML: {
+        return setHTML(html);
+      }
+      case FiddleType.HTMLWithCSS: {
+        return setHTMLWithCSS(html, css);
+      }
+      default: {
+        throw new Error(`Unsupported fiddle type ${fiddleType}`);
+      }
+    }
+  });
+});
 
 When(/^I execute the following JavaScript:$/, (javaScript: string) => {
   return selectJavaScriptInstruction().then(() =>
@@ -161,3 +220,42 @@ Then(
     expect(value).to.equal(text);
   }
 );
+
+Then(/^it should remember the code$/, async () => {
+  const fiddleType: FiddleType = getInstructionConfiguration(
+    getTheInstructionID()
+  ).fiddleType;
+
+  switch (fiddleType) {
+    case FiddleType.HTML: {
+      const html: string = await getHTML();
+      expect(html).to.equal(getTheHTML());
+      break;
+    }
+    case FiddleType.HTMLWithCSS: {
+      const [html, css] = await Promise.all([getHTML(), getCSS()]);
+      expect(html).to.equal(getTheHTML());
+      expect(css).to.equal(getTheCSS());
+      break;
+    }
+    case FiddleType.JavaScript: {
+      const javaScript: string = await getJavaScript();
+      expect(javaScript).to.equal(getTheJavaScript());
+      break;
+    }
+    case FiddleType.JavaScriptHTMLCSS: {
+      const [javaScript, html, css] = await Promise.all([
+        getJavaScript(),
+        getHTML(),
+        getCSS(),
+      ]);
+      expect(javaScript).to.equal(getTheJavaScript());
+      expect(html).to.equal(getTheHTML());
+      expect(css).to.equal(getTheCSS());
+      break;
+    }
+    default: {
+      throw new Error(`Unsupported fiddle type ${fiddleType}`);
+    }
+  }
+});

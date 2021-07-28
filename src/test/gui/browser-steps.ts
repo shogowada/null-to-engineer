@@ -1,7 +1,11 @@
-import { Then } from "@cucumber/cucumber";
+import { Then, When } from "@cucumber/cucumber";
 import { expect } from "chai";
 import { logging } from "selenium-webdriver";
-import { getBrowserLogEntries } from "./drivers";
+import { getBrowserLogEntries, getDriver } from "./drivers";
+
+When(/^I refresh the page$/, () => {
+  return getDriver().navigate().refresh();
+});
 
 Then(/^I should see no error log$/, async () => {
   const entries: logging.Entry[] = await getBrowserLogEntries();

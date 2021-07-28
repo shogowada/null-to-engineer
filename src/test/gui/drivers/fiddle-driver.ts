@@ -1,17 +1,23 @@
-import * as os from "os";
 import { By, WebElement } from "selenium-webdriver";
 import { ConsoleLog, ConsoleLogLevel, ElementID } from "../../../common";
-import { setInputValue } from "./input-driver";
+import { getInputValue, setInputValue } from "./input-driver";
 import { getDriver } from "./driver";
 
 export const executeJavaScript = (code: string) => {
-  return setInputValue(
-    getDriver().findElement(By.id(ElementID.JavaScriptFiddleCode)),
-    code
-  ).then(() =>
+  return setJavaScript(code).then(() =>
     getDriver().findElement(By.id(ElementID.JavaScriptFiddleExecute)).click()
   );
 };
+
+export const setJavaScript = (code: string) => {
+  return setInputValue(
+    getDriver().findElement(By.id(ElementID.JavaScriptFiddleCode)),
+    code
+  );
+};
+
+export const getJavaScript = (): PromiseLike<string> =>
+  getInputValue(getDriver().findElement(By.id(ElementID.JavaScriptFiddleCode)));
 
 export const getConsoleLogs = async (): Promise<ConsoleLog[]> => {
   const elements: WebElement[] = await selectConsoleLogTab().then(() =>
@@ -41,31 +47,50 @@ const selectConsoleLogTab = () => {
 };
 
 export const executeHTML = (html: string) => {
-  return setInputValue(
-    getDriver().findElement(By.id(ElementID.HTMLFiddleCode)),
-    html
-  ).then(() =>
+  return setHTML(html).then(() =>
     getDriver().findElement(By.id(ElementID.HTMLFiddleExecute)).click()
   );
 };
 
-export const executeHTMLWithCSS = (html: string, css: string) => {
+export const setHTML = (html: string) => {
   return setInputValue(
     getDriver().findElement(By.id(ElementID.HTMLFiddleCode)),
     html
-  )
-    .then(() =>
-      setInputValue(
-        getDriver().findElement(By.id(ElementID.CSSFiddleCode)),
-        css
-      )
-    )
-    .then(() =>
-      getDriver().findElement(By.id(ElementID.HTMLFiddleExecute)).click()
-    );
+  );
 };
 
+export const getHTML = (): PromiseLike<string> =>
+  getInputValue(getDriver().findElement(By.id(ElementID.HTMLFiddleCode)));
+
+export const executeHTMLWithCSS = (html: string, css: string) => {
+  return setHTMLWithCSS(html, css).then(() =>
+    getDriver().findElement(By.id(ElementID.HTMLFiddleExecute)).click()
+  );
+};
+
+export const setHTMLWithCSS = (html: string, css: string) => {
+  return setInputValue(
+    getDriver().findElement(By.id(ElementID.HTMLFiddleCode)),
+    html
+  ).then(() =>
+    setInputValue(getDriver().findElement(By.id(ElementID.CSSFiddleCode)), css)
+  );
+};
+
+export const getCSS = (): PromiseLike<string> =>
+  getInputValue(getDriver().findElement(By.id(ElementID.CSSFiddleCode)));
+
 export const executeJavaScriptHTMLCSS = (
+  javaScript: string,
+  html: string,
+  css: string
+) => {
+  return setJavaScriptHTMLCSS(javaScript, html, css).then(() =>
+    getDriver().findElement(By.id(ElementID.HTMLFiddleExecute)).click()
+  );
+};
+
+export const setJavaScriptHTMLCSS = (
   javaScript: string,
   html: string,
   css: string
@@ -85,9 +110,6 @@ export const executeJavaScriptHTMLCSS = (
         getDriver().findElement(By.id(ElementID.CSSFiddleCode)),
         css
       )
-    )
-    .then(() =>
-      getDriver().findElement(By.id(ElementID.HTMLFiddleExecute)).click()
     );
 };
 
