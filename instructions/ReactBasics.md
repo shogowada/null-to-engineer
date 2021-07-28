@@ -2,7 +2,7 @@
 
 ## React って何？
 
-[React](https://reactjs.org) は JavaScript を使って HTML を書くことができるようになるライブラリだよ 🤔
+[React](https://ja.reactjs.org) は JavaScript を使って HTML を書くことができるようになるライブラリだよ 🤔
 
 例えば同じ形の要素を繰り返し書きたいときに JavaScript のループを使ったり、
 特定の条件下でしか要素を書きたくないときに`if`を使ったりできるんだ 😲
@@ -26,7 +26,7 @@
 ></script>
 ```
 
-React では、[JSX（JavaScript XML）](https://reactjs.org/docs/introducing-jsx.html)と呼ばれる特別な JavaScript を使うんだ。
+React では、[JSX（JavaScript XML）](https://ja.reactjs.org/docs/introducing-jsx.htmll)と呼ばれる特別な JavaScript を使うんだ。
 JSX のおかげで、JavaScript を使って HTML を書くことができるよ 😎
 実際に JSX が何なのかは後で例を見ながら学ぼうね！
 まずは JSX を使えるようにするために、[Babel](https://babeljs.io) と呼ばれるライブラリも読み込もう 🙂
@@ -90,4 +90,82 @@ JSX のおかげで、JavaScript を使って HTML を書くことができる�
 もちろん、ただ`<h1>Hello, World!</h1>`と書きたいだけなら React を使うのはやりすぎだけど、
 複雑なアプリを作るときは React がとても役に立つんだ 😉
 
-次は React でタスク管理アプリを作ってみようか 😄
+## コンポーネント
+
+React では、[コンポーネント](https://ja.reactjs.org/docs/glossary.html#components)と呼ばれる関数を組み合わせることでウェブサイトを作っていくよ。
+コンポーネントは HTML を返す関数なんだ。厳密には HTML じゃなくて JSX なんだけど、ここでは HTML と呼ぶね！
+
+例えば下の例だと、`HelloWorld`という関数が`<h1>Hello, World!</h1>`という HTML を返しているね。
+
+```javascript
+const HelloWorld = () => {
+  return <h1>Hello, World!</h1>;
+};
+```
+
+これをそのまま HTML の要素として描画することができるよ。
+
+```html
+<div id="root"/ >
+<script type="text/babel">
+  const HelloWorld = () => {
+    return <h1>Hello, World!</h1>;
+  };
+
+  const rootElement = document.getElementById("root");
+  ReactDOM.render(<HelloWorld />, rootElement);
+</script>
+```
+
+## props（プロップス）
+
+[props](https://ja.reactjs.org/docs/components-and-props.html)と呼ばれるものを使うことで、コンポーネントに値を渡すことができるよ。
+
+普通のパラメータみたいに関数に渡して使うことができる。
+
+```javascript
+const HelloWorld = (props) => {
+  // {}を使って、HTML内に変数の値を注入しよう！
+  return <h1>Hello, {props.name}!</h1>;
+};
+
+const rootElement = document.getElementById("root");
+// propsは、HTMLの属性みたいにコンポーネントに渡すことができる
+ReactDOM.render(<HelloWorld name="World" />, rootElement);
+```
+
+上の例では`"World"`を`name`prop に渡しているね。もし変数を渡したい場合は、`{}`を使えるよ。
+
+```javascript
+const name = "World";
+ReactDOM.render(<HelloWorld name={name} />, rootElement);
+```
+
+気をつけなきゃいけないのは、props は読み取り専用だってこと。
+
+```javascript
+const HelloWorld = (props) => {
+  props.name = "World"; // これやっちゃダメ！
+  return <h1>Hello, {props.name}!</h1>;
+};
+```
+
+## state（ステート）
+
+props と違って、[state](https://ja.reactjs.org/docs/state-and-lifecycle.html)と呼ばれるものを使うことで、コンポーネントに変更可能な変数を持たせることができるんだ。
+
+```javascript
+const Counter = () => {
+  const [count, setCount] = React.useState(0);
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        setCount((previousCount) => previousCount + 1);
+      }}
+    >
+      {count}回押された
+    </button>
+  );
+};
+```
