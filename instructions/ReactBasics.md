@@ -13,7 +13,7 @@
 
 ここで書くことは呪文みたいなものだから、あまり細かいことは気にせずにコピー＆ペーストしててもいいよ 😊
 
-まず、React を読み込もう！
+まず、`script`要素を使って React を読み込もう！
 
 ```html
 <script
@@ -90,12 +90,108 @@ JSX のおかげで、JavaScript を使って HTML を書くことができる�
 もちろん、ただ`<h1>Hello, World!</h1>`と書きたいだけなら React を使うのはやりすぎだけど、
 複雑なアプリを作るときは React がとても役に立つんだ 😉
 
+ここからの例では一番下の`script`要素の中身だけ書くけど、他のコードも全部必要だから消さないでね！
+
+## JSX
+
+JSX は HTML ととても似てるんだけど、いくつか大きな違いがあるよ。
+
+まず、JSX は JavaScript の値みたいに、変数に覚えておいてもらったりできるよ。
+
+```javascript
+const helloWorld = <h1>Hello, World!</h1>;
+
+ReactDOM.render(helloWorld, document.getElementById("root"));
+```
+
+`{}`を使うことで、他の変数や値を埋め込むこともできるんだ。
+
+```javascript
+const name = "World";
+const helloWorld = <h1>Hello, {name}!</h1>;
+
+ReactDOM.render(helloWorld, document.getElementById("root"));
+```
+
+HTML みたいに、要素の属性を指定することもできるよ。
+
+```javascript
+const button = <button type="button">ボタン</button>;
+
+ReactDOM.render(button, document.getElementById("root"));
+```
+
+気をつけなきゃいけないのが、もし属性が複数の文字でできている場合、続く文字の頭文字を大文字にしなきゃいけないこと。
+
+例えば HTML だとこうなるものが、
+
+```html
+<input type="text" maxlength="5" />
+```
+
+React だとこうなる。
+
+```javascript
+// HTML と違って、L が大文字なところに注目
+// あと HTML と違って、{}を使って数値を渡しているね
+const input = <input type="text" maxLength={5} />;
+
+ReactDOM.render(input, document.getElementById("root"));
+```
+
+ちなみに文字列を大文字で区切るのを camelCase（キャメルケース）と呼ぶよ。
+ラクダ（英語で camel）みたいに見えるからそう呼ばれるようになったんだね。
+
+## React での CSS
+
+React で CSS を使う際には、少し注意しなきゃいけないことがあるんだ。
+
+まず、HTML では`class`属性を使って CSS のクラスを指定してたんだけど、React だと`className`を使わなきゃいけないんだ。
+
+HTML ではこうなんだけど、
+
+```html
+<h1 class="primary-header">Hello, World!</h1>
+```
+
+React ではこうなる。
+
+```javascript
+<h1 className="primary-header">Hello, World!</h1>
+```
+
+あと`style`属性の値も、HTML だと文字列を渡してたのに対して、React だとオブジェクトを渡すことになるよ。
+そのとき、HTML だと`-`を使ってプロパティの文字を区切っていたのに対して、React だと camelCase にしなきゃいけないんだ。
+
+言葉で説明しても分かりにくいから、例をみてみよう。
+
+HTML ではこうなるものが、
+
+```html
+<h1 style="background-color: green;">Hello, World!</h1>
+```
+
+React ではこうなる。
+
+```javascript
+<h1
+  style={{
+    backgroundColor: "green",
+  }}
+>
+  Hello, World!
+</h1>
+```
+
+ちなみに`-`で文字を区切る方法にも名前がついてるよ。
+これは串に刺したケバブみたいに見えるから、kebab-case（ケバブケース）と呼ばれているんだ。
+
 ## コンポーネント
 
 React では、[コンポーネント](https://ja.reactjs.org/docs/glossary.html#components)と呼ばれる関数を組み合わせることでウェブサイトを作っていくよ。
-コンポーネントは HTML を返す関数なんだ。厳密には HTML じゃなくて JSX なんだけど、ここでは HTML と呼ぶね！
+コンポーネントは JSX を返す関数なんだ。
 
-例えば下の例だと、`HelloWorld`という関数が`<h1>Hello, World!</h1>`という HTML を返しているね。
+例えば下の例だと、`HelloWorld`という関数が`<h1>Hello, World!</h1>`という JSX を返しているね。
 
 ```javascript
 const HelloWorld = () => {
@@ -103,34 +199,32 @@ const HelloWorld = () => {
 };
 ```
 
-これをそのまま HTML の要素として描画することができるよ。
+コンポーネントの名前は、必ず大文字から初めてね。camelCase みたいだけど、最初の文字も大文字。こういうのを PascalCase（パスカルケース）と呼ぶよ。
+これは [Pascal](https://ja.wikipedia.org/wiki/Pascal) というプログラミング言語が語源になっているんだ。
 
-```html
-<div id="root"/ >
-<script type="text/babel">
-  const HelloWorld = () => {
-    return <h1>Hello, World!</h1>;
-  };
+コンポーネントは、そのまま要素みたいに描画することができるよ。
 
-  const rootElement = document.getElementById("root");
-  ReactDOM.render(<HelloWorld />, rootElement);
-</script>
+```javascript
+const HelloWorld = () => {
+  return <h1>Hello, World!</h1>;
+};
+
+ReactDOM.render(<HelloWorld />, document.getElementById("root"));
 ```
 
 ## props（プロップス）
 
-[props](https://ja.reactjs.org/docs/components-and-props.html)と呼ばれるものを使うことで、コンポーネントに値を渡すことができるよ。
+[props](https://ja.reactjs.org/docs/components-and-props.html) と呼ばれるものを使うことで、コンポーネントに値を渡すことができるよ。
 
 普通のパラメータみたいに関数に渡して使うことができる。
 
 ```javascript
 const HelloWorld = (props) => {
-  // {}を使って、HTML内に変数の値を注入しよう！
   return <h1>Hello, {props.name}!</h1>;
 };
 
 const rootElement = document.getElementById("root");
-// propsは、HTMLの属性みたいにコンポーネントに渡すことができる
+// props は、属性としてコンポーネントに渡すことができる
 ReactDOM.render(<HelloWorld name="World" />, rootElement);
 ```
 
@@ -152,7 +246,16 @@ const HelloWorld = (props) => {
 
 ## state（ステート）
 
-props と違って、[state](https://ja.reactjs.org/docs/state-and-lifecycle.html)と呼ばれるものを使うことで、コンポーネントに変更可能な変数を持たせることができるんだ。
+props と違って、[state](https://ja.reactjs.org/docs/state-and-lifecycle.html) と呼ばれるものを使うことで、コンポーネントに変更可能な変数を持たせることができるんだ。
+
+```javascript
+const HideAndSeek = () => {
+  const [isVisible, setIsVisible] = React.useState(true);
+  if (isVisible) {
+    return <button></button>;
+  }
+};
+```
 
 ```javascript
 const Counter = () => {
