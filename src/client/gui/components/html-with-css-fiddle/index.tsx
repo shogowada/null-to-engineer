@@ -5,24 +5,30 @@ import { CSSFiddleEditor } from "../css-fiddle/css-fiddle-editor";
 import { HTMLFiddleOutput } from "../html-fiddle/html-fiddle-output";
 import { useCompiledHTML } from "../create-html";
 
-export const HTMLWithCSSFiddle: React.FunctionComponent = () => {
-  const [html, setHTML] = React.useState<string>("");
-  const [css, setCSS] = React.useState<string>("");
+interface Props {
+  html: string;
+  css: string;
+  setHTML: (html: string) => void;
+  setCSS: (css: string) => void;
+}
 
+export const HTMLWithCSSFiddle: React.FunctionComponent<Props> = (
+  props: Props
+) => {
   const [compiledHTML, consoleLogs, compileHTML] = useCompiledHTML();
 
   return (
     <div className="two-fiddle-container">
       <div className="fiddle-code-container">
-        <HTMLFiddleEditor html={html} onChange={setHTML} />
-        <CSSFiddleEditor css={css} onChange={setCSS} />
+        <HTMLFiddleEditor html={props.html} onChange={props.setHTML} />
+        <CSSFiddleEditor css={props.css} onChange={props.setCSS} />
       </div>
       <button
         type="button"
         id={ElementID.HTMLFiddleExecute}
         className="fiddle-execute"
         onClick={() => {
-          compileHTML({ html, css });
+          compileHTML({ html: props.html, css: props.css });
         }}
       >
         実行 ▶️

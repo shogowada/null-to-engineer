@@ -6,6 +6,8 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import { createBrowserHistory, History } from "history";
 import { ConnectedRouter, routerMiddleware } from "connected-react-router";
+import { debounce } from "lodash";
+import { configuration } from "./infrastructure";
 import { AppDispatch, AppState, createReducer } from "./presentation";
 import { Main } from "./gui/components/main";
 import "./gui/styles/main.scss";
@@ -18,15 +20,31 @@ declare global {
   }
 }
 
+const stateJSON: string | null = localStorage.getItem(configuration.stateKey);
+const initialState: PreloadedState<AppState> = {
+  ...(window.__PRELOADED_STATE__ || {}),
+  ...JSON.parse(stateJSON || "{}"),
+};
+
+delete window.__PRELOADED_STATE__;
+
 const store: Store<AppState> & {
   dispatch: AppDispatch;
 } = createStore(
   createReducer(history),
-  window.__PRELOADED_STATE__,
+  initialState,
   composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)))
 );
 
-delete window.__PRELOADED_STATE__;
+const saveState = debounce(() => {
+  const state: AppState = store.getState();
+  const stateToSave: Partial<AppState> = {
+    instructionIDToCodeDictionary: state.instructionIDToCodeDictionary,
+  };
+  localStorage.setItem(configuration.stateKey, JSON.stringify(stateToSave));
+}, configuration.saveStateDebounceRate);
+
+store.subscribe(saveState);
 
 const mountDOM = document.getElementById("mount");
 

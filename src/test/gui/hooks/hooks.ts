@@ -8,8 +8,13 @@ import {
   getDriver,
   quitDriver,
 } from "../drivers";
+import { resetTheCode } from "../the-code";
+import { resetTheInstruction } from "../the-instruction";
 
 Before(() => {
+  resetTheCode();
+  resetTheInstruction();
+
   return clearBrowserLogs().then(() =>
     getDriver().navigate().to(configuration.targetURL)
   );
