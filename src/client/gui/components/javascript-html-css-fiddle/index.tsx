@@ -6,26 +6,40 @@ import { JavaScriptFiddleEditor } from "../javascript-fiddle/javascript-fiddle-e
 import { HTMLFiddleOutput } from "../html-fiddle/html-fiddle-output";
 import { useCompiledHTML } from "../create-html";
 
-export const JavaScriptHTMLCSSFiddle: React.FunctionComponent = () => {
-  const [html, setHTML] = React.useState<string>("");
-  const [css, setCSS] = React.useState<string>("");
-  const [javaScript, setJavaScript] = React.useState<string>("");
+interface Props {
+  javaScript: string;
+  html: string;
+  css: string;
+  setJavaScript: (javaScript: string) => void;
+  setHTML: (html: string) => void;
+  setCSS: (css: string) => void;
+}
 
+export const JavaScriptHTMLCSSFiddle: React.FunctionComponent<Props> = (
+  props: Props
+) => {
   const [compiledHTML, consoleLogs, compileHTML] = useCompiledHTML();
 
   return (
     <div className="three-fiddle-container">
       <div className="fiddle-code-container">
-        <HTMLFiddleEditor html={html} onChange={setHTML} />
-        <CSSFiddleEditor css={css} onChange={setCSS} />
-        <JavaScriptFiddleEditor code={javaScript} onChange={setJavaScript} />
+        <HTMLFiddleEditor html={props.html} onChange={props.setHTML} />
+        <CSSFiddleEditor css={props.css} onChange={props.setCSS} />
+        <JavaScriptFiddleEditor
+          code={props.javaScript}
+          onChange={props.setJavaScript}
+        />
       </div>
       <button
         type="button"
         id={ElementID.HTMLFiddleExecute}
         className="fiddle-execute"
         onClick={() => {
-          compileHTML({ html, css, javaScript });
+          compileHTML({
+            html: props.html,
+            css: props.css,
+            javaScript: props.javaScript,
+          });
         }}
       >
         実行 ▶️
