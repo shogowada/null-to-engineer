@@ -94,7 +94,8 @@ JSX のおかげで、JavaScript を使って HTML を書くことができる�
 
 ## JSX
 
-JSX は HTML ととても似てるんだけど、いくつか大きな違いがあるよ。
+React では JSX という、とても HTML に似たものを書くことになるよ。
+本当にとても似てるんだけど、いくつか大きな違いがあるんだ。
 
 まず、JSX は JavaScript の値みたいに、変数に覚えておいてもらったりできるよ。
 
@@ -113,10 +114,21 @@ const helloWorld = <h1>Hello, {name}!</h1>;
 ReactDOM.render(helloWorld, document.getElementById("root"));
 ```
 
+## JSX での属性
+
 HTML みたいに、要素の属性を指定することもできるよ。
 
 ```javascript
 const button = <button type="button">ボタン</button>;
+
+ReactDOM.render(button, document.getElementById("root"));
+```
+
+`""`の代わりに`{}`を使うことで、変数や値を渡すこともできるよ。
+
+```javascript
+const buttonType = "button";
+const button = <button type={buttonType}>ボタン</button>;
 
 ReactDOM.render(button, document.getElementById("root"));
 ```
@@ -129,7 +141,7 @@ ReactDOM.render(button, document.getElementById("root"));
 <input type="text" maxlength="5" />
 ```
 
-React だとこうなる。
+JSX だとこうなる。
 
 ```javascript
 // HTML と違って、L が大文字なところに注目
@@ -142,11 +154,31 @@ ReactDOM.render(input, document.getElementById("root"));
 ちなみに文字列を大文字で区切るのを camelCase（キャメルケース）と呼ぶよ。
 ラクダ（英語で camel）みたいに見えるからそう呼ばれるようになったんだね。
 
-## React での CSS
+## JSX でのイベント
 
-React で CSS を使う際には、少し注意しなきゃいけないことがあるんだ。
+イベントは、属性に関数を渡すことで処理できるよ。
 
-まず、HTML では`class`属性を使って CSS のクラスを指定してたんだけど、React だと`className`を使わなきゃいけないんだ。
+例えば`click`イベントを処理したい場合、`onClick`属性に関数を渡すことができるんだ。
+
+```javascript
+ReactDOM.render(
+  <button
+    type="button"
+    onClick={() => {
+      console.log("ボタンが押された！");
+    }}
+  >
+    押したあとにコンソールログを見て！
+  </button>,
+  document.getElementById("root")
+);
+```
+
+## JSX での CSS
+
+JSX で CSS を使う際には、少し注意しなきゃいけないことがあるんだ。
+
+まず、HTML では`class`属性を使って CSS のクラスを指定してたんだけど、JSX だと`className`を使わなきゃいけないんだ。
 
 HTML ではこうなんだけど、
 
@@ -154,14 +186,14 @@ HTML ではこうなんだけど、
 <h1 class="primary-header">Hello, World!</h1>
 ```
 
-React ではこうなる。
+JSX ではこうなる。
 
 ```javascript
 <h1 className="primary-header">Hello, World!</h1>
 ```
 
-あと`style`属性の値も、HTML だと文字列を渡してたのに対して、React だとオブジェクトを渡すことになるよ。
-そのとき、HTML だと`-`を使ってプロパティの文字を区切っていたのに対して、React だと camelCase にしなきゃいけないんだ。
+あと`style`属性の値も、HTML だと文字列を渡してたのに対して、JSX だとオブジェクトを渡すことになるよ。
+そのとき、HTML だと`-`を使ってプロパティの文字を区切っていたのに対して、JSX だと camelCase にしなきゃいけないんだ。
 
 言葉で説明しても分かりにくいから、例をみてみよう。
 
@@ -171,7 +203,7 @@ HTML ではこうなるものが、
 <h1 style="background-color: green;">Hello, World!</h1>
 ```
 
-React ではこうなる。
+JSX ではこうなる。
 
 ```javascript
 <h1
@@ -199,7 +231,8 @@ const HelloWorld = () => {
 };
 ```
 
-コンポーネントの名前は、必ず大文字から初めてね。camelCase みたいだけど、最初の文字も大文字。こういうのを PascalCase（パスカルケース）と呼ぶよ。
+コンポーネントの名前は、必ず大文字から初めてね。
+camelCase みたいだけど、最初の文字も大文字。こういうのを PascalCase（パスカルケース）と呼ぶよ。
 これは [Pascal](https://ja.wikipedia.org/wiki/Pascal) というプログラミング言語が語源になっているんだ。
 
 コンポーネントは、そのまま要素みたいに描画することができるよ。
@@ -212,27 +245,38 @@ const HelloWorld = () => {
 ReactDOM.render(<HelloWorld />, document.getElementById("root"));
 ```
 
+コンポーネントから他のコンポーネントを描画することもできるよ。
+
+```javascript
+const Content = () => {
+  return <p>段落だよ</p>;
+};
+
+const Article = () => {
+  return (
+    <div>
+      <h1>ヘッダーだよ</h1>
+      <Content />
+    </div>
+  );
+};
+
+ReactDOM.render(<Article />, document.getElementById("root"));
+```
+
 ## props（プロップス）
 
 [props](https://ja.reactjs.org/docs/components-and-props.html) と呼ばれるものを使うことで、コンポーネントに値を渡すことができるよ。
 
-普通のパラメータみたいに関数に渡して使うことができる。
+普通の関数のパラメータみたいに受け取って使うことができる。
 
 ```javascript
 const HelloWorld = (props) => {
   return <h1>Hello, {props.name}!</h1>;
 };
 
-const rootElement = document.getElementById("root");
 // props は、属性としてコンポーネントに渡すことができる
-ReactDOM.render(<HelloWorld name="World" />, rootElement);
-```
-
-上の例では`"World"`を`name`prop に渡しているね。もし変数を渡したい場合は、`{}`を使えるよ。
-
-```javascript
-const name = "World";
-ReactDOM.render(<HelloWorld name={name} />, rootElement);
+ReactDOM.render(<HelloWorld name="World" />, document.getElementById("root"));
 ```
 
 気をつけなきゃいけないのは、props は読み取り専用だってこと。
@@ -246,29 +290,68 @@ const HelloWorld = (props) => {
 
 ## state（ステート）
 
-props と違って、[state](https://ja.reactjs.org/docs/state-and-lifecycle.html) と呼ばれるものを使うことで、コンポーネントに変更可能な変数を持たせることができるんだ。
+props と違って [state](https://ja.reactjs.org/docs/state-and-lifecycle.html) と呼ばれるものを使うことで、コンポーネントに変更可能な変数を持たせることができるんだ。
+
+ステートは[`React.useState()`](https://ja.reactjs.org/docs/hooks-reference.html#usestate)という関数を使って作ることができるよ。
+この関数は現在のステートと、そのステートを変えるための関数を返すんだ。
 
 ```javascript
-const HideAndSeek = () => {
-  const [isVisible, setIsVisible] = React.useState(true);
-  if (isVisible) {
-    return <button></button>;
-  }
-};
+// state は現在のステート
+// setState はステートを変える関数
+// initialState はステートの最初の値
+// それぞれの名前は好きに変えていいよ！
+const [state, setState] = React.useState(initialState);
 ```
 
+例えば下のように`setState`の方（この例では`setIsHiding`という名前）に次のステートを渡すことで、ステートを変えることができる。
+
 ```javascript
-const Counter = () => {
-  const [count, setCount] = React.useState(0);
+const Peekaboo = () => {
+  // React.useState に true を渡しているから、最初は isHiding が true になる
+  const [isHiding, setIsHiding] = React.useState(true);
   return (
     <button
       type="button"
       onClick={() => {
-        setCount((previousCount) => previousCount + 1);
+        setIsHiding(false);
       }}
     >
-      {count}回押された
+      {isHiding ? "🙈いないいない" : "🐵ばあ！"}
     </button>
   );
 };
+
+ReactDOM.render(<Peekaboo />, document.getElementById("root"));
 ```
+
+もし次のステートを計算するのに前のステートが必要な場合は、[`setState`に関数を渡さなきゃいけないよ](https://ja.reactjs.org/docs/hooks-reference.html#functional-updates)。
+`setState`に関数を渡した場合、現在のステートをパラメータとして受け取れるから、それを使って次のステートを計算することができるんだ。
+
+例えば下の例では、ボタンを押すごとに`isHiding`が反転するようになるよ。
+
+```javascript
+const Peekaboo = () => {
+  const [isHiding, setIsHiding] = React.useState(true);
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        // setIsHiding に関数を渡すと、前のステートを受け取れる
+        // 次のステートを返すことで、ステートを変えよう
+        // prev は previous（「前の」という意味）の略として、React ではよく使われるよ
+        setIsHiding((prevIsHiding) => !prevIsHiding);
+
+        // つまり、下のように書いちゃダメなんだ
+        // setIsHiding(!isHiding);
+      }}
+    >
+      {isHiding ? "🙈いないいない" : "🐵ばあ！"}
+    </button>
+  );
+};
+
+ReactDOM.render(<Peekaboo />, document.getElementById("root"));
+```
+
+`React.useState()`は、React のフックと呼ばれる機能の一部なんだ。
+他にも色々なフックがあるから、気になったら[ドキュメント](https://ja.reactjs.org/docs/hooks-reference.html)を見てね！
