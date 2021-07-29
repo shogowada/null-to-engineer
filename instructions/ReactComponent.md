@@ -74,7 +74,7 @@ const HelloWorld = (props) => {
 
 ## state（ステート）
 
-props と違って [state](https://ja.reactjs.org/docs/state-and-lifecycle.html) と呼ばれるものを使うことで、コンポーネントに変更可能な変数を持たせることができるんだ 😄
+[state](https://ja.reactjs.org/docs/state-and-lifecycle.html) と呼ばれるものを使うことで、コンポーネントに変更可能な変数を持たせることができるんだ 😄
 
 state は[`React.useState()`](https://ja.reactjs.org/docs/hooks-reference.html#usestate)という関数を使って作ることができるよ。
 この関数は現在のステートと、そのステートを変えるための関数を返すんだ 🙂

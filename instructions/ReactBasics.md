@@ -27,7 +27,7 @@
 ></script>
 ```
 
-React では、[JSX（JavaScript XML）](https://ja.reactjs.org/docs/introducing-jsx.htmll)と呼ばれる特別な JavaScript を使うんだ。
+React では、[JSX（JavaScript XML）](https://ja.reactjs.org/docs/introducing-jsx.html)と呼ばれる特別な JavaScript を使うんだ。
 JSX のおかげで、JavaScript を使って HTML を書くことができるよ 😎
 実際に JSX が何なのかは後で例を見ながら学ぼうね！
 まずは JSX を使えるようにするために、[Babel](https://babeljs.io) と呼ばれるライブラリも読み込もう 🙂
