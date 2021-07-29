@@ -2,10 +2,10 @@
 
 ## Hello, World!
 
-React では、[コンポーネント](https://ja.reactjs.org/docs/glossary.html#components)と呼ばれる関数を組み合わせることでウェブサイトを作っていくよ。
+React では、[コンポーネント](https://ja.reactjs.org/docs/glossary.html#components)と呼ばれる関数を組み合わせることでウェブサイトを作っていくよ 😊
 コンポーネントは JSX を返す関数なんだ。
 
-例えば下の例だと、`HelloWorld`という関数が`<h1>Hello, World!</h1>`という JSX を返しているね。
+例えば下の例だと、`HelloWorld`という関数が`<h1>Hello, World!</h1>`という JSX を返しているね 👀
 
 ```javascript
 const HelloWorld = () => {
@@ -13,11 +13,13 @@ const HelloWorld = () => {
 };
 ```
 
-コンポーネントの名前は、必ず大文字から初めてね。
-camelCase みたいだけど、最初の文字も大文字。こういうのを PascalCase（パスカルケース）と呼ぶよ。
-これは [Pascal](https://ja.wikipedia.org/wiki/Pascal) というプログラミング言語が語源になっているんだ。
+これだけでコンポーネントの完成だよ！
 
-コンポーネントは、そのまま要素みたいに描画することができるよ。
+コンポーネントの名前は、必ず大文字から初めてね 👍
+camelCase みたいだけど、最初の文字も大文字。こういうのを PascalCase（パスカルケース）と呼ぶよ。
+これは [Pascal](https://ja.wikipedia.org/wiki/Pascal) というプログラミング言語が語源になっているんだ 🤓
+
+コンポーネントは、そのまま要素みたいに描画することができるよ 🙂
 
 ```javascript
 const HelloWorld = () => {
@@ -27,7 +29,7 @@ const HelloWorld = () => {
 ReactDOM.render(<HelloWorld />, document.getElementById("root"));
 ```
 
-コンポーネントから他のコンポーネントを描画することもできるよ。
+コンポーネントから他のコンポーネントを描画することもできるよ 😲
 
 ```javascript
 const Content = () => {
@@ -50,7 +52,7 @@ ReactDOM.render(<Article />, document.getElementById("root"));
 
 [props](https://ja.reactjs.org/docs/components-and-props.html) と呼ばれるものを使うことで、コンポーネントに値を渡すことができるよ。
 
-普通の関数のパラメータみたいに受け取って使うことができる。
+普通の関数のパラメータみたいに受け取って使うことができる 😄
 
 ```javascript
 const HelloWorld = (props) => {
@@ -61,7 +63,7 @@ const HelloWorld = (props) => {
 ReactDOM.render(<HelloWorld name="World" />, document.getElementById("root"));
 ```
 
-気をつけなきゃいけないのは、props は読み取り専用だってこと。
+気をつけなきゃいけないのは、props は読み取り専用だってこと 🤭
 
 ```javascript
 const HelloWorld = (props) => {
@@ -72,10 +74,10 @@ const HelloWorld = (props) => {
 
 ## state（ステート）
 
-props と違って [state](https://ja.reactjs.org/docs/state-and-lifecycle.html) と呼ばれるものを使うことで、コンポーネントに変更可能な変数を持たせることができるんだ。
+props と違って [state](https://ja.reactjs.org/docs/state-and-lifecycle.html) と呼ばれるものを使うことで、コンポーネントに変更可能な変数を持たせることができるんだ 😄
 
-ステートは[`React.useState()`](https://ja.reactjs.org/docs/hooks-reference.html#usestate)という関数を使って作ることができるよ。
-この関数は現在のステートと、そのステートを変えるための関数を返すんだ。
+state は[`React.useState()`](https://ja.reactjs.org/docs/hooks-reference.html#usestate)という関数を使って作ることができるよ。
+この関数は現在のステートと、そのステートを変えるための関数を返すんだ 🙂
 
 ```javascript
 // state は現在のステート
@@ -85,7 +87,7 @@ props と違って [state](https://ja.reactjs.org/docs/state-and-lifecycle.html)
 const [state, setState] = React.useState(initialState);
 ```
 
-例えば下のように`setState`の方（この例では`setIsHiding`という名前）に次のステートを渡すことで、ステートを変えることができる。
+例えば下のように`setState`の方（この例では`setIsHiding`という名前）に次の state を渡すことで、state を変えることができる 👀
 
 ```javascript
 const Peekaboo = () => {
@@ -95,6 +97,7 @@ const Peekaboo = () => {
     <button
       type="button"
       onClick={() => {
+        // isHiding を false に変えよう！
         setIsHiding(false);
       }}
     >
@@ -106,10 +109,10 @@ const Peekaboo = () => {
 ReactDOM.render(<Peekaboo />, document.getElementById("root"));
 ```
 
-もし次のステートを計算するのに前のステートが必要な場合は、[`setState`に関数を渡した方がいいよ](https://ja.reactjs.org/docs/hooks-reference.html#functional-updates)。
-`setState`に関数を渡した場合、現在のステートをパラメータとして受け取れるから、それを使って次のステートを計算することができるんだ。
+もし次の state を計算するのに今の state が必要な場合は、[`setState`に関数を渡した方がいいよ](https://ja.reactjs.org/docs/hooks-reference.html#functional-updates)。
+`setState`に関数を渡した場合、現在の state をパラメータとして受け取れるから、それを使って次の state を計算することができるんだ 😲
 
-例えば下の例では、ボタンを押すごとに`isHiding`が反転するようになるよ。
+例えば下の例では、ボタンを押すごとに`isHiding`が反転するようになるよ 😄
 
 ```javascript
 const Peekaboo = () => {
@@ -118,8 +121,8 @@ const Peekaboo = () => {
     <button
       type="button"
       onClick={() => {
-        // setIsHiding に関数を渡すと、前のステートを受け取れる
-        // 次のステートを返すことで、ステートを変えよう
+        // setIsHiding に関数を渡すと、前の state を受け取れる
+        // 次の state を返すことで、state を変えよう
         // prev は previous（「前の」という意味）の略として、React ではよく使われるよ
         setIsHiding((prevIsHiding) => !prevIsHiding);
       }}
