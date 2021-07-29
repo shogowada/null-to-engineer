@@ -5,6 +5,7 @@ import { JavaScriptFiddle } from "./javascript-fiddle";
 import { HTMLFiddle } from "./html-fiddle";
 import { HTMLWithCSSFiddle } from "./html-with-css-fiddle";
 import { JavaScriptHTMLCSSFiddle } from "./javascript-html-css-fiddle";
+import { ReactFiddle } from "./react-fiddle";
 
 interface Props {
   code: Code;
@@ -74,6 +75,11 @@ export const Fiddle: React.FunctionComponent<Props> = (props: Props) => {
           setHTML={setHTML}
           setCSS={setCSS}
         />
+      );
+    }
+    case FiddleType.React: {
+      return (
+        <ReactFiddle javaScript={javaScript} setJavaScript={setJavaScript} />
       );
     }
     case FiddleType.None: {

@@ -24,6 +24,8 @@ export enum InstructionID {
   WebsiteBasics = "WebsiteBasics",
 
   ReactBasics = "ReactBasics",
+  ReactJSX = "ReactJSX",
+  ReactComponent = "ReactComponent",
 
   AboutNullToEngineer = "AboutNullToEngineer",
 }
@@ -55,6 +57,7 @@ export enum FiddleType {
   JavaScriptHTMLCSS = "JavaScriptHTMLCSS",
   HTML = "HTML",
   HTMLWithCSS = "HTMLWithCSS",
+  React = "React",
 }
 
 export interface InstructionConfiguration {
@@ -97,7 +100,11 @@ export const Chapters: Chapter[] = [
   {
     id: ChapterID.FrontEndTODOAppWithReact,
     name: "React 基本編 ✨",
-    instructionIDs: [InstructionID.ReactBasics],
+    instructionIDs: [
+      InstructionID.ReactBasics,
+      InstructionID.ReactJSX,
+      InstructionID.ReactComponent,
+    ],
   },
   {
     id: ChapterID.AboutNullToEngineer,
@@ -184,6 +191,18 @@ export const getInstructionConfiguration = (
       return {
         id,
         fiddleType: FiddleType.HTML,
+      };
+    }
+    case InstructionID.ReactComponent: {
+      return {
+        id,
+        fiddleType: FiddleType.React,
+      };
+    }
+    case InstructionID.ReactJSX: {
+      return {
+        id,
+        fiddleType: FiddleType.React,
       };
     }
     case InstructionID.WebsiteBasics: {

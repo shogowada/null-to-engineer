@@ -4,7 +4,7 @@ import { HTMLFiddleEditor } from "../html-fiddle/html-fiddle-editor";
 import { CSSFiddleEditor } from "../css-fiddle/css-fiddle-editor";
 import { JavaScriptFiddleEditor } from "../javascript-fiddle/javascript-fiddle-editor";
 import { HTMLFiddleOutput } from "../html-fiddle/html-fiddle-output";
-import { useCompiledHTML } from "../create-html";
+import { useCompiledHTML } from "../use-compiled-html";
 
 interface Props {
   javaScript: string;

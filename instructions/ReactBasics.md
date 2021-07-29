@@ -2,7 +2,7 @@
 
 ## React って何？
 
-[React](https://reactjs.org) は JavaScript を使って HTML を書くことができるようになるライブラリだよ 🤔
+[React](https://ja.reactjs.org) は JavaScript を使って HTML を書くことができるようになるライブラリだよ 🤔
 
 例えば同じ形の要素を繰り返し書きたいときに JavaScript のループを使ったり、
 特定の条件下でしか要素を書きたくないときに`if`を使ったりできるんだ 😲
@@ -13,7 +13,8 @@
 
 ここで書くことは呪文みたいなものだから、あまり細かいことは気にせずにコピー＆ペーストしててもいいよ 😊
 
-まず、React を読み込もう！
+まず、`script`要素を使って React を読み込もう！
+これを書くことによって、ブラウザに「この`src`にある JavaScript を読み込んでね」と伝えることができるんだ 🙂
 
 ```html
 <script
@@ -26,13 +27,16 @@
 ></script>
 ```
 
-React では、[JSX（JavaScript XML）](https://reactjs.org/docs/introducing-jsx.html)と呼ばれる特別な JavaScript を使うんだ。
+React では、[JSX（JavaScript XML）](https://ja.reactjs.org/docs/introducing-jsx.html)と呼ばれる特別な JavaScript を使うんだ。
 JSX のおかげで、JavaScript を使って HTML を書くことができるよ 😎
 実際に JSX が何なのかは後で例を見ながら学ぼうね！
 まずは JSX を使えるようにするために、[Babel](https://babeljs.io) と呼ばれるライブラリも読み込もう 🙂
 
 ```html
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script
+  src="https://unpkg.com/babel-standalone@6/babel.min.js"
+  crossorigin
+></script>
 ```
 
 次に React が HTML を書き出すときに使われる要素を用意するよ。
@@ -90,4 +94,5 @@ JSX のおかげで、JavaScript を使って HTML を書くことができる�
 もちろん、ただ`<h1>Hello, World!</h1>`と書きたいだけなら React を使うのはやりすぎだけど、
 複雑なアプリを作るときは React がとても役に立つんだ 😉
 
-次は React でタスク管理アプリを作ってみようか 😄
+次からは React を使えるようにするおまじない（`script`要素など）はもう書いておくから、
+React のコードだけに集中して学べるよ！

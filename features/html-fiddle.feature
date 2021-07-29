@@ -122,6 +122,19 @@ Feature: HTML fiddle
     """
 
   @gui
+  Scenario: Render React
+    When I execute the following React:
+    """
+    // </script> writing a closing script tag here should have no effect
+    const mountElement = document.getElementById("root");
+    ReactDOM.render(<h1>Hello, React!</h1>, mountElement);
+    """
+    Then it should output the following HTML:
+    """
+    <div id="root"><h1>Hello, React!</h1></div>
+    """
+
+  @gui
   Scenario Outline: Remember code for <fiddleType> fiddle
     Given I have some code for <fiddleType> fiddle
     And I wait for 2 seconds
@@ -133,3 +146,4 @@ Feature: HTML fiddle
       | JavaScriptHTMLCSS |
       | HTML              |
       | HTMLWithCSS       |
+      | React             |

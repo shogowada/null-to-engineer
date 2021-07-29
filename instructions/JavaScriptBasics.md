@@ -267,13 +267,35 @@ const person = {
 introduce(person.name, person.age); // つばさは35才です！
 ```
 
-`return`を使うと、一つだけ何かを返すこともできるんだ。
+`return`を使うと、一つだけ値を返すこともできるんだ。
 
 ```javascript
 const createIntroduction = (person) => {
   // console.logを使わずに、returnを使って文字列を返してるよ！
   return `${person.name}は${person.age}才です！`;
 };
+
+const person = {
+  name: "つばさ",
+  age: 35,
+};
+// 返された文字列をconsole.logを使って表示しよう！
+console.log(createIntroduction(person)); // つばさは35才です！
+```
+
+もし関数の中身が一行しかない場合は、`{}`を省略することができるよ。
+その場合`return`は書けなくなるんだけど、代わりに絶対その一行の結果が返されるんだ 😄
+
+```javascript
+// これはできない（{} がないから return 書いちゃダメ）
+// const createIntroduction =
+//   (person) => return `${person.name}は${person.age}才です！`;
+
+// これじゃ結果が返されない（{} があるから return が必要）
+// const createIntroduction =
+//   (person) => { `${person.name}は${person.age}才です！` };
+
+const createIntroduction = (person) => `${person.name}は${person.age}才です！`;
 
 const person = {
   name: "つばさ",

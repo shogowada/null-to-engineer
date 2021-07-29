@@ -2,7 +2,7 @@ import * as React from "react";
 import { ElementID } from "../../../../common";
 import { HTMLFiddleEditor } from "./html-fiddle-editor";
 import { HTMLFiddleOutput } from "./html-fiddle-output";
-import { useCompiledHTML } from "../create-html";
+import { useCompiledHTML } from "../use-compiled-html";
 
 interface Props {
   html: string;
