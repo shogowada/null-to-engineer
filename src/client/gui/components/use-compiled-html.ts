@@ -15,9 +15,14 @@ interface ConsoleLogMessage {
 }
 
 const CSSType = "text/css";
-const JavaScriptType = "text/javascript";
 
-export const useCompiledHTML = (): [
+interface UseCompiledHTMLOptions {
+  javaScriptType?: string;
+}
+
+export const useCompiledHTML = ({
+  javaScriptType = "text/javascript",
+}: UseCompiledHTMLOptions = {}): [
   string,
   ConsoleLog[],
   (options: CompileHTMLOptions) => void
@@ -75,13 +80,13 @@ export const useCompiledHTML = (): [
     const cssObjectURL = createURL(css || "", CSSType);
 
     javaScript = createJavaScript(javaScript || "");
-    const javaScriptObjectURL = createURL(javaScript, JavaScriptType);
+    const javaScriptObjectURL = createURL(javaScript, javaScriptType);
 
     setCSSObjectURL(cssObjectURL);
     setJavaScriptObjectURL(javaScriptObjectURL);
 
     const linkElement: string = `<link rel="stylesheet" type="${CSSType}" href="${cssObjectURL}">`;
-    const scriptElement: string = `<script defer type="${JavaScriptType}" src="${javaScriptObjectURL}"></script>`;
+    const scriptElement: string = `<script defer type="${javaScriptType}" src="${javaScriptObjectURL}"></script>`;
 
     setConsoleLogs(getSyntaxErrorLogs(javaScript));
     setCompiledHTML(`${linkElement}

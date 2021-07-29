@@ -11,6 +11,9 @@ import { getDriver } from "./driver";
 export const selectJavaScriptInstruction = () =>
   selectInstructionByFiddleType(FiddleType.JavaScript);
 
+export const selectReactInstruction = () =>
+  selectInstructionByFiddleType(FiddleType.React);
+
 export const selectHTMLInstruction = () =>
   selectInstructionByFiddleType(FiddleType.HTML);
 

@@ -28,6 +28,7 @@ import {
   selectInstruction,
   selectJavaScriptHTMLCSSInstruction,
   selectJavaScriptInstruction,
+  selectReactInstruction,
   setHTML,
   setHTMLWithCSS,
   setJavaScript,
@@ -61,7 +62,8 @@ Given(/^I have some code for (\w+) fiddle$/, (fiddleType: FiddleType) => {
       case FiddleType.JavaScriptHTMLCSS: {
         return setJavaScriptHTMLCSS(javaScript, html, css);
       }
-      case FiddleType.JavaScript: {
+      case FiddleType.JavaScript:
+      case FiddleType.React: {
         return setJavaScript(javaScript);
       }
       case FiddleType.HTML: {
@@ -81,6 +83,10 @@ When(/^I execute the following JavaScript:$/, (javaScript: string) => {
   return selectJavaScriptInstruction().then(() =>
     executeJavaScript(javaScript)
   );
+});
+
+When(/^I execute the following React:$/, (javaScript: string) => {
+  return selectReactInstruction().then(() => executeJavaScript(javaScript));
 });
 
 When(/^I execute the following HTML:$/, (html: string) => {
@@ -238,7 +244,8 @@ Then(/^it should remember the code$/, async () => {
       expect(css).to.equal(getTheCSS());
       break;
     }
-    case FiddleType.JavaScript: {
+    case FiddleType.JavaScript:
+    case FiddleType.React: {
       const javaScript: string = await getJavaScript();
       expect(javaScript).to.equal(getTheJavaScript());
       break;
