@@ -358,6 +358,7 @@ $button-transition: background-color $animation-duration ease,
       border: none;
       height: 100%;
       color: $grayed-out-color;
+      background-color: transparent;
 
       &:hover {
         color: $execute-button-color;
