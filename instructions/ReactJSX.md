@@ -97,7 +97,10 @@ HTML ではこうなんだけど、
 JSX ではこうなる 😲
 
 ```javascript
-<h1 className="primary-header">Hello, World!</h1>
+ReactDOM.render(
+  <h1 className="primary-header">Hello, World!</h1>,
+  document.getElementById("root")
+);
 ```
 
 あと`style`属性の値も、HTML だと文字列を渡してたのに対して、JSX だとオブジェクトを渡すことになるよ。
@@ -114,13 +117,16 @@ HTML ではこうなるものが、
 JSX ではこうなる 😲
 
 ```javascript
-<h1
-  style={{
-    backgroundColor: "green",
-  }}
->
-  Hello, World!
-</h1>
+ReactDOM.render(
+  <h1
+    style={{
+      backgroundColor: "green",
+    }}
+  >
+    Hello, World!
+  </h1>,
+  document.getElementById("root")
+);
 ```
 
 ちなみに`-`で単語を区切る方法にも名前がついてるよ 😊
