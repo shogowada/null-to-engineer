@@ -15,13 +15,14 @@ interface ConsoleLogMessage {
 }
 
 const CSSType = "text/css";
+const JavaScriptType = "text/javascript";
 
 interface UseCompiledHTMLOptions {
   javaScriptType?: string;
 }
 
 export const useCompiledHTML = ({
-  javaScriptType = "text/javascript",
+  javaScriptType = JavaScriptType,
 }: UseCompiledHTMLOptions = {}): [
   string,
   ConsoleLog[],
@@ -30,6 +31,9 @@ export const useCompiledHTML = ({
   const [compiledHTML, setCompiledHTML] = React.useState<string>("");
   const [cssObjectURL, setCSSObjectURL] = React.useState<string | null>(null);
   const [javaScriptObjectURL, setJavaScriptObjectURL] = React.useState<
+    string | null
+  >(null);
+  const [logJavaScriptObjectURL, setLogJavaScriptObjectURL] = React.useState<
     string | null
   >(null);
   const [consoleLogs, setConsoleLogs] = React.useState<ConsoleLog[]>([]);
@@ -55,8 +59,10 @@ export const useCompiledHTML = ({
 
   React.useEffect(() => {
     window.addEventListener("message", onConsoleLogMessage);
+    setLogJavaScriptObjectURL(createURL(LogJavaScript, JavaScriptType));
     return () => {
       window.removeEventListener("message", onConsoleLogMessage);
+      URL.revokeObjectURL(logJavaScriptObjectURL!);
     };
   }, []);
 
@@ -86,10 +92,12 @@ export const useCompiledHTML = ({
     setJavaScriptObjectURL(javaScriptObjectURL);
 
     const linkElement: string = `<link rel="stylesheet" type="${CSSType}" href="${cssObjectURL}">`;
+    const logScriptElement: string = `<script type="${JavaScriptType}" src="${logJavaScriptObjectURL}"></script>`;
     const scriptElement: string = `<script defer type="${javaScriptType}" src="${javaScriptObjectURL}"></script>`;
 
-    setConsoleLogs(getSyntaxErrorLogs(javaScript));
+    setConsoleLogs([]);
     setCompiledHTML(`${linkElement}
+    ${logScriptElement}
 ${scriptElement}
 ${html || ""}`);
   };
@@ -104,46 +112,39 @@ const createURL = (input: string, type: string): string => {
 
 const createJavaScript = (javaScript: string): string => {
   return `"use strict";
-(() => {
-  ${JSON.stringify(ConsoleLogLevels)}.map(level => {
-    const original = console[level];
-    console[level] = function() {
-      original.apply(this, arguments);
-      window.parent.postMessage({
-        source: ${JSON.stringify(ConsoleLogMessageSource)},
-        type: level,
-        args: Array.from(arguments)
-      }, location.origin);
-    };
-  });
-  const original = console.clear;
-  console.clear = function() {
-    original.apply(this, arguments);
-    window.parent.postMessage({
-      source: ${JSON.stringify(ConsoleLogMessageSource)},
-      type: "clear"
-    }, location.origin);
-  };
-
-  window.addEventListener("error", (event) => {
-    window.parent.postMessage({
-      source: ${JSON.stringify(ConsoleLogMessageSource)},
-      type: ${JSON.stringify(ConsoleLogLevel.Error)},
-      args: [event.message]
-    }, location.origin);
-  });
-})();
 ${javaScript}`;
 };
 
-const getSyntaxErrorLogs = (javaScript: string): ConsoleLog[] => {
-  try {
-    Function(javaScript);
-    return [];
-  } catch (exception) {
-    return [{ level: ConsoleLogLevel.Error, message: exception.toString() }];
-  }
+const LogJavaScript = createJavaScript(`${JSON.stringify(
+  ConsoleLogLevels
+)}.map(level => {
+  const original = console[level];
+  console[level] = function() {
+    original.apply(this, arguments);
+    window.parent.postMessage({
+      source: ${JSON.stringify(ConsoleLogMessageSource)},
+      type: level,
+      args: Array.from(arguments)
+    }, location.origin);
+  };
+});
+
+const original = console.clear;
+console.clear = function() {
+  original.apply(this, arguments);
+  window.parent.postMessage({
+    source: ${JSON.stringify(ConsoleLogMessageSource)},
+    type: "clear"
+  }, location.origin);
 };
+
+window.addEventListener("error", (event) => {
+  window.parent.postMessage({
+    source: ${JSON.stringify(ConsoleLogMessageSource)},
+    type: ${JSON.stringify(ConsoleLogLevel.Error)},
+    args: [event.message]
+  }, location.origin);
+});`);
 
 const mapLogArgsToLog = (
   level: ConsoleLogLevel,

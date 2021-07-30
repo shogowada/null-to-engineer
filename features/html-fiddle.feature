@@ -120,6 +120,7 @@ Feature: HTML fiddle
     """
     <div id="root"><h1>Hello, World!</h1></div>
     """
+    And I should see no error log
 
   @gui
   Scenario: Render React
@@ -133,6 +134,7 @@ Feature: HTML fiddle
     """
     <div id="root"><h1>Hello, React!</h1></div>
     """
+    And I should see no error log
 
   @gui
   Scenario Outline: Remember code for <fiddleType> fiddle
