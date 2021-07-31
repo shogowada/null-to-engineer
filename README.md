@@ -20,6 +20,11 @@
 
 サーバーは実行時に全ての記事を HTML へと変換します。HTML は API を通じて、必要なときに必要な分だけクライアントに渡されます。
 
+## アクセス分析
+
+アクセス分析には [Plausible](https://plausible.io) を使っています。
+[`./index.template.html`](./index.template.html) にスクリプトを注入しています。
+
 ## 開発
 
 ### 環境

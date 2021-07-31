@@ -78,7 +78,10 @@ JSX のおかげで、JavaScript を使って HTML を書くことができる�
   crossorigin
 ></script>
 
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script
+  src="https://unpkg.com/babel-standalone@6/babel.min.js"
+  crossorigin
+></script>
 
 <div id="root"/ >
 
