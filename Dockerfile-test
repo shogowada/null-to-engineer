@@ -1,4 +1,4 @@
-FROM null-to-web-engineer:base
+FROM null-to-engineer:base
 
 COPY ./src/test ./src/test
 COPY ./cucumber.js ./

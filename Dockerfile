@@ -1,4 +1,4 @@
-FROM null-to-web-engineer:base as client
+FROM null-to-engineer:base as client
 
 COPY webpack.config.js ./index.template.html ./
 COPY ./imgs ./imgs
@@ -6,14 +6,14 @@ COPY ./src/client ./src/client/
 RUN npm run build && \
   npm run unit-test-client
 
-FROM null-to-web-engineer:base as server
+FROM null-to-engineer:base as server
 
 COPY ./src/client ./src/client/
 COPY ./src/server ./src/server/
 RUN npm run check-type && \
   npm run unit-test-server
 
-FROM null-to-web-engineer:base
+FROM null-to-engineer:base
 
 RUN apk --no-cache add curl
 
