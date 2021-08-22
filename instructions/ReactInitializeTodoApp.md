@@ -145,12 +145,18 @@ app.use(express.static("public"));
 app.listen(8080);
 ```
 
+おーっと、ポート番号って何だろね！ポート番号について理解するために、少し URL について見てみようか。
+
+## URL って何？
+
+[URL](https://ja.wikipedia.org/wiki/Uniform_Resource_Locator)（ユー・アール・エル、Uniform Resource Locator）はインターネット上にあるものの場所を指定する文字列だよ。
+
 ## ウェブサーバーを起動する
 
 ウェブサーバーを起動すると、今作ったウェブサイトをブラウザから見ることができるよ。
 まだインターネットには公開していなくて、自分のパソコンからしか見れないから安心してね！
 
 1. ターミナルで`node index.js`を実行する
-1. ブラウザで[http://localhost:8080](http://localhost:8080)を開く
+1. ブラウザで http://localhost:8080 を開く
 
 大きな「Hello, World!」が表示されたら成功だよ！
