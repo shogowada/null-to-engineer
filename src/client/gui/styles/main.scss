@@ -425,7 +425,8 @@ code {
 
   &.language-javascript,
   &.language-html,
-  &.language-css {
+  &.language-css,
+  &.language-json {
     display: block;
     padding: 30px 20px 20px 20px;
     overflow-x: auto;
@@ -451,5 +452,8 @@ code {
   }
   &.language-css::before {
     content: "CSS";
+  }
+  &.language-json::before {
+    content: "JSON";
   }
 }

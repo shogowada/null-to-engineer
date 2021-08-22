@@ -37,43 +37,26 @@
 
 ## 必要なライブラリをインストール
 
-1. `npm install --save express react react-dom`
+1. ターミナルで`npm install express`を実行する
 
-`express`はウェブサーバーを作るときに使うライブラリ、`react`は JSX を書くために使うライブラリ、`react-dom`は JSX を HTML に変換するライブラリだよ。
+`express`はウェブサーバーを作るときに使うライブラリだよ。
+
+今`package.json`を見てみると、それぞれのライブラリが`dependencies`として追加されているはず。
+こうやって「このアプリを動かすには、このライブラリが必要です」って記憶しているんだ。
+
+React を同じように読み込んで使う方法もあるんだけど、ちょっと難しいからそれはまた今度ね！
 
 ## HTML ファイルを作ろう
 
 1. VS Code で右クリック →New Folder から、`public`というフォルダを作る
-1. 右クリック →New File から、`public`フォルダの中に`index.html`というファイルを作る
+1. `public`フォルダを右クリック →New File から、フォルダ内に`index.html`というファイルを作る
 1. `index.html`に以下の内容を書く
 
 ```html
-<html>
-  <body>
-    <h1>Hello, World!</h1>
-  </body>
-</html>
-```
-
-[`html`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/html)と[`body`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/body)は初めてみたね！
-
-`html`要素は HTML の全体を表す要素で、`body`要素は HTML で表示されるコンテンツを表す要素だよ。
-
-一回 VS Code から離れて、作ったファイルをダブルクリックして開いてみて！
-ブラウザが起動されて、"Hello, World!"と表示されたかな？
-
-## React を読み込む
-
-今までは`script`要素の場所を気にしてなかったけど、ここからは[`head`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/head)の中に置こう！
-
-`head`要素はメタデータ、つまり機械のためのデータを記述する場所なんだ。
-外部の JavaScript を読み込むのはウェブページの内容には関係なく、機械が裏でやることだから、`script`要素は`head`要素の中に書くんだね。
-
-あと React が使う器になる要素、`<div id="root"/ >`も用意しておこう！
-
-```html
-<html>
+<!DOCTYPE html>
+<html lang="ja">
   <head>
+    <title>タスク管理アプリ</title>
     <script
       src="https://unpkg.com/react@17/umd/react.development.js"
       crossorigin
@@ -92,6 +75,37 @@
   </body>
 </html>
 ```
+
+[`<!DOCTYPE html>`](https://developer.mozilla.org/ja/docs/Glossary/Doctype)、
+[`html`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/html)、
+[`head`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/head)、
+それに[`body`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/body)は初めてみたね！
+一つずつみていこう。
+
+### \<!DOCTYPE html>
+
+[`<!DOCTYPE html>`](https://developer.mozilla.org/ja/docs/Glossary/Doctype)はブラウザに「これは HTML ですよ」と教えるもの。
+必ず書かなきゃいけないおまじないみたいなもの！
+
+### html 要素
+
+[`html`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/html)は HTML の全体を表す要素。
+全ての要素は`html`要素の中に書かれることになるよ！
+
+ここでは[`lang`属性](https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/lang)を使って言語の設定もしているね。`ja`は日本語を表すコードだよ！
+
+### head 要素
+
+[`head`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/head)はメタデータ（機械のためのデータ）を記述する要素。
+
+[`title`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/title)を使ってウェブサイトの名前を指定したり、
+[`script`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/script)を使って JavaScript を読み込んだりできるよ。
+
+### body 要素
+
+[`body`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/body)は HTML で表示されるコンテンツを表す要素。
+
+React で開発する場合は React でコンテンツを書くことになるんだけど、React が使う器になる要素、`<div id="root"/ >`はここで用意しておこう！
 
 ## JavaScript ファイルを作ろう
 
@@ -130,3 +144,13 @@ app.use(express.static("public"));
 // ポート番号 8080 で設定したものを供給する
 app.listen(8080);
 ```
+
+## ウェブサーバーを起動する
+
+ウェブサーバーを起動すると、今作ったウェブサイトをブラウザから見ることができるよ。
+まだインターネットには公開していなくて、自分のパソコンからしか見れないから安心してね！
+
+1. ターミナルで`node index.js`を実行する
+1. ブラウザで[http://localhost:8080](http://localhost:8080)を開く
+
+大きな「Hello, World!」が表示されたら成功だよ！
