@@ -1,6 +1,8 @@
-import { Before } from "@cucumber/cucumber";
+import { Before, setDefaultTimeout } from "@cucumber/cucumber";
 import { eventually } from "../../common";
-import { appAPIClient } from "../infrastructure";
+import { appAPIClient, configuration } from "../infrastructure";
+
+setDefaultTimeout(configuration.defaultTimeout);
 
 Before(() => {
   return eventually(() => appAPIClient.getVersion(), {
