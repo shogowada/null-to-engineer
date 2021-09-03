@@ -27,6 +27,7 @@ export enum InstructionID {
   ReactJSX = "ReactJSX",
   ReactComponent = "ReactComponent",
 
+  WebBasics = "WebBasics",
   SetupLocalJSDevEnv = "SetupLocalJSDevEnv",
   ReactInitializeTodoApp = "ReactInitializeTodoApp",
 
@@ -107,6 +108,7 @@ export const Chapters: Chapter[] = [
       InstructionID.ReactBasics,
       InstructionID.ReactJSX,
       InstructionID.ReactComponent,
+      InstructionID.WebBasics,
       InstructionID.SetupLocalJSDevEnv,
       InstructionID.ReactInitializeTodoApp,
     ],
@@ -217,6 +219,12 @@ export const getInstructionConfiguration = (
       };
     }
     case InstructionID.SetupLocalJSDevEnv: {
+      return {
+        id,
+        fiddleType: FiddleType.None,
+      };
+    }
+    case InstructionID.WebBasics: {
       return {
         id,
         fiddleType: FiddleType.None,
