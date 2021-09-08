@@ -141,15 +141,9 @@ const app = express();
 // public フォルダ内のファイルを供給する
 app.use(express.static("public"));
 
-// ポート番号 8080 で設定したものを供給する
+// ポート番号 8080 で設定したものをサーブする
 app.listen(8080);
 ```
-
-おーっと、ポート番号って何だろね！ポート番号について理解するために、少し URL について見てみようか。
-
-## URL って何？
-
-[URL](https://ja.wikipedia.org/wiki/Uniform_Resource_Locator)（ユー・アール・エル、Uniform Resource Locator）はインターネット上にあるものの場所を指定する文字列だよ。
 
 ## ウェブサーバーを起動する
 
