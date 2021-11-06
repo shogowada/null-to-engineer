@@ -1,5 +1,7 @@
 import { InstructionID } from "./instruction";
 
+const InstructionJSONBase = "/instructions";
+
 export const RoutePath = {
   instruction: (id: InstructionID): string => {
     return RoutePath.instructionUnencoded(encodeURIComponent(id));
@@ -7,4 +9,9 @@ export const RoutePath = {
   instructionUnencoded: (id: string): string => {
     return `/instructions/${id}`;
   },
+  instructionJSONBase: InstructionJSONBase,
+  instructionJSON: (id: InstructionID): string => {
+    return `${InstructionJSONBase}/${encodeURIComponent(id)}.json`;
+  },
+  instructionMetadataListJSON: `${InstructionJSONBase}/metadata.json`,
 };

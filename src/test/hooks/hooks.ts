@@ -1,10 +1,19 @@
 import { Before } from "@cucumber/cucumber";
+import fetch from "node-fetch";
 import { eventually } from "../../common";
-import { appAPIClient } from "../infrastructure";
+import { configuration } from "../infrastructure";
 
 Before(() => {
-  return eventually(() => appAPIClient.getVersion(), {
-    timeout: 10 * 1000,
-    interval: 250,
-  });
+  return eventually(
+    async () => {
+      const response = await fetch(configuration.targetURL);
+      if (response.status !== 200) {
+        throw new Error(response.statusText);
+      }
+    },
+    {
+      timeout: 10 * 1000,
+      interval: 250,
+    }
+  );
 });
