@@ -32,7 +32,6 @@ module.exports = {
       template: path.join(__dirname, "index.template.html"),
       title: "経験ゼロからエンジニア",
       hash: true,
-      filename: "index.template.html",
     }),
     new CopyPlugin({
       patterns: [
