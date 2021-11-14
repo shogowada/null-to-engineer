@@ -131,6 +131,8 @@ JSX を使えるように、`type="text/babel"`を書くのも忘れずにね！
 ウェブサーバーはウェブサイトに必要なものを供給（サーブ）するものだよ。
 ウェブサーバーには express というライブラリを使うよ。
 
+今度は`react-todo-app`フォルダの中に`index.js`というファイルを作って、以下のコードを書こう。
+
 ```javascript
 // express を読み込む
 const express = require("express");
@@ -142,7 +144,11 @@ const app = express();
 app.use(express.static("public"));
 
 // 上で設定したものを、ポート番号 8080 でサーブする
-app.listen(8080);
+const Port = 8080;
+app.listen(Port, () => {
+  // 無事サーバーが起動されたら、この関数が呼ばれるよ
+  console.log(`Started server on port ${Port}`);
+});
 ```
 
 ## ウェブサーバーを起動する
@@ -155,3 +161,5 @@ app.listen(8080);
    - `:8080`を忘れると HTTP のデフォルトのポート`80`に繋ごうとしちゃうから、`:8080`を忘れないでね！
 
 大きな「Hello, World!」が表示されたら成功だよ！
+
+ウェブサーバーを停止するには <kbd>Ctrl</kbd> + <kbd>C</kbd> を押してね。
