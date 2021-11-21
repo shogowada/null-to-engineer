@@ -1,11 +1,9 @@
-FROM node:14-alpine
+FROM node:16-alpine
 
 WORKDIR /app/
 
 COPY ./package.json ./package-lock.json ./
-RUN npm ci --only=production && \
-  mv ./node_modules/ ./prod_node_modules/ && \
-  npm ci
+RUN npm ci
 
 COPY ./tsconfig.json ./
 COPY ./src/common/ ./src/common/
