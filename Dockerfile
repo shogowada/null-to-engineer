@@ -23,9 +23,8 @@ RUN npm ci --only=production && \
   apk --no-cache add curl
 
 COPY ./tsconfig.json ./
-COPY ./src/common/ ./src/common/
 COPY --from=client /app/public/ ./public/
-COPY --from=server /app/src/server/ ./src/server/
+COPY --from=server /app/src/ ./src/
 
 HEALTHCHECK --start-period=10s --retries=1 CMD curl -f http://localhost/webapi || exit 1
 

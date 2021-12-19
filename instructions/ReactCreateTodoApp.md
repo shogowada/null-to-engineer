@@ -303,17 +303,30 @@ ReactDOM.render(<Main />, root);
 ユーザーに何か情報を入力してもらうときは`form`要素を使おう。
 
 ```javascript
+// 新しくコンポーネントを作ろう！
 const NewTask = (props) => {
+  // それぞれの task にはユニークな id が必要。
+  // 次の id は何にすればいいのかは、ステートとして管理しよう。
   const [nextID, setNextID] = React.useState(0);
+  // 現在入力されている task の名前も、ステートとして管理しよう。
   const [name, setName] = React.useState("");
 
   return (
     <form
+      // form には submit というイベントがあって、
+      // これはフォーム内でエンターキーを入力したときや、送信ボタンを押したときに呼ばれるイベントなんだ。
+      // submit イベントは、onSubmit 属性に関数を渡すことで処理できるよ。
       onSubmit={(event) => {
+        // submit イベントは、放っておくと勝手にデータをサーバーに送信しようとしちゃうんだ。
+        // 今回は自分でイベントを処理したいから、preventDefault を呼ぶことでデフォルトの動きを止めよう。
         event.preventDefault();
 
         props.onCreate({ id: nextID, name, done: false });
+
+        // 次に作る task の id は、今作った task の id に 1 を足したもの
         setNextID((prevNextID) => prevNextID + 1);
+
+        // そのまま次の task 名を入力できるように、名前を空っぽにしよう
         setName("");
       }}
     >
@@ -321,8 +334,12 @@ const NewTask = (props) => {
         名前:
         <input
           type="text"
+          // input の値を name ステートに設定しよう。
           value={name}
           onChange={(event) => {
+            // event.target はこの input 要素そももの。
+            // そして input 要素の value には、現在の値が入っているよ。
+            // つまり以下のコードは、name ステートを現在の input の値に設定しているんだ。
             setName(event.target.value);
           }}
         />
