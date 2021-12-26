@@ -75,17 +75,17 @@ const Main = () => {
                 <input
                   type="checkbox"
                   checked={task.done}
-                  onClick={() =>
-                    setTasks((prevTasks) =>
-                      prevTasks.map((prevTask) => {
+                  onClick={() => {
+                    setTasks((prevTasks) => {
+                      return prevTasks.map((prevTask) => {
                         if (prevTask.id === task.id) {
                           return { ...prevTask, done: !prevTask.done };
                         } else {
                           return prevTask;
                         }
-                      })
-                    )
-                  }
+                      });
+                    });
+                  }}
                 />
                 {task.name}
               </label>
@@ -96,9 +96,6 @@ const Main = () => {
     </div>
   );
 };
-
-const root = document.getElementById("root");
-ReactDOM.render(<Main />, root);
 ```
 
 この`input`要素には`type="checkbox"`という属性がついているから、チェックボックスになるよ。
@@ -141,15 +138,15 @@ const Main = () => {
   ]);
 
   const onTaskClick = (taskID) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((prevTask) => {
-        if (prevTask.id === taskID) {
+    setTasks((prevTasks) => {
+      return prevTasks.map((prevTask) => {
+        if (prevTask.id === task.id) {
           return { ...prevTask, done: !prevTask.done };
         } else {
           return prevTask;
         }
-      })
-    );
+      });
+    });
   };
 
   return (
@@ -163,7 +160,10 @@ const Main = () => {
                 <input
                   type="checkbox"
                   checked={task.done}
-                  onClick={() => onTaskClick(task.id)}
+                  // ここで onTaskClick 使ってるよ！
+                  onClick={() => {
+                    onTaskClick(task.id);
+                  }}
                 />
                 {task.name}
               </label>
@@ -174,9 +174,6 @@ const Main = () => {
     </div>
   );
 };
-
-const root = document.getElementById("root");
-ReactDOM.render(<Main />, root);
 ```
 
 こうやってコードを綺麗にしていく作業のことを「リファクタリング」と呼ぶよ！
@@ -185,31 +182,21 @@ ReactDOM.render(<Main />, root);
 
 ```javascript
 const Main = () => {
-  const [tasks, setTasks] = React.useState([
-    { id: 0, name: "シャワーを浴びる" },
-    { id: 1, name: "歯を磨く" },
-  ]);
-
-  const onTaskClick = (taskID) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((prevTask) => {
-        if (prevTask.id === taskID) {
-          return { ...prevTask, done: !prevTask.done };
-        } else {
-          return prevTask;
-        }
-      })
-    );
-  };
-
+  // 他のコード...
   return (
     <div>
       <h1>タスク管理アプリ</h1>
       <ul>
         {tasks.map((task) => {
+          // Task コンポーネントを使おう
           return (
             <li key={task.id}>
-              <Task task={task} onClick={onTaskClick} />
+              <Task
+                task={task}
+                onClick={(taskId) => {
+                  onTaskClick(taskId);
+                }}
+              />
             </li>
           );
         })}
@@ -218,48 +205,39 @@ const Main = () => {
   );
 };
 
+// 新しく Task コンポーネントを作ろう
+// タスクは props から渡すよ
 const Task = (props) => {
   return (
     <label>
       <input
         type="checkbox"
         checked={props.task.done}
-        onClick={() => props.onClick(props.task.id)}
+        onClick={() => {
+          // props.onClick に task.id を渡そう
+          props.onClick(props.task.id);
+        }}
       />
       {props.task.name}
     </label>
   );
 };
-
-const root = document.getElementById("root");
-ReactDOM.render(<Main />, root);
 ```
 
 あれ、もう１ステップ綺麗にできそうだぞ？タスク一覧も一つのコンポーネントにしてみたらどうだろう！
 
 ```javascript
 const Main = () => {
-  const [tasks, setTasks] = React.useState([
-    { id: 0, name: "シャワーを浴びる" },
-    { id: 1, name: "歯を磨く" },
-  ]);
-
-  const onTaskClick = (taskID) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((prevTask) => {
-        if (prevTask.id === taskID) {
-          return { ...prevTask, done: !prevTask.done };
-        } else {
-          return prevTask;
-        }
-      })
-    );
-  };
-
+  // 他のコード...
   return (
     <div>
       <h1>タスク管理アプリ</h1>
-      <TaskList tasks={tasks} onTaskClick={onTaskClick} />
+      <TaskList
+        tasks={tasks}
+        onTaskClick={(taskId) => {
+          onTaskClick(taskId);
+        }}
+      />
     </div>
   );
 };
@@ -270,7 +248,12 @@ const TaskList = (props) => {
       {props.tasks.map((task) => {
         return (
           <li key={task.id}>
-            <Task task={task} onClick={props.onTaskClick} />
+            <Task
+              task={task}
+              onClick={(taskId) => {
+                props.onTaskClick(taskId);
+              }}
+            />
           </li>
         );
       })}
@@ -284,15 +267,14 @@ const Task = (props) => {
       <input
         type="checkbox"
         checked={props.task.done}
-        onClick={() => props.onClick(props.task.id)}
+        onClick={() => {
+          props.onClick(props.task.id);
+        }}
       />
       {props.task.name}
     </label>
   );
 };
-
-const root = document.getElementById("root");
-ReactDOM.render(<Main />, root);
 ```
 
 ## 新しいタスクを追加する
@@ -305,9 +287,6 @@ ReactDOM.render(<Main />, root);
 ```javascript
 // 新しくコンポーネントを作ろう！
 const NewTask = (props) => {
-  // それぞれの task にはユニークな id が必要。
-  // 次の id は何にすればいいのかは、ステートとして管理しよう。
-  const [nextID, setNextID] = React.useState(0);
   // 現在入力されている task の名前も、ステートとして管理しよう。
   const [name, setName] = React.useState("");
 
@@ -321,10 +300,7 @@ const NewTask = (props) => {
         // 今回は自分でイベントを処理したいから、preventDefault を呼ぶことでデフォルトの動きを止めよう。
         event.preventDefault();
 
-        props.onCreate({ id: nextID, name, done: false });
-
-        // 次に作る task の id は、今作った task の id に 1 を足したもの
-        setNextID((prevNextID) => prevNextID + 1);
+        props.onCreate({ name, done: false });
 
         // そのまま次の task 名を入力できるように、名前を空っぽにしよう
         setName("");
@@ -351,3 +327,30 @@ const NewTask = (props) => {
   );
 };
 ```
+
+これを `Main` コンポーネントに追加しよう。
+
+```javascript
+<div>
+  <h1>タスク管理アプリ</h1>
+  <NewTask
+    onCreate={(task) => {
+      setTasks((prevTasks) => {
+        const id = Math.max(...prevTasks.map((task) => task.id)) + 1;
+        // 次の tasks ステートは、現在の tasks に新しい task を追加したもの
+        // id を渡すのを忘れないようにしよう
+        return [...prevTasks, { ...task, id }];
+      });
+    }}
+  />
+  <TaskList
+    tasks={tasks}
+    onTaskClick={(taskId) => {
+      onTaskClick(taskId);
+    }}
+  />
+</div>
+```
+
+新しいタスクを入力できるようになったかな？
+こうやって小さいコンポーネントを組み合わせることで、大きなアプリケーションも作れるよ！
