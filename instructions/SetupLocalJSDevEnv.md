@@ -2,19 +2,18 @@
 
 ## 開発環境？
 
-ここからは自分のパソコンを使って、プロのエンジニアがやっている手順と同じ手順でウェブアプリの開発に取り組もう！
-このページでは自分のパソコンでウェブクライアントとウェブサーバーを開発するための環境を整えるよ。
+ここからは自分のパソコンを使って、プロのエンジニアがやっている手順と同じ手順でウェブアプリの開発に取り組もう ✨
 
-最初に２つのプログラムをインストールするよ。
+最初に２つのプログラムをインストールするよ 👀
 
 1. IDE（アイ・ディー・イー、Integrated Development Environment）
    - 主にコードを編集するためのプログラム。その他にも色々と開発の手助けをしてくれる機能が万歳。
-2. Node.js（ノード・ジェーエス、ノード）
+2. Node.js（ノード・ジェーエス、ノード）、NPM（エヌ・ピー・エム）
    - パソコンで JavaScript を実行するためのプログラム。
 
 ## IDE をインストールする
 
-Microsoft が出している[Visual Studio Code](https://code.visualstudio.com)（以下 VS Code）は、無料で使えてウェブアプリの開発もできるから便利だよ。
+Microsoft が出している [Visual Studio Code](https://code.visualstudio.com)（以下 VS Code）は、無料で使えてウェブアプリの開発もできるから便利だよ 😄
 
 1. [VS Code のウェブサイト](https://code.visualstudio.com)にいく
 2. Stable ヴァージョンをダウンロードする
@@ -25,7 +24,10 @@ Microsoft が出している[Visual Studio Code](https://code.visualstudio.com)�
 4. インストールされた VS Code を実行する
 5. VS Code が開かれたら成功
 
-## Node.js をインストールする
+## Node.js と NPM をインストールする
+
+Node.js は JavaScript を実行するプログラム、NPM は JavaScript のライブラリを管理するプログラムなんだ。
+つまり NPM を使って React や Babel などを自分のパソコンにダウンロードすることができるよ 😮
 
 1. [Node.js のウェブサイト](https://nodejs.org/ja/)にいく
 2. LTS ヴァージョンをダウンロードする
@@ -36,6 +38,3 @@ Microsoft が出している[Visual Studio Code](https://code.visualstudio.com)�
    3. 次のような文字列が表示されたら成功（数字は一致しなくてもいい）：`v14.17.4`
    4. `npm --version`を実行する
    5. 次のような文字列が表示されたら成功（数字は一致しなくてもいい）：`6.14.14`
-
-Node.js は JavaScript を実行するプログラム、NPM は JavaScript のライブラリを管理するプログラムなんだ。
-つまり NPM を使って React や Babel などを自分のパソコンにインストールすることができるよ。
