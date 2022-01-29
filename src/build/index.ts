@@ -1,11 +1,6 @@
 import * as path from "path";
 import * as fs from "fs";
-import {
-  Instruction,
-  InstructionIDs,
-  InstructionMetadata,
-  RoutePath,
-} from "../common";
+import { Instruction, InstructionIDs, RoutePath } from "../common";
 import { configuration } from "./infrastructure";
 import { getInstruction, getInstructionMetadataList } from "./business";
 
