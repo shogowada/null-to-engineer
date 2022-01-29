@@ -2,9 +2,8 @@
 
 ## プロジェクトを初期化しよう
 
-まずプロジェクトを作る場所にフォルダを作って、NPM を使ってそこにプロジェクトを作ろう。
-「プロジェクト」というと大袈裟だけど、ただ色々なファイルが集まってるだけなんだ。
-だからまず、そのファイルを保存する場所を作るんだよ。
+まずプロジェクトを作る場所にフォルダを作って、NPM を使ってそこにプロジェクトを作ろう 🙌
+「プロジェクト」というと大袈裟だけど、ただ色々なファイルが集まってるだけだよ 😉
 
 1. `react-todo-app`というフォルダを作る
 1. VS Code を開く
@@ -15,9 +14,9 @@
 1. 色々聞かれるので、質問が終わるまで全部そのままエンターキーを押す
    - 全部デフォルトの設定で問題なし！
 
-この時点で、`react-todo-app`フォルダ内に`package.json`というファイルが作られたはず。
+この時点で、`react-todo-app`フォルダ内に`package.json`というファイルが作られたはず 👀
 これは NPM でプロジェクトを作るときにとても大切なファイルで、このプロジェクトの名前やバージョン、
-依存しているライブラリとかを全部記述しているんだ。
+依存しているライブラリとかを全部記述しているんだ ✍️
 
 今はまだ初期化したばかりで空っぽだから、中身はこんな風になってるはず。
 
@@ -39,12 +38,12 @@
 
 1. ターミナルで`npm install express`を実行する
 
-`express`はウェブサーバーを作るときに使うライブラリだよ。
+`express`はウェブサーバーを作るときに使うライブラリだよ。上のコマンドを実行することで、プロジェクトに`express`をインストールしたんだ 👍
 
-今`package.json`を見てみると、それぞれのライブラリが`dependencies`として追加されているはず。
-こうやって「このアプリを動かすには、このライブラリが必要です」って記憶しているんだ。
+今`package.json`を見てみると、`express`が`dependencies`として追加されているはず。
+こうやって「このアプリを動かすには、このライブラリが必要です」って記憶しているんだよ 😄
 
-React を同じように読み込んで使う方法もあるんだけど、ちょっと難しいからそれはまた今度ね！
+React を同じようにインストールして使う方法もあるんだけど、ちょっと難しいからそれはまた今度ね 🙃
 
 ## HTML ファイルを作ろう
 
@@ -85,51 +84,51 @@ React を同じように読み込んで使う方法もあるんだけど、ち�
 ### \<!DOCTYPE html>
 
 [`<!DOCTYPE html>`](https://developer.mozilla.org/ja/docs/Glossary/Doctype)はブラウザに「これは HTML ですよ」と教えるもの。
-必ず書かなきゃいけないおまじないみたいなもの！
+必ず書かなきゃいけないおまじないみたいなもの 🪄
 
 ### html 要素
 
 [`html`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/html)は HTML の全体を表す要素。
-全ての要素は`html`要素の中に書かれることになるよ！
+全ての要素は`html`要素の中に書かれることになるよ 🙂
 
-ここでは[`lang`属性](https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/lang)を使って言語の設定もしているね。`ja`は日本語を表すコードだよ！
+ここでは[`lang`属性](https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/lang)を使って言語の設定もしているね。`ja`は日本語を表すコードだよ 🗾
 
 ### head 要素
 
 [`head`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/head)はメタデータ（機械のためのデータ）を記述する要素。
 
 [`title`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/title)を使ってウェブサイトの名前を指定したり、
-[`script`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/script)を使って JavaScript を読み込んだりできるよ。
+[`script`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/script)を使って JavaScript を読み込んだりできるよ 😄
 
 ### body 要素
 
 [`body`要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/body)は HTML で表示されるコンテンツを表す要素。
 
-React で開発する場合は React でコンテンツを書くことになるんだけど、React が使う器になる要素、`<div id="root"/ >`はここで用意しておこう！
+React で開発する場合は React でコンテンツを書くことになるけど、React が使う器になる要素、`<div id="root"/ >`はここで用意しておこう 😎
 
 ## JavaScript ファイルを作ろう
 
-`public`フォルダーの中に`index.js`というファイルを作って、以下の内容を書こう。
+`public`フォルダーの中に`index.js`というファイルを作って、以下の内容を書こう 💻
 
 ```javascript
 const rootElement = document.getElementById("root");
 ReactDOM.render(<h1>Hello, World!</h1>, rootElement);
 ```
 
-次に、このファイルを HTML から読み込もう。`head`要素の中に、下の`script`要素を書いてね！
-JSX を使えるように、`type="text/babel"`を書くのも忘れずにね！
+次に、このファイルを HTML から読み込もう。`head`要素の中に、下の`script`要素を追加してね！
+JSX を使えるように、`type="text/babel"`を書くのも忘れずにね 👀
 
 ```html
 <script defer type="text/babel" src="index.js"></script>
 ```
 
-`defer`を付けることで、React や Babel、他の HTML を読み込んでからこのコードを読み込むように指定することができるんだ。
-そうすることで、このコードを読み込んだときには全てが準備されている状態にできるんだね。
+`defer`を付けることで、他のコードを読み込んでからこのコードを読み込むように指定することができるんだ 🤔
+React や Babel が読み込まれた状態じゃないとこのコードは動かせないから、`defer`を使ってこのコードを最後に読み込むようにしてるんだよ ✨
 
 ## ウェブサーバーを作ろう
 
-ウェブサーバーはウェブサイトに必要なものを供給（サーブ）するものだよ。
-ウェブサーバーには express というライブラリを使うよ。
+ウェブサーバーはウェブサイトに必要なものを供給（サーブ）するものだよ 😶
+ウェブサーバーには express というライブラリを使おう。
 
 今度は`react-todo-app`フォルダの中に`index.js`というファイルを作って、以下のコードを書こう。
 
@@ -153,13 +152,13 @@ app.listen(Port, () => {
 
 ## ウェブサーバーを起動する
 
-ウェブサーバーを起動すると、今作ったウェブサイトをブラウザから見ることができるよ。
-まだインターネットには公開していなくて、自分のパソコンからしか見れないから安心してね！
+ウェブサーバーを起動すると、今作ったウェブサイトをブラウザから見ることができるよ 😲
+まだインターネットには公開していなくて、自分のパソコンからしか見れないから安心してね 👍
 
 1. ターミナルで`node index.js`を実行する
 1. ブラウザで http://localhost:8080 を開く
    - `:8080`を忘れると HTTP のデフォルトのポート`80`に繋ごうとしちゃうから、`:8080`を忘れないでね！
 
-大きな「Hello, World!」が表示されたら成功だよ！
+大きな「Hello, World!」が表示されたら成功だよ 🎉
 
-ウェブサーバーを停止するには <kbd>Ctrl</kbd> + <kbd>C</kbd> を押してね。
+ウェブサーバーを停止するには <kbd>Ctrl</kbd> + <kbd>C</kbd> を押してね 🙂
