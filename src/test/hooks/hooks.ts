@@ -1,7 +1,9 @@
-import { Before } from "@cucumber/cucumber";
+import { Before, setDefaultTimeout } from "@cucumber/cucumber";
 import fetch from "node-fetch";
 import { eventually } from "../../common";
 import { configuration } from "../infrastructure";
+
+setDefaultTimeout(configuration.defaultTimeout);
 
 Before(() => {
   return eventually(
