@@ -14,6 +14,7 @@ RUN npm run build-instructions
 
 FROM null-to-engineer:base as server
 
+COPY ./src/client ./src/client/
 COPY ./src/server ./src/server/
 RUN npm run check-type
 

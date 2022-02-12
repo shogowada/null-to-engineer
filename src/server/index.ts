@@ -1,7 +1,8 @@
-import * as path from "path";
 import * as express from "express";
 import * as helmet from "helmet";
 import * as compression from "compression";
+import { configuration } from "./configuration";
+import { handleRender } from "./render";
 
 const app = express();
 
@@ -12,13 +13,8 @@ app.use(
   })
 );
 
-const rootDir: string = path.join(__dirname, "..", "..");
-const publicDir: string = path.join(rootDir, "public");
-
-app.use(express.static(publicDir));
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(publicDir, "index.html"));
-});
+app.use("/static", express.static(configuration.staticDir));
+app.use(handleRender);
 
 const Port = 80;
 console.log(`Starting server on ${Port}`);

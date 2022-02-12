@@ -1,6 +1,6 @@
 import { InstructionID } from "./instruction";
 
-const InstructionJSONBase = "/instructions";
+const InstructionJSONBase = "/static/instructions";
 
 export const RoutePath = {
   instruction: (id: InstructionID): string => {
