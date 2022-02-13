@@ -7,7 +7,12 @@ import * as ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router";
 import { createStore, PreloadedState } from "redux";
 import { Provider } from "react-redux";
-import { DefaultInstructionID, InstructionID, InstructionIDs } from "../common";
+import {
+  DefaultInstructionID,
+  Instruction,
+  InstructionID,
+  InstructionIDs,
+} from "../common";
 import {
   addInstructionContent,
   AppState,
@@ -29,11 +34,11 @@ export const handleRender = (
   const history = createMemoryHistory();
 
   const store = createStore(createReducer(history), getInitialState());
-  const instructionID: InstructionID = getInstructionID(req.path);
+  const instruction: Instruction = getInstructionFromPath(req.path);
   store.dispatch(
     addInstructionContent({
-      id: instructionID,
-      html: getInstruction(instructionID).html,
+      id: instruction.id,
+      html: instruction.html,
     })
   );
 
@@ -57,8 +62,12 @@ const getInitialState = (): PreloadedState<AppState> => {
   return state as PreloadedState<AppState>;
 };
 
+const getInstructionFromPath = (path: string): Instruction => {
+  return getInstruction(getInstructionID(path));
+};
+
 const getInstructionID = (path: string): InstructionID => {
-  const groups = /^\/instructions\/(\w+)$/.exec(path);
+  const groups = /^\/instructions\/(\w+).*$/.exec(path);
   if (groups) {
     const id: InstructionID = groups[1] as InstructionID;
     if (InstructionIDs.includes(id)) {
