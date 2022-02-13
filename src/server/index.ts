@@ -1,7 +1,7 @@
 import * as express from "express";
 import * as helmet from "helmet";
 import * as compression from "compression";
-import { configuration } from "./configuration";
+import { configuration } from "./infrastructure";
 import { handleRender } from "./render";
 
 const app = express();

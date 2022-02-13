@@ -7,46 +7,19 @@ import * as ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router";
 import { createStore, PreloadedState } from "redux";
 import { Provider } from "react-redux";
-import {
-  DefaultInstructionID,
-  Instruction,
-  InstructionID,
-  InstructionIDs,
-  InstructionMetadata,
-} from "../common";
+import { DefaultInstructionID, InstructionID, InstructionIDs } from "../common";
 import {
   addInstructionContent,
   AppState,
   createReducer,
 } from "../client/presentation";
 import { Main } from "../client/gui/components/main";
-import { configuration } from "./configuration";
+import { configuration } from "./infrastructure";
+import { getInstruction, getInstructionMetadataList } from "./business";
 
 const htmlTemplate: string = fs.readFileSync(
   path.join(configuration.staticDir, "index.html"),
   { encoding: "utf8" }
-);
-
-const instructionMetadataList: InstructionMetadata[] = JSON.parse(
-  fs.readFileSync(
-    path.join(configuration.staticDir, "instructions", "metadata.json"),
-    { encoding: "utf8" }
-  )
-);
-
-const instructionIDToInstructionMap = new Map<InstructionID, Instruction>(
-  InstructionIDs.map((instructionID): [InstructionID, Instruction] => {
-    const json: string = fs.readFileSync(
-      path.join(
-        configuration.staticDir,
-        "instructions",
-        `${instructionID}.json`
-      ),
-      { encoding: "utf8" }
-    );
-    const instruction: Instruction = JSON.parse(json);
-    return [instructionID, instruction];
-  })
 );
 
 export const handleRender = (
@@ -60,7 +33,7 @@ export const handleRender = (
   store.dispatch(
     addInstructionContent({
       id: instructionID,
-      html: instructionIDToInstructionMap.get(instructionID)!.html,
+      html: getInstruction(instructionID).html,
     })
   );
 
@@ -79,7 +52,7 @@ export const handleRender = (
 
 const getInitialState = (): PreloadedState<AppState> => {
   const state: Partial<AppState> = {
-    instructionMetadataList,
+    instructionMetadataList: getInstructionMetadataList(),
   };
   return state as PreloadedState<AppState>;
 };

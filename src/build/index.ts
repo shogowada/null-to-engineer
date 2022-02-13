@@ -2,7 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 import { Instruction, InstructionIDs, RoutePath } from "../common";
 import { configuration } from "./infrastructure";
-import { getInstruction, getInstructionMetadataList } from "./business";
+import { getInstruction, getInstructionMetadataList } from "../server/business";
 
 const buildInstructions = (): void => {
   fs.mkdirSync(configuration.publicInstructionDir, { recursive: true });
