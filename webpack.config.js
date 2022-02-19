@@ -34,6 +34,15 @@ module.exports = {
       title: "経験ゼロからエンジニア",
       hash: true,
       publicPath: "static",
+      minify: {
+        collapseWhitespace: true,
+        keepClosingSlash: true,
+        removeComments: false,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      },
     }),
     new CopyPlugin({
       patterns: [

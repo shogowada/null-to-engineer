@@ -8,10 +8,13 @@ import { StaticRouter } from "react-router";
 import { createStore, PreloadedState } from "redux";
 import { Provider } from "react-redux";
 import {
+  Chapter,
+  Chapters,
   DefaultInstructionID,
   Instruction,
   InstructionID,
   InstructionIDs,
+  requireDefined,
 } from "../common";
 import {
   addInstructionContent,
@@ -52,7 +55,7 @@ export const handleRender = (
 
   const state = store.getState();
 
-  res.send(renderFullPage(html, state));
+  res.send(renderFullPage(instruction, html, state));
 };
 
 const getInitialState = (): PreloadedState<AppState> => {
@@ -80,11 +83,35 @@ const getInstructionID = (path: string): InstructionID => {
   }
 };
 
-const renderFullPage = (html: string, state: AppState): string => {
+const renderFullPage = (
+  instruction: Instruction,
+  html: string,
+  state: AppState
+): string => {
   return htmlTemplate
+    .replace("<!--__META_PLACEHOLDER__-->", renderMeta(instruction))
     .replace("__RENDERED_HTML_PLACEHOLDER__", html)
     .replace(
       '"__PRELOADED_STATE_PLACEHOLDER__"',
       JSON.stringify(state).replace(/</g, "\\u003c")
     );
+};
+
+const renderMeta = (instruction: Instruction): string => {
+  const chapter: Chapter = requireDefined(
+    Chapters.find((chapter) => chapter.instructionIDs.includes(instruction.id)),
+    `chapter for ${instruction.id}`
+  );
+
+  return ReactDOMServer.renderToString(
+    <React.Fragment>
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:site" content="@wada_shogo" />
+      <meta
+        name="twitter:title"
+        content={`${chapter.name} ${instruction.name}`}
+      />
+      <meta name="twitter:description" content="経験ゼロからエンジニア 💻" />
+    </React.Fragment>
+  );
 };
