@@ -4,6 +4,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const publicDir = path.join(__dirname, "public");
+const staticDir = path.join(publicDir, "static");
 
 module.exports = {
   mode: "production",
@@ -32,18 +33,28 @@ module.exports = {
       template: path.join(__dirname, "index.template.html"),
       title: "経験ゼロからエンジニア",
       hash: true,
+      publicPath: "static",
+      minify: {
+        collapseWhitespace: true,
+        keepClosingSlash: true,
+        removeComments: false,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      },
     }),
     new CopyPlugin({
       patterns: [
         {
           from: path.join(__dirname, "imgs", "*.jpg"),
-          to: path.join(publicDir),
+          to: path.join(staticDir),
         },
       ],
     }),
   ],
   output: {
-    path: publicDir,
+    path: staticDir,
     filename: "main.js",
   },
 };

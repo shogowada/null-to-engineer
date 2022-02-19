@@ -1,8 +1,7 @@
 import { InstructionID } from "./instruction";
 
-export enum JSONRPCMethodNames {
+export enum JSONRPCMethodName {
   GetInstructionHTML = "GetInstructionHTML",
-  GetVersion = "GetVersion",
 }
 
 export interface GetInstructionHTMLParams {

@@ -1,18 +1,18 @@
 import * as path from "path";
 import * as fs from "fs";
 import {
-  Dictionary,
   Instruction,
   InstructionID,
   InstructionIDs,
   InstructionMetadata,
+  requireDefined,
 } from "../../common";
 import { configuration } from "../infrastructure";
 import { createInstruction } from "./instruction-factory";
 
 const loadMarkdown = (instructionID: InstructionID): string => {
   return fs.readFileSync(
-    path.join(configuration.rootDir, "instructions", `${instructionID}.md`),
+    path.join(configuration.instructionDir, `${instructionID}.md`),
     { encoding: "utf-8" }
   );
 };
@@ -32,14 +32,9 @@ const instructions: Instruction[] = InstructionIDs.reduce(
   []
 );
 
-const instructionIDToInstructionDictionary: Dictionary<Instruction> =
-  instructions.reduce(
-    (dictionary, instruction: Instruction): Dictionary<Instruction> => ({
-      ...dictionary,
-      [instruction.id]: instruction,
-    }),
-    {}
-  );
+const instructionIDToInstructionMap = new Map<InstructionID, Instruction>(
+  instructions.map((instruction) => [instruction.id, instruction])
+);
 
 const instructionMetadataList: InstructionMetadata[] = instructions.map(
   (instruction): InstructionMetadata => ({
@@ -50,7 +45,10 @@ const instructionMetadataList: InstructionMetadata[] = instructions.map(
 );
 
 export const getInstruction = (id: InstructionID): Instruction =>
-  instructionIDToInstructionDictionary[id];
+  requireDefined(
+    instructionIDToInstructionMap.get(id),
+    `Instruction for ${id}`
+  );
 
 export const getInstructionMetadataList = (): InstructionMetadata[] =>
   instructionMetadataList;

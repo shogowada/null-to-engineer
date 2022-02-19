@@ -1,19 +1,22 @@
 import * as path from "path";
-import { RoutePath } from "../../common";
 
 export interface Configuration {
   rootDir: string;
+  instructionDir: string;
   publicDir: string;
-  publicInstructionDir: string;
+  staticDir: string;
 }
 
 const rootDir: string = path.join(__dirname, "..", "..", "..");
+const instructionDir: string = path.join(rootDir, "instructions");
 const publicDir: string = path.join(rootDir, "public");
+const staticDir: string = path.join(publicDir, "static");
 
 export const configuration: Configuration = {
   rootDir,
+  instructionDir,
   publicDir,
-  publicInstructionDir: path.join(publicDir, RoutePath.instructionJSONBase),
+  staticDir,
 };
 
 console.log(`Configuration: ${JSON.stringify(configuration, undefined, 2)}`);
