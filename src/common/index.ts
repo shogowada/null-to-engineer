@@ -1,3 +1,4 @@
+export * from "./app-api-client";
 export * from "./console-log";
 export * from "./dictionary";
 export * from "./element-id";

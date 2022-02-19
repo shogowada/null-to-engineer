@@ -7,50 +7,52 @@ import { Provider } from "react-redux";
 import { createBrowserHistory, History } from "history";
 import { ConnectedRouter, routerMiddleware } from "connected-react-router";
 import { debounce } from "lodash";
-import { appAPIClient, configuration } from "./infrastructure";
+import { configuration } from "./infrastructure";
 import { AppDispatch, AppState, createReducer } from "./presentation";
 import { Main } from "./gui/components/main";
 import "./gui/styles/main.scss";
 
 const history: History = createBrowserHistory();
 
+declare global {
+  interface Window {
+    __PRELOADED_STATE__: Partial<AppState> | undefined;
+  }
+}
+
 const stateJSON: string | null = localStorage.getItem(configuration.stateKey);
+const initialState: PreloadedState<AppState> = {
+  ...window.__PRELOADED_STATE__,
+  ...JSON.parse(stateJSON ?? "{}"),
+};
 
-appAPIClient
-  .getInstructionMetadataList()
-  .then(
-    (instructionMetadataList): PreloadedState<AppState> => ({
-      instructionMetadataList,
-      ...JSON.parse(stateJSON || "{}"),
-    })
-  )
-  .then((initialState: PreloadedState<AppState>) => {
-    const store: Store<AppState> & {
-      dispatch: AppDispatch;
-    } = createStore(
-      createReducer(history),
-      initialState,
-      composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)))
-    );
+delete window.__PRELOADED_STATE__;
 
-    const saveState = debounce(() => {
-      const state: AppState = store.getState();
-      const stateToSave: Partial<AppState> = {
-        instructionIDToCodeDictionary: state.instructionIDToCodeDictionary,
-      };
-      localStorage.setItem(configuration.stateKey, JSON.stringify(stateToSave));
-    }, configuration.saveStateDebounceRate);
+const store: Store<AppState> & {
+  dispatch: AppDispatch;
+} = createStore(
+  createReducer(history),
+  initialState,
+  composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)))
+);
 
-    store.subscribe(saveState);
+const saveState = debounce(() => {
+  const state: AppState = store.getState();
+  const stateToSave: Partial<AppState> = {
+    instructionIDToCodeDictionary: state.instructionIDToCodeDictionary,
+  };
+  localStorage.setItem(configuration.stateKey, JSON.stringify(stateToSave));
+}, configuration.saveStateDebounceRate);
 
-    const mountDOM = document.getElementById("mount");
+store.subscribe(saveState);
 
-    ReactDOM.render(
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <Main />
-        </ConnectedRouter>
-      </Provider>,
-      mountDOM
-    );
-  });
+const mountDOM = document.getElementById("mount");
+
+ReactDOM.render(
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <Main />
+    </ConnectedRouter>
+  </Provider>,
+  mountDOM
+);
