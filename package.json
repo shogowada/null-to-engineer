@@ -6,9 +6,7 @@
   "scripts": {
     "format": "pretty-quick || echo \"Ignoring the format failure\"",
     "check-type": "tsc --noEmit",
-    "build": "npm-run-all --parallel build-code build-instructions",
-    "build-code": "webpack-cli",
-    "build-instructions": "ts-node ./src/build/index.ts",
+    "build": "webpack-cli",
     "build-base": "docker build --tag null-to-engineer:base --file Dockerfile-base .",
     "_start": "ts-node ./src/server/index.ts",
     "start": "npm run format && npm run build-base && docker-compose up --build -d",

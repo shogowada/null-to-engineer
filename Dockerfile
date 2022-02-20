@@ -3,7 +3,7 @@ FROM null-to-engineer:base as client
 COPY ./webpack.config.js ./index.template.html ./
 COPY ./imgs ./imgs
 COPY ./src/client ./src/client/
-RUN npm run build-code && \
+RUN npm run build && \
   npm run unit-test-client
 
 FROM null-to-engineer:base as server

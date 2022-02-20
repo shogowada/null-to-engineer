@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import {
-  Chapters,
   ElementID,
   InstructionID,
   InstructionMetadata,
@@ -36,7 +35,7 @@ export const ViewInstruction = (props: Props) => {
       <Link
         id={ElementID.NextInstruction}
         to={RoutePath.instruction(nextInstructionMetadata.id)}
-        style={{ float: "right" }}
+        className="next-instruction"
       >
         次は {nextInstructionMetadata.name} 👉
       </Link>
@@ -52,9 +51,11 @@ export const ViewInstruction = (props: Props) => {
         ])}
       >
         <div dangerouslySetInnerHTML={{ __html: props.html || prevHTML }} />
+        <div className="instruction-pane-footer">
+          {props.nextInstructionMetadata &&
+            renderNextInstructionLink(props.nextInstructionMetadata)}
+        </div>
       </div>
-      {props.nextInstructionMetadata &&
-        renderNextInstructionLink(props.nextInstructionMetadata)}
     </React.Fragment>
   );
 };

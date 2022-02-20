@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "~highlight.js/styles/github.css";
 
 $tablet-width: 768px;
@@ -15,6 +16,7 @@ $code-border-color: lightgray;
 $output-border-color: lightgray;
 $grayed-out-color: rgba(0, 0, 0, 0.5);
 $font-size: 16px;
+$small-font-size: 12px;
 $animation-duration: 0.25s;
 
 body {
@@ -138,7 +140,7 @@ $button-transition: background-color $animation-duration ease,
   overflow-y: auto;
 
   .chapters-pane {
-    margin: $margin-main-frame ($margin-main-frame / 2);
+    margin: $margin-main-frame math.div($margin-main-frame, 2);
   }
 }
 
@@ -146,7 +148,7 @@ $button-transition: background-color $animation-duration ease,
   overflow-y: auto;
 
   .instruction-pane {
-    margin: $margin-main-frame ($margin-main-frame / 2);
+    margin: $margin-main-frame math.div($margin-main-frame, 2);
     border-radius: 10px;
     padding: $padding-large;
     box-shadow: 0 0 $margin-small $shadow-color;
@@ -158,20 +160,26 @@ $button-transition: background-color $animation-duration ease,
       opacity: 0.2;
       transition: opacity $animation-duration ease;
     }
+
+    .instruction-pane-footer {
+      display: flex;
+      flex-direction: column;
+
+      .next-instruction {
+        align-self: flex-end;
+        margin: 0 0 $margin-main-frame 0;
+      }
+    }
   }
 
   p {
     margin: 40px auto;
   }
-
-  #next-instruction {
-    margin: 0 $margin-main-frame $margin-main-frame 0;
-  }
 }
 
 .item-fiddle {
   overflow-y: auto;
-  padding: $margin-main-frame ($margin-main-frame / 2);
+  padding: $margin-main-frame math.div($margin-main-frame, 2);
 }
 
 .instruction-list {
