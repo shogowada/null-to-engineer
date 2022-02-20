@@ -27,7 +27,7 @@ COPY ./instructions ./instructions/
 COPY --from=client /app/public/ ./public/
 COPY --from=server /app/src/ ./src/
 
-HEALTHCHECK --start-period=10s --retries=1 CMD curl -f http://localhost/webapi || exit 1
+HEALTHCHECK --start-period=10s --retries=1 CMD curl -f http://localhost/health || exit 1
 
 EXPOSE 80
 

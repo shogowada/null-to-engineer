@@ -22,6 +22,9 @@ app.use(
 );
 
 app.use("/static", express.static(configuration.staticDir));
+app.get(RoutePath.health, (req, res) => {
+  res.sendStatus(200);
+});
 app.post(RoutePath.jsonRPC, async (req, res) => {
   const response: JSONRPCResponse | null = await jsonRPCServer.receive(
     req.body

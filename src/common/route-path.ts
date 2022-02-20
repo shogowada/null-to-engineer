@@ -8,4 +8,5 @@ export const RoutePath = {
     return `/instructions/${id}`;
   },
   jsonRPC: "/json-rpc",
+  health: "/health",
 };
