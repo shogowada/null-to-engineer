@@ -102,26 +102,3 @@ export const trace = <T>(
     return action();
   }
 };
-
-export const traceSync = <T>(
-  name: string,
-  attributes: SpanAttributes,
-  action: () => T
-): T => {
-  const tracer = getTracer();
-  if (tracer) {
-    return tracer.startActiveSpan(name, { attributes }, (span) => {
-      try {
-        const result: T = action();
-        return result;
-      } catch (err) {
-        span.setStatus({ code: SpanStatusCode.ERROR, message: err.message });
-        throw err;
-      } finally {
-        span.end();
-      }
-    });
-  } else {
-    return action();
-  }
-};
