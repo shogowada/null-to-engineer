@@ -7,15 +7,15 @@ import {
   InstructionMetadata,
   requireDefined,
 } from "../../common";
-import { configuration, trace } from "../infrastructure";
+import { configuration, traceSync } from "../infrastructure";
 import { createInstruction } from "./instruction-factory";
 
-const loadMarkdown = (instructionID: InstructionID): PromiseLike<string> => {
-  return trace(
+const loadMarkdown = (instructionID: InstructionID): string => {
+  return traceSync(
     "Read instruction file",
     { "instruction.id": instructionID },
     () =>
-      fs.promises.readFile(
+      fs.readFileSync(
         path.join(configuration.instructionDir, `${instructionID}.md`),
         { encoding: "utf-8" }
       )
@@ -24,59 +24,44 @@ const loadMarkdown = (instructionID: InstructionID): PromiseLike<string> => {
 
 const createInstructionFromInstructionID = (
   instructionID: InstructionID
-): PromiseLike<Instruction> => {
-  return trace(
+): Instruction => {
+  return traceSync(
     "Create instruction",
     { "instruction.id": instructionID },
-    async () => {
-      const markdown: string = await loadMarkdown(instructionID);
+    () => {
+      const markdown: string = loadMarkdown(instructionID);
       return createInstruction(instructionID, markdown);
     }
   );
 };
 
-const instructionsPromise: PromiseLike<Instruction[]> = trace(
-  "Create instructions",
-  {},
-  () => {
-    return Promise.all(
-      InstructionIDs.map((instructionID) =>
-        createInstructionFromInstructionID(instructionID)
-      )
-    );
-  }
+const instructions: Instruction[] = traceSync("Create instructions", {}, () =>
+  InstructionIDs.reduce(
+    (instructions, instructionID: InstructionID): Instruction[] => [
+      ...instructions,
+      createInstructionFromInstructionID(instructionID),
+    ],
+    []
+  )
 );
 
-const instructionIDToInstructionMapPromise = instructionsPromise.then(
-  (instructions) => {
-    return new Map<InstructionID, Instruction>(
-      instructions.map((instruction) => [instruction.id, instruction])
-    );
-  }
+const instructionIDToInstructionMap = new Map<InstructionID, Instruction>(
+  instructions.map((instruction) => [instruction.id, instruction])
 );
 
-const instructionMetadataListPromise: PromiseLike<InstructionMetadata[]> =
-  instructionsPromise.then((instructions) => {
-    return instructions.map(
-      (instruction): InstructionMetadata => ({
-        id: instruction.id,
-        name: instruction.name,
-        sections: instruction.sections,
-      })
-    );
-  });
+const instructionMetadataList: InstructionMetadata[] = instructions.map(
+  (instruction): InstructionMetadata => ({
+    id: instruction.id,
+    name: instruction.name,
+    sections: instruction.sections,
+  })
+);
 
-export const getInstruction = async (
-  id: InstructionID
-): Promise<Instruction> => {
-  const instructionIDToInstructionMap =
-    await instructionIDToInstructionMapPromise;
-  return requireDefined(
+export const getInstruction = (id: InstructionID): Instruction =>
+  requireDefined(
     instructionIDToInstructionMap.get(id),
     `Instruction for ${id}`
   );
-};
 
-export const getInstructionMetadataList = (): PromiseLike<
-  InstructionMetadata[]
-> => instructionMetadataListPromise;
+export const getInstructionMetadataList = (): InstructionMetadata[] =>
+  instructionMetadataList;

@@ -9,11 +9,11 @@ describe("createInstruction", () => {
     let name: string;
     let actual: Instruction;
 
-    beforeEach(async () => {
+    beforeEach(() => {
       instructionID = InstructionID.HTMLBasics;
       name = "名前はここ！";
 
-      actual = await createInstruction(
+      actual = createInstruction(
         instructionID,
         `# ${name}
 
