@@ -1,6 +1,7 @@
 import { marked } from "marked";
 import * as highlightJS from "highlight.js";
 import { Instruction, InstructionID } from "../../common";
+import { trace } from "../infrastructure";
 
 marked.use({
   renderer: {
@@ -17,16 +18,16 @@ marked.use({
   },
 });
 
-export const createInstruction = (
+export const createInstruction = async (
   instructionID: InstructionID,
   markdown: string
-): Instruction => {
+): Promise<Instruction> => {
   const markdownLines: string[] = markdown.split(/[\n\r]/);
   return {
     id: instructionID,
     name: createName(instructionID, markdownLines),
     sections: createSections(markdownLines),
-    html: createHTML(markdown),
+    html: await createHTML(markdown),
   };
 };
 
@@ -54,10 +55,27 @@ const createSections = (markdownLines: string[]): string[] => {
   }, []);
 };
 
-const createHTML = (markdown: string): string => {
-  return marked(markdown, {
-    highlight: (code: string, language: string): string => {
-      return (highlightJS as any).highlight(code, { language }).value;
-    },
-  });
+const createHTML = (markdown: string): PromiseLike<string> => {
+  return trace(
+    "Create HTML from markdown",
+    {},
+    () =>
+      new Promise<string>((resolve, reject) => {
+        marked(
+          markdown,
+          {
+            highlight: (code: string, language: string): string => {
+              return (highlightJS as any).highlight(code, { language }).value;
+            },
+          },
+          (error, html) => {
+            if (error) {
+              reject(error);
+            } else {
+              resolve(html);
+            }
+          }
+        );
+      })
+  );
 };

@@ -30,14 +30,14 @@ const htmlTemplate: string = fs.readFileSync(
   { encoding: "utf8" }
 );
 
-export const handleRender = (
+export const handleRender = async (
   req: express.Request,
   res: express.Response
-): void => {
+): Promise<void> => {
   const history = createMemoryHistory();
 
-  const store = createStore(createReducer(history), getInitialState());
-  const instruction: Instruction = getInstructionFromPath(req.path);
+  const store = createStore(createReducer(history), await getInitialState());
+  const instruction: Instruction = await getInstructionFromPath(req.path);
   store.dispatch(
     addInstructionContent({
       id: instruction.id,
@@ -58,14 +58,14 @@ export const handleRender = (
   res.send(renderFullPage(instruction, html, state));
 };
 
-const getInitialState = (): PreloadedState<AppState> => {
+const getInitialState = async (): Promise<PreloadedState<AppState>> => {
   const state: Partial<AppState> = {
-    instructionMetadataList: getInstructionMetadataList(),
+    instructionMetadataList: await getInstructionMetadataList(),
   };
   return state as PreloadedState<AppState>;
 };
 
-const getInstructionFromPath = (path: string): Instruction => {
+const getInstructionFromPath = (path: string): PromiseLike<Instruction> => {
   return getInstruction(getInstructionID(path));
 };
 
