@@ -82,6 +82,7 @@ export const trace = <T>(
         const result: T = await action();
         return result;
       } catch (error) {
+        span.recordException(error);
         span.setStatus({
           code: SpanStatusCode.ERROR,
           message: error?.message ?? "Unexpected error",
