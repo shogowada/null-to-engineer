@@ -22,7 +22,7 @@ export const configuration: Configuration = {
   publicDir,
   staticDir,
   serviceName: process.env.SERVICE_NAME ?? "null-to-engineer",
-  honeycombAPIKey: process.env.HONEYCOMB_TEAM,
+  honeycombAPIKey: process.env.HONEYCOMB_API_KEY,
   honeycombDataset: process.env.HONEYCOMB_DATASET ?? "null-to-engineer",
 };
 
