@@ -3,3 +3,7 @@ services:
   server:
     build:
       context: .
+    environment:
+      - HONEYCOMB_DATASET=null-to-engineer.local
+    env_file:
+      - ./main.env

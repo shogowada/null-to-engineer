@@ -1,6 +1,7 @@
 import { marked } from "marked";
 import * as highlightJS from "highlight.js";
 import { Instruction, InstructionID } from "../../common";
+import { traceSync } from "../infrastructure";
 
 marked.use({
   renderer: {
@@ -55,9 +56,11 @@ const createSections = (markdownLines: string[]): string[] => {
 };
 
 const createHTML = (markdown: string): string => {
-  return marked(markdown, {
-    highlight: (code: string, language: string): string => {
-      return (highlightJS as any).highlight(code, { language }).value;
-    },
-  });
+  return traceSync("Create HTML from markdown", {}, () =>
+    marked(markdown, {
+      highlight: (code: string, language: string): string => {
+        return (highlightJS as any).highlight(code, { language }).value;
+      },
+    })
+  );
 };
