@@ -22,7 +22,7 @@
     "test-wip": "npm run format && npm run build-base && docker-compose --file docker-compose.yml --file docker-compose.test.yml --file docker-compose.test-wip.yml up --build --abort-on-container-exit"
   },
   "author": "",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "@types/body-parser": "^1.19.2",
     "@types/compression": "^1.7.0",
