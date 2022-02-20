@@ -91,9 +91,9 @@ export const trace = <T>(
       try {
         const result: T = await action();
         return result;
-      } catch (err) {
-        span.setStatus({ code: SpanStatusCode.ERROR, message: err.message });
-        throw err;
+      } catch (error) {
+        span.setStatus(createErrorSpanStatus(error));
+        throw error;
       } finally {
         span.end();
       }
@@ -114,9 +114,9 @@ export const traceSync = <T>(
       try {
         const result: T = action();
         return result;
-      } catch (err) {
-        span.setStatus({ code: SpanStatusCode.ERROR, message: err.message });
-        throw err;
+      } catch (error) {
+        span.setStatus(createErrorSpanStatus(error));
+        throw error;
       } finally {
         span.end();
       }
@@ -124,4 +124,11 @@ export const traceSync = <T>(
   } else {
     return action();
   }
+};
+
+const createErrorSpanStatus = (error: any): SpanStatus => {
+  return {
+    code: SpanStatusCode.ERROR,
+    message: error?.message ?? "Unexpected error",
+  };
 };
