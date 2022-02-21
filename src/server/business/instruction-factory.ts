@@ -1,5 +1,5 @@
 import { marked } from "marked";
-import * as highlightJS from "highlight.js";
+import highlightJS from "highlight.js";
 import { Instruction, InstructionID } from "../../common";
 import { trace } from "../infrastructure";
 
@@ -65,10 +65,10 @@ const createHTML = (markdown: string): PromiseLike<string> => {
           markdown,
           {
             highlight: (code: string, language: string): string => {
-              return (highlightJS as any).highlight(code, { language }).value;
+              return highlightJS.highlight(code, { language }).value;
             },
           },
-          (error, html) => {
+          (error: unknown, html: string) => {
             if (error) {
               reject(error);
             } else {
