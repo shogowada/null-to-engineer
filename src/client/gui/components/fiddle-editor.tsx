@@ -15,11 +15,10 @@ export const FiddleEditor: React.FunctionComponent<Props> = (props: Props) => {
       value={props.value}
       autoCorrect="off"
       autoCapitalize="none"
+      spellCheck={false}
       placeholder={`ここに ${props.name} を書いてね ✍️`}
       onChange={(event) => {
-        props.onChange(
-          event.target.value.replace(/[‘’]/g, "'").replace(/[“”]/g, '"')
-        );
+        props.onChange(event.target.value);
       }}
     />
   );
