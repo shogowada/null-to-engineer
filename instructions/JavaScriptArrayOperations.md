@@ -371,8 +371,8 @@ const animalNames = animals.map((animal) => animal.name);
 console.log(animalNames); // ["dog","cat","duck"]
 
 // reduceを使うとこうなる
-const animalNames2 = animals.reduce((animalNames, animal) => {
-  return [...animalNames, animal.name];
+const animalNames2 = animals.reduce((mapped, animal) => {
+  return [...mapped, animal.name];
 }, []);
 
 // ほら、同じ結果！
