@@ -31,6 +31,7 @@ export enum InstructionID {
   SetupLocalJSDevEnv = "SetupLocalJSDevEnv",
   ReactInitializeTodoApp = "ReactInitializeTodoApp",
   ReactCreateTodoApp = "ReactCreateTodoApp",
+  Bundler = "Bundler",
 
   AboutNullToEngineer = "AboutNullToEngineer",
 }
@@ -113,6 +114,7 @@ export const Chapters: Chapter[] = [
       InstructionID.SetupLocalJSDevEnv,
       InstructionID.ReactInitializeTodoApp,
       InstructionID.ReactCreateTodoApp,
+      InstructionID.Bundler,
     ],
   },
   {
@@ -131,6 +133,12 @@ export const getInstructionConfiguration = (
 ): InstructionConfiguration => {
   switch (id) {
     case InstructionID.AboutNullToEngineer: {
+      return {
+        id,
+        fiddleType: FiddleType.None,
+      };
+    }
+    case InstructionID.Bundler: {
       return {
         id,
         fiddleType: FiddleType.None,
