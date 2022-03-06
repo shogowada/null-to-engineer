@@ -34,6 +34,24 @@
 }
 ```
 
+ここに `"type": "module" を追加しよう。
+これをすることで、新しい方法でライブラリを読み込むことができるようになるよ。
+
+```json
+{
+  "name": "react-todo-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
+```
+
 ## 必要なライブラリをインストール
 
 1. ターミナルで`npm install express`を実行する
@@ -134,7 +152,7 @@ React や Babel が読み込まれた状態じゃないとこのコードは動�
 
 ```javascript
 // express を読み込む
-const express = require("express");
+import express from "express";
 
 // express のサーバーを作る
 const app = express();

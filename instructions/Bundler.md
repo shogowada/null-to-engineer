@@ -37,7 +37,7 @@ webpack も NPM のライブラリだから、NPM を使ってインストール
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "module": "type",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -55,9 +55,13 @@ webpack も NPM のライブラリだから、NPM を使ってインストール
 次は `webpack.config.js` ファイルを作って、下の内容を書こう
 
 ```javascript
-const path = require("path");
+import * as url from "url";
+import * as path from "path";
 
-module.exports = {
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   entry: "./src/client/index.js",
   output: {
     path: path.join(__dirname, "public"),
@@ -119,9 +123,8 @@ HTML に下のような記述があるはず。これを全部消そう！
 3. `webpack.config.js` に以下のように `module` を追加する
 
    ```javascript
-   const path = require("path");
-
-   module.exports = {
+   // 他のコード...
+   export default {
      // 他の設定...
      module: {
        rules: [
