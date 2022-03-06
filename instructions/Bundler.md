@@ -58,9 +58,13 @@ webpack も NPM のライブラリだから、NPM を使ってインストール
 import * as url from "url";
 import * as path from "path";
 
+// 現在のファイル（webpack.config.js）のパス
 const __filename = url.fileURLToPath(import.meta.url);
+
+// 現在のフォルダ（webpack.config.js があるフォルダ）のパス
 const __dirname = path.dirname(__filename);
 
+// webpack の設定をエクスポートする
 export default {
   entry: "./src/client/index.js",
   output: {
