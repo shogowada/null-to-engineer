@@ -1,4 +1,8 @@
-import { configuration, initializeTracer, trace } from "./infrastructure";
+import { initializeTracer } from "./infrastructure";
+
+initializeTracer();
+
+import { configuration, trace } from "./infrastructure";
 import { StatusCodes } from "http-status-codes";
 import * as express from "express";
 import * as bodyParser from "body-parser";
@@ -8,8 +12,6 @@ import { JSONRPCResponse } from "json-rpc-2.0";
 import { RoutePath } from "../common";
 import { handleRender } from "./render";
 import { jsonRPCServer } from "./presentation";
-
-initializeTracer();
 
 const app = express();
 

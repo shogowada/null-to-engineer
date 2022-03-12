@@ -7,6 +7,10 @@ import { SemanticResourceAttributes } from "@opentelemetry/semantic-conventions"
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-grpc";
 import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
 import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-base";
+import { registerInstrumentations } from "@opentelemetry/instrumentation";
+import { ExpressInstrumentation } from "@opentelemetry/instrumentation-express";
+import { HttpInstrumentation } from "@opentelemetry/instrumentation-http";
+import { DnsInstrumentation } from "@opentelemetry/instrumentation-dns";
 import { configuration } from "./configuration";
 
 const createTracer = (honeycombAPIKey: string): api.Tracer => {
@@ -23,6 +27,15 @@ const createTracer = (honeycombAPIKey: string): api.Tracer => {
   });
 
   tracerProvider.register();
+
+  registerInstrumentations({
+    tracerProvider,
+    instrumentations: [
+      new HttpInstrumentation(),
+      new DnsInstrumentation(),
+      new ExpressInstrumentation(),
+    ],
+  });
 
   return api.trace.getTracer(configuration.serviceName);
 };
