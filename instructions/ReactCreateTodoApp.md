@@ -139,7 +139,7 @@ const Main = () => {
   const onTaskClick = (taskID) => {
     setTasks((prevTasks) => {
       return prevTasks.map((prevTask) => {
-        if (prevTask.id === task.id) {
+        if (prevTask.id === taskID) {
           return { ...prevTask, done: !prevTask.done };
         } else {
           return prevTask;
