@@ -32,6 +32,7 @@ export enum InstructionID {
   ReactInitializeTodoApp = "ReactInitializeTodoApp",
   ReactCreateTodoApp = "ReactCreateTodoApp",
   Bundler = "Bundler",
+  BundleReactTodoApp = "BundleReactTodoApp",
 
   AboutNullToEngineer = "AboutNullToEngineer",
 }
@@ -115,6 +116,7 @@ export const Chapters: Chapter[] = [
       InstructionID.ReactInitializeTodoApp,
       InstructionID.ReactCreateTodoApp,
       InstructionID.Bundler,
+      InstructionID.BundleReactTodoApp,
     ],
   },
   {
@@ -133,6 +135,12 @@ export const getInstructionConfiguration = (
 ): InstructionConfiguration => {
   switch (id) {
     case InstructionID.AboutNullToEngineer: {
+      return {
+        id,
+        fiddleType: FiddleType.None,
+      };
+    }
+    case InstructionID.BundleReactTodoApp: {
       return {
         id,
         fiddleType: FiddleType.None,

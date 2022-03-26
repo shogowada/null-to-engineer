@@ -424,6 +424,10 @@ $button-transition: background-color $animation-duration ease,
   }
 }
 
+li code {
+  padding: 0px 6px;
+}
+
 code {
   background: #f6f8fa;
   border: 1px solid lightgray;

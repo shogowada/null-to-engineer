@@ -28,8 +28,12 @@ webpack も NPM のライブラリだから、NPM を使ってインストール
 
 ## webpack の設定
 
-まず、`package.json` に `"type": "module"` と追加しよう。
-ファイルをつなげる方法は大きく分けて２つあるんだけど、`"type": "module"` を追加することで、新しい方法でファイルをつなげることができるんだ
+1. `package.json` に `"type": "module"` と追加する
+   - ファイルをつなげる方法は大きく分けて２つあるんだけど、`"type": "module"` を追加することで、新しい方法でファイルをつなげることができるんだ
+2. `package.json` の `scripts` に、`"build": "webpack"` を追加する
+   - `npm run build` を実行することでバンドルを実行することができるようになるよ
+
+今 `package.json` は、だいたいこんな感じになってるはず
 
 ```json
 {
@@ -39,7 +43,8 @@ webpack も NPM のライブラリだから、NPM を使ってインストール
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",
@@ -47,7 +52,8 @@ webpack も NPM のライブラリだから、NPM を使ってインストール
     "express": "^4.17.3"
   },
   "devDependencies": {
-    "webpack": "^5.70.0"
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
   }
 }
 ```
@@ -153,3 +159,14 @@ JavaScript では、`/` で囲まれた文字列は正規表現を表すよ。
 
 さて話を戻して、ここでは `.js` で終わるファイル（ただし `node_modules` 内のファイルを除く）に、`babel-loader` を適用してね、と webpack に教えているよ。
 この設定と `.babelrc` の設定のお陰で、webpack はファイルをバンドルする際に、Babel を使って JSX を理解することができるようになるんだ。
+
+## バンドルする
+
+1. `npm run build` を実行する
+   - `public` フォルダ内にバンドル化された `index.js` が出力されるはず
+2. `node index.js` を実行する
+3. ブラウザで http://localhost:8080 を開く
+   - タスク管理アプリを開けたら成功だよ！
+
+これで HTML を変更しなくても、JavaScript だけで色々なライブラリを使えるようになったね！
+次は自分で書いた JavaScript のファイルを、いくつかの小さなファイルに分けてみよう。
