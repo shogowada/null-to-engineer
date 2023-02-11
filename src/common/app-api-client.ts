@@ -1,12 +1,16 @@
 import fetch from "node-fetch";
 import { StatusCodes } from "http-status-codes";
-import { JSONRPCClient, JSONRPCRequest } from "json-rpc-2.0";
+import {
+  JSONRPCClient,
+  JSONRPCRequest,
+  TypedJSONRPCClient,
+} from "json-rpc-2.0";
 import { InstructionID } from "./instruction";
 import { RoutePath } from "./route-path";
-import { GetInstructionHTMLParams, JSONRPCMethodName } from "./json-rpc";
+import { GetInstructionHTMLParams, JSONRPCMethods } from "./json-rpc";
 
 export class AppAPIClient {
-  private jsonRPCClient: JSONRPCClient;
+  private jsonRPCClient: TypedJSONRPCClient<JSONRPCMethods>;
 
   constructor(url: string) {
     this.jsonRPCClient = new JSONRPCClient((request: JSONRPCRequest) => {
@@ -27,9 +31,6 @@ export class AppAPIClient {
 
   getInstructionHTML(id: InstructionID): PromiseLike<string> {
     const params: GetInstructionHTMLParams = { id };
-    return this.jsonRPCClient.request(
-      JSONRPCMethodName.GetInstructionHTML,
-      params
-    );
+    return this.jsonRPCClient.request("getInstructionHTML", params);
   }
 }

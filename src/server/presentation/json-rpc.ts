@@ -1,8 +1,10 @@
-import { JSONRPCServer } from "json-rpc-2.0";
+import { JSONRPCServer, TypedJSONRPCServer } from "json-rpc-2.0";
+import { JSONRPCMethods } from "../../common";
 import { trace } from "../infrastructure";
 import { addInstructionJSONRPCMethods } from "./instruction-json-rpc-methods";
 
-export const jsonRPCServer = new JSONRPCServer();
+export const jsonRPCServer: TypedJSONRPCServer<JSONRPCMethods> =
+  new JSONRPCServer();
 
 jsonRPCServer.applyMiddleware((next, request) => {
   return trace(`JSON-RPC method (${request.method})`, {}, () => {
